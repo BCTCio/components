@@ -6,6 +6,45 @@ Congrats! You just saved yourself hours of work by bootstrapping this project wi
 
 > If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
 
+## How to use this package?
+
+`npm install @bctc/components`
+
+```json
+{
+  "dependencies": {
+    "@bctc/components": "latest"
+  }
+}
+```
+
+```tsx
+import React, { useState } from 'react';
+import { ToggleSwitch, UserInfoPill } from '@bctc/components';
+import '@bctc/components/dist/tailwind.css'; // This should be imported at the root tsx file, just import it once there is enough
+import './App.css';
+
+function App() {
+  const [changed, setChanged] = useState(false);
+
+  return (
+    <div className="App">
+      <UserInfoPill
+        showButton
+        buttonText="View"
+        data={{
+          avatar: 'https://avatars.githubusercontent.com/u/13799221?v=4',
+          title: 'foo',
+        }}
+      />
+      <ToggleSwitch enabled={changed} onChange={() => setChanged(!changed)} />
+    </div>
+  );
+}
+
+export default App;
+```
+
 ## Commands
 
 TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
