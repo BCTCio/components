@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import UserInfoPill, { UserInfoPillProps } from './';
+import { UserInfoPill, UserInfoPillProps } from './';
 import { userAvatar } from '../../constants/assets';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
