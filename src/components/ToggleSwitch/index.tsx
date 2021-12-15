@@ -3,7 +3,7 @@ import { Switch } from '@headlessui/react';
 
 export interface ToggleSwitchProps {
   enabled: boolean;
-  onChange: (value: Boolean) => void;
+  onChange: (value: boolean) => void;
 }
 
 export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
