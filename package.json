@@ -40,16 +40,6 @@
   "name": "@bctc/components",
   "author": "mxdi9i7",
   "module": "dist/bctc-components.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/bctc-components.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/bctc-components.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@size-limit/preset-small-lib": "^7.0.4",
