@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Story } from '@storybook/react';
 import { ToggleSwitch, ToggleSwitchProps } from './';
 
-const Template: Story<ToggleSwitchProps> = (args) => {
+const Template: Story<ToggleSwitchProps> = (_args) => {
   const [checked, setChecked] = useState(false);
 
   return <ToggleSwitch onChange={setChecked} enabled={checked} />;

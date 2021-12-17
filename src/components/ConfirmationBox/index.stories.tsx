@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { useHookstate } from '@hookstate/core';
+import React, { useState } from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
@@ -22,9 +20,13 @@ const props = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof ConfirmationBox> = (args) => {
-  const state = useHookstate(props);
+  const [state, setState] = useState(props);
   return (
-    <ConfirmationBox {...state.value} {...args} setShow={state.show.set} />
+    <ConfirmationBox
+      {...state}
+      {...args}
+      setShow={(v: boolean) => setState({ ...state, show: v })}
+    />
   );
 };
 Default.parameters = {
