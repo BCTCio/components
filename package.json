@@ -17,8 +17,6 @@
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "yarn build",
-    "size": "size-limit",
-    "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-tailwind": "cross-env NODE_ENV=production npx tailwindcss -o ./dist/tailwind.css --minify"
@@ -42,7 +40,6 @@
   "module": "dist/bctc-components.esm.js",
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@size-limit/preset-small-lib": "^7.0.4",
     "@storybook/addon-essentials": "^6.4.9",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^6.4.9",
@@ -58,7 +55,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
-    "size-limit": "^7.0.4",
     "tailwindcss": "^3.0.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
