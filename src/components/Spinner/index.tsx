@@ -3,11 +3,18 @@ import React from 'react';
 
 export interface SpinnerProps {
   color?: 'green' | 'light' | 'dark';
+  size?: number;
 }
 
-export const Spinner: React.FC<SpinnerProps> = ({ color = 'light' }) => (
+export const Spinner: React.FC<SpinnerProps> = ({
+  color = 'light',
+  size = 5,
+}) => (
   <svg
-    className={classNames('animate-spin h-5 w-5', {
+    style={{
+      height: size * 4,
+    }}
+    className={classNames('animate-spin', {
       'text-white': color === 'light',
       'text-gray-900': color === 'dark',
       'text-green-500': color === 'green',
