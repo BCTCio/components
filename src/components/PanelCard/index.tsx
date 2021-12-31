@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
+import { Spinner } from '../Spinner';
 
 export interface PanelCardProps {
   headerText: string;
@@ -9,6 +10,7 @@ export interface PanelCardProps {
   footer?: ReactNode;
   headerRight?: ReactNode;
   padding?: boolean;
+  loading?: boolean;
 }
 
 export const PanelCard: React.FC<PanelCardProps> = ({
@@ -19,6 +21,7 @@ export const PanelCard: React.FC<PanelCardProps> = ({
   footer,
   padding,
   headerRight,
+  loading,
 }) => {
   return (
     <div
@@ -29,8 +32,13 @@ export const PanelCard: React.FC<PanelCardProps> = ({
       <div className="px-4 py-5 sm:px-6 flex items-center justify-between flex-wrap sm:flex-nowrap">
         <div>
           {headerText && (
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 flex items-center">
               {headerText}
+              {loading && (
+                <div className="pl-4">
+                  <Spinner color="dark" />
+                </div>
+              )}
             </h3>
           )}
           {headerSubtitle && (

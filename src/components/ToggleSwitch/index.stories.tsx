@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
-import { Story } from '@storybook/react';
-import { ToggleSwitch, ToggleSwitchProps } from './';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ToggleSwitch } from './';
 
-const Template: Story<ToggleSwitchProps> = (_args) => {
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+  title: 'Elements/ToggleSwitch',
+  component: ToggleSwitch,
+} as ComponentMeta<typeof ToggleSwitch>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+export const Default: ComponentStory<typeof ToggleSwitch> = (_args) => {
   const [checked, setChecked] = useState(false);
 
-  return <ToggleSwitch onChange={setChecked} enabled={checked} />;
+  return <ToggleSwitch onChange={setChecked} checked={checked} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  enabled: false,
+Default.parameters = {
+  docs: {
+    source: {
+      language: 'tsx',
+      code: `const [checked, setChecked] = useState(false);
+
+<ToggleSwitch onChange={setChecked} checked={checked} />`,
+    },
+  },
 };
