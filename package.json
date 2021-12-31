@@ -1,6 +1,6 @@
 {
   "displayName": "BCTC Components",
-  "version": "0.5.2",
+  "version": "0.5.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
