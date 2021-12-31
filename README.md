@@ -1,10 +1,16 @@
-# TSDX React w/ Storybook User Guide
+# Publishing
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+0. If you haven't installed np, run `npm i -g np`
+1. Create a new branch and make changes
+2. Make a PR, get it approved, and merge into master
+3. Make sure tests are successful in the PR
+4. Go into master branch and `np --yolo`
 
-> This TSDX setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you’re looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+## Versions
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+- Update major for breaking changes
+- Update minor for creating a new component
+- Update patch for fixing a bug or adding a property to a component
 
 ## How to use this package?
 
