@@ -26,5 +26,5 @@ export const Green: ComponentStory<typeof Spinner> = (_args) => {
 };
 
 export const Biggger: ComponentStory<typeof Spinner> = (_args) => {
-  return <Spinner color="dark" size={10} />;
+  return <Spinner color="dark" size="h-10" />;
 };
