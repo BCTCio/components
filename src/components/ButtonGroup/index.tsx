@@ -27,13 +27,13 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
   return (
     <button
       onClick={() => onClick?.call(null)}
-      className={`transition-colors relative border inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-1 focus:ring-green-500 ${roundLocation} ${
-        selected ? 'border-green-500 bg-white' : 'border-gray-300 bg-gray-50'
-      } ${
-        disabled || selected
-          ? 'cursor-default'
-          : 'cursor-pointer hover:bg-white'
-      } ${disabled && 'bg-gray-100'}`}
+      className={`transition-colors relative border-2 border-gray-300 inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-1 focus:ring-green-500 ${roundLocation} ${
+        selected
+          ? 'cursor-default border-green-500 bg-white'
+          : disabled
+          ? 'text-gray-400 cursor-not-allowed bg-gray-50'
+          : 'cursor-pointer hover:bg-white bg-gray-50'
+      }`}
       disabled={disabled || selected}
     >
       {children}
