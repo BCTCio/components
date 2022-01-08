@@ -28,3 +28,29 @@ export const Default: ComponentStory<typeof UserInfoPill> = (args) => (
 export const WithoutButton: ComponentStory<typeof UserInfoPill> = (args) => (
   <UserInfoPill {...props} showButton={false} {...args} />
 );
+
+export const WithBadge: ComponentStory<typeof UserInfoPill> = (args) => (
+  <>
+    <UserInfoPill
+      {...props}
+      showButton
+      statusBadge="Paid"
+      statusType="success"
+      {...args}
+    />
+    <UserInfoPill
+      {...props}
+      showButton
+      statusBadge="50% Paid"
+      statusType="warning"
+      {...args}
+    />
+    <UserInfoPill
+      {...props}
+      showButton
+      statusBadge="0% Paid"
+      statusType="danger"
+      {...args}
+    />
+  </>
+);
