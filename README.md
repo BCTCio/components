@@ -12,6 +12,13 @@
 - Update minor for creating a new component
 - Update patch for fixing a bug or adding a property to a component
 
+## FAQ
+
+- Why does my package not export when using from actual project?
+  - This may be due to your components not using named export and using default export, note: the current export pattern from this library supports named exports ONLY. Meaning: `export const Modal` instead of `export default Modal`.
+- Why does my component render an undefined when using in actual project?
+  - You may have only published the component recently in latest version, restart your dev server in actual project.
+
 ## How to use this package?
 
 `npm install @bctc/components`
