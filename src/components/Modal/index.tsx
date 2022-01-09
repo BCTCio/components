@@ -1,7 +1,7 @@
 import React, { ReactNode, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export interface Props {
+export interface ModalProps {
   title: string;
   body?: ReactNode;
   footer?: ReactNode;
@@ -9,7 +9,13 @@ export interface Props {
   handleClose: () => void;
 }
 
-const Modal: React.FC<Props> = ({ title, body, footer, handleClose, show }) => {
+const Modal: React.FC<ModalProps> = ({
+  title,
+  body,
+  footer,
+  handleClose,
+  show,
+}) => {
   const cancelButtonRef = useRef(null);
   return (
     <Transition.Root show={show} as={Fragment}>
