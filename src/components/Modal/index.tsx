@@ -4,15 +4,19 @@ import { Dialog, Transition } from '@headlessui/react';
 export interface ModalProps {
   title: string;
   body?: ReactNode;
-  footer?: ReactNode;
   show: boolean;
+  submitText?: string;
+  handleCancel: () => void;
+  handleSubmit: () => void;
   handleClose: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({
   title,
   body,
-  footer,
+  submitText = 'Submit',
+  handleCancel,
+  handleSubmit,
   handleClose,
   show,
 }) => {
@@ -68,11 +72,24 @@ export const Modal: React.FC<ModalProps> = ({
                   </div>
                 </div>
               </div>
-              {footer && (
-                <div className="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
-                  {footer}
-                </div>
-              )}
+
+              <div className="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  type="button"
+                  className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => handleSubmit()}
+                >
+                  {submitText}
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={handleCancel}
+                  ref={cancelButtonRef}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </Transition.Child>
         </div>
