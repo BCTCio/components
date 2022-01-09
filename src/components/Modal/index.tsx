@@ -9,7 +9,7 @@ export interface ModalProps {
   handleClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({
+export const Modal: React.FC<ModalProps> = ({
   title,
   body,
   footer,
@@ -80,5 +80,3 @@ const Modal: React.FC<ModalProps> = ({
     </Transition.Root>
   );
 };
-
-export default Modal;
