@@ -10,11 +10,19 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof Spinner> = (args) => {
-  return <Spinner {...args} />;
+  return (
+    <div className="bg-gray-800 p-2">
+      <Spinner {...args} />
+    </div>
+  );
 };
 
 export const Light: ComponentStory<typeof Spinner> = (_args) => {
-  return <Spinner color="light" />;
+  return (
+    <div className="bg-gray-800 p-2">
+      <Spinner color="light" />
+    </div>
+  );
 };
 
 export const Dark: ComponentStory<typeof Spinner> = (_args) => {
