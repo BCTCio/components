@@ -11,13 +11,9 @@ export default {
 } as ComponentMeta<typeof UserInfoPill>;
 
 const props: UserInfoPillProps = {
-  data: {
-    avatar: userAvatar,
-    title: 'Peter Swag',
-  },
-  showButton: true,
+  avatar: userAvatar,
+  title: 'Peter Swag',
   redirectTo: '#',
-  buttonText: 'View',
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -25,29 +21,64 @@ export const Default: ComponentStory<typeof UserInfoPill> = (args) => (
   <UserInfoPill {...props} {...args} />
 );
 
-export const WithoutButton: ComponentStory<typeof UserInfoPill> = (args) => (
-  <UserInfoPill {...props} showButton={false} {...args} />
+export const OneButton: ComponentStory<typeof UserInfoPill> = (args) => (
+  <UserInfoPill
+    {...props}
+    buttons={[
+      {
+        title: 'Click Me!',
+        onClick() {
+          alert('You clicked me!');
+        },
+      },
+    ]}
+    {...args}
+  />
+);
+
+export const MultipleButtons: ComponentStory<typeof UserInfoPill> = (args) => (
+  <UserInfoPill
+    {...props}
+    buttons={[
+      {
+        title: 'Button 1',
+        onClick() {
+          alert('You clicked button 1!');
+        },
+      },
+      {
+        title: 'Button 2',
+        onClick() {
+          alert('You clicked button 2!');
+        },
+      },
+      {
+        title: 'Button 3',
+        onClick() {
+          alert('You clicked button 3!');
+        },
+      },
+    ]}
+    {...args}
+  />
 );
 
 export const WithBadge: ComponentStory<typeof UserInfoPill> = (args) => (
   <>
     <UserInfoPill
       {...props}
-      showButton
       statusBadge="Paid"
       statusType="success"
       {...args}
     />
     <UserInfoPill
       {...props}
-      showButton
       statusBadge="50% Paid"
       statusType="warning"
       {...args}
     />
     <UserInfoPill
       {...props}
-      showButton
       statusBadge="0% Paid"
       statusType="danger"
       {...args}
