@@ -103,7 +103,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items
-                  className={`w-32 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none ${
+                  className={`z-10 w-32 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none ${
                     ringColor || 'active:ring-blue-400'
                   }`}
                 >
