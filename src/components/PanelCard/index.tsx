@@ -25,7 +25,7 @@ export const PanelCard: React.FC<PanelCardProps> = ({
 }) => {
   return (
     <div
-      className={classNames('bg-white overflow-hidden shadow rounded-lg', {
+      className={classNames('bg-white shadow rounded-lg', {
         'divide-y divide-gray-200': !!divider,
       })}
     >
