@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { SingleDropdown } from '.';
+import { SearchInput } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Inputs/SingleDropdown',
-  component: SingleDropdown,
-} as ComponentMeta<typeof SingleDropdown>;
+  title: 'Inputs/SearchInput',
+  component: SearchInput,
+} as ComponentMeta<typeof SearchInput>;
 
 const props = {
   data: new Array(20)
@@ -16,10 +16,10 @@ const props = {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof SingleDropdown> = (args) => {
-  const [state, setState] = useState('');
+export const Default: ComponentStory<typeof SearchInput> = (args) => {
+  const [state, setState] = useState<string[]>([]);
   return (
-    <SingleDropdown
+    <SearchInput
       {...props}
       {...args}
       value={state}
@@ -28,10 +28,10 @@ export const Default: ComponentStory<typeof SingleDropdown> = (args) => {
   );
 };
 
-export const WithLabel: ComponentStory<typeof SingleDropdown> = (args) => {
-  const [state, setState] = useState('');
+export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
+  const [state, setState] = useState<string[]>([]);
   return (
-    <SingleDropdown
+    <SearchInput
       {...props}
       label="Label"
       {...args}
@@ -41,12 +41,12 @@ export const WithLabel: ComponentStory<typeof SingleDropdown> = (args) => {
   );
 };
 
-export const WithStatus: ComponentStory<typeof SingleDropdown> = (args) => {
-  const [state, setState] = useState('');
+export const WithStatus: ComponentStory<typeof SearchInput> = (args) => {
+  const [state, setState] = useState<string[]>([]);
   return (
-    <SingleDropdown
+    <SearchInput
       {...props}
-      showStatus={true}
+      showStatus
       {...args}
       value={state}
       onChange={(v) => setState(v)}

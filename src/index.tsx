@@ -8,4 +8,6 @@ export * from './components/Modal';
 export * from './components/Notification';
 export * from './components/SingleDropdown';
 export * from './components/MultiDropdown';
+export * from './components/Pagination';
+export * from './components/SearchInput';
 export * from './constants/interfaces';

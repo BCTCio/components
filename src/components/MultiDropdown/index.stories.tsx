@@ -5,7 +5,7 @@ import { MultiDropdown } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Elements/MultiDropdown',
+  title: 'Inputs/MultiDropdown',
   component: MultiDropdown,
 } as ComponentMeta<typeof MultiDropdown>;
 
