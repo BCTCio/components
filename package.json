@@ -64,6 +64,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
+    "@hookstate/core": "^3.0.13",
     "classnames": "^2.3.1"
   }
 }
