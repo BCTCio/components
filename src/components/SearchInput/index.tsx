@@ -51,7 +51,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     const idRemoved = value.filter((v) => v !== id);
     onChange(idRemoved.length === value.length ? [...value, id] : idRemoved);
   };
-
+  console.log(onInputChange);
   return (
     <div className="w-full relative" ref={searchInput}>
       {label && (
@@ -71,7 +71,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           name={label}
           id={label}
           value={filter}
-          onChange={(e) => (onInputChange || setFilter)(e.target.value)}
+          onChange={(e) => {
+            setFilter(e.target.value);
+            onInputChange?.call(null, e.target.value);
+          }}
           className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full border-gray-300 rounded-md text-sm"
           placeholder={placeholder}
         />
@@ -83,8 +86,8 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         leaveTo="opacity-0"
       >
         <div className="absolute z-10 mt-1 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm w-full max-w-full cursor-pointer">
-          {filteredData.length ? (
-            filteredData.map((item) => {
+          {(onInputChange ? data : filteredData).length ? (
+            (onInputChange ? data : filteredData).map((item) => {
               const isSelected = value.find((v) => v === item.id) !== undefined;
               return (
                 <div
