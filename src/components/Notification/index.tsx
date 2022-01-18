@@ -29,7 +29,7 @@ export const error = (
     description:
       typeof err === 'string'
         ? err
-        : err?.message.toString() || params?.fallback,
+        : err?.message?.toString() || params?.fallback,
     show: true,
     type: 'error',
   });
