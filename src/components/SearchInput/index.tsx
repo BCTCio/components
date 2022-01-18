@@ -51,7 +51,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     const idRemoved = value.filter((v) => v !== id);
     onChange(idRemoved.length === value.length ? [...value, id] : idRemoved);
   };
-  console.log(onInputChange);
+
   return (
     <div className="w-full relative" ref={searchInput}>
       {label && (
