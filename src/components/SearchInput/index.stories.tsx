@@ -24,6 +24,7 @@ export const Default: ComponentStory<typeof SearchInput> = (args) => {
       {...args}
       value={state}
       onChange={(v) => setState(v)}
+      onInputChange={undefined}
     />
   );
 };
@@ -37,6 +38,7 @@ export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
       {...args}
       value={state}
       onChange={(v) => setState(v)}
+      onInputChange={undefined}
     />
   );
 };
@@ -50,6 +52,7 @@ export const WithStatus: ComponentStory<typeof SearchInput> = (args) => {
       {...args}
       value={state}
       onChange={(v) => setState(v)}
+      onInputChange={undefined}
     />
   );
 };
