@@ -5,7 +5,7 @@ import { ButtonGroup, ButtonGroupProps } from './';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Elements/ButtonGroup',
+  title: 'Inputs/ButtonGroup',
   component: ButtonGroup,
 } as ComponentMeta<typeof ButtonGroup>;
 

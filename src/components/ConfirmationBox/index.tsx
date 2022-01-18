@@ -15,13 +15,7 @@ export interface ConfirmationBoxState {
   onCancel?: () => Promise<void> | void;
 }
 
-export interface ConfirmationBoxProps {
-  show: boolean;
-  title: string;
-  description?: string;
-  type: 'info' | 'warning';
-  onConfirm: () => Promise<void> | void;
-  onCancel?: () => Promise<void> | void;
+export interface ConfirmationBoxProps extends ConfirmationBoxState {
   setShow: (v: boolean) => any;
 }
 

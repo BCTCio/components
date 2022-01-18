@@ -4,7 +4,7 @@ import { ToggleSwitch } from './';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Elements/ToggleSwitch',
+  title: 'Inputs/ToggleSwitch',
   component: ToggleSwitch,
 } as ComponentMeta<typeof ToggleSwitch>;
 
