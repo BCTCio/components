@@ -9,6 +9,7 @@ export interface SearchInputProps {
   label?: string;
   placeholder?: string;
   data: DropdownData[];
+  onInputChange: (v: string) => void;
   onChange: (v: DropdownData['id'][]) => void;
   value: DropdownData['id'][];
 }
@@ -19,6 +20,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   placeholder = 'Type in a search filter',
   data,
   value,
+  onInputChange,
   onChange,
 }) => {
   const [filter, setFilter] = useState('');
@@ -69,7 +71,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           name={label}
           id={label}
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => (onInputChange || setFilter)(e.target.value)}
           className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full border-gray-300 rounded-md text-sm"
           placeholder={placeholder}
         />
