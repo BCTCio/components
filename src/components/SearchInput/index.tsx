@@ -9,7 +9,7 @@ export interface SearchInputProps {
   label?: string;
   placeholder?: string;
   data: DropdownData[];
-  onInputChange: (v: string) => void;
+  onInputChange?: (v: string) => void;
   onChange: (v: DropdownData['id'][]) => void;
   value: DropdownData['id'][];
 }
