@@ -6,8 +6,7 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/outline';
 
-export interface ConfirmationBoxState {
-  show: boolean;
+export interface ConfirmationBoxData {
   title: string;
   description?: string;
   type: 'info' | 'warning';
@@ -15,8 +14,9 @@ export interface ConfirmationBoxState {
   onCancel?: () => Promise<void> | void;
 }
 
-export interface ConfirmationBoxProps extends ConfirmationBoxState {
-  setShow: (v: boolean) => any;
+export interface ConfirmationBoxProps extends ConfirmationBoxData {
+  show: boolean;
+  setShow: (v: boolean) => void;
 }
 
 export const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
@@ -28,7 +28,7 @@ export const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
   onCancel,
   setShow,
 }) => {
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const renderIcon = () => {
     switch (type) {
       case 'info':
@@ -72,6 +72,7 @@ export const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
         open={show}
         onClose={() => {
           setShow(false);
+          onCancel?.call(null);
         }}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -103,7 +104,7 @@ export const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-4 sm:pt-5">
               <div className="sm:flex sm:items-start">
                 <div
                   className={`${
