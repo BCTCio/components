@@ -14,14 +14,14 @@ const props = {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof Table> = (_args) => {
+export const Default: ComponentStory<typeof Table> = (args) => {
   return (
-    <Table {..._args} {...props} />
+    <Table {...args} {...props} />
   );
 };
 
-export const WithStripes: ComponentStory<typeof Table> = (_args) => {
+export const WithStripes: ComponentStory<typeof Table> = (args) => {
   return (
-    <Table stripes {..._args} {...props}/>
+    <Table stripes {...args} {...props}/>
   );
 };
