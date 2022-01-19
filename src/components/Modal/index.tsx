@@ -1,33 +1,38 @@
 import React, { ReactNode, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export interface ModalProps {
+export interface ModalData {
   title: string;
   body?: ReactNode;
-  show: boolean;
+  onSubmit: () => Promise<void> | void;
+  onCancel?: () => Promise<void> | void;
   submitText?: string;
-  handleCancel: () => void;
-  handleSubmit: () => void;
-  handleClose: () => void;
+}
+export interface ModalProps extends ModalData {
+  show: boolean;
+  setShow: (v: boolean) => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({
   title,
   body,
   submitText = 'Submit',
-  handleCancel,
-  handleSubmit,
-  handleClose,
+  onSubmit,
+  onCancel,
   show,
+  setShow,
 }) => {
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <Transition.Root show={show} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={handleClose}
+        onClose={() => {
+          setShow(false);
+          onCancel?.call(null);
+        }}
       >
         <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -68,7 +73,7 @@ export const Modal: React.FC<ModalProps> = ({
                     >
                       {title}
                     </Dialog.Title>
-                    {body && <div className="mt-2">{body}</div>}
+                    <div className="mt-2">{body}</div>
                   </div>
                 </div>
               </div>
@@ -77,14 +82,17 @@ export const Modal: React.FC<ModalProps> = ({
                 <button
                   type="button"
                   className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => handleSubmit()}
+                  onClick={onSubmit}
                 >
                   {submitText}
                 </button>
                 <button
                   type="button"
                   className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={handleCancel}
+                  onClick={() => {
+                    setShow(false);
+                    onCancel?.call(null);
+                  }}
                   ref={cancelButtonRef}
                 >
                   Cancel
