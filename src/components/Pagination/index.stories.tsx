@@ -13,7 +13,6 @@ export const Default: ComponentStory<typeof Pagination> = (args: any) => {
   const [page, setPage] = useState(1);
   return (
     <Pagination
-      totalPages={10}
       total={100}
       itemsPerPage={10}
       {...args}
