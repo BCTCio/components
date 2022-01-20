@@ -23,22 +23,12 @@ const props = {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+
 export const Default: ComponentStory<typeof Table> = (args) => {
-  return <Table {...args} {...props} />;
-};
-
-export const WithStripes: ComponentStory<typeof Table> = (args) => {
-  return <Table stripes {...args} {...props} />;
-};
-
-export const NoData: ComponentStory<typeof Table> = (args) => {
-  return <Table {...args} columns={props.columns} data={[]} name="users" />;
-};
-
-export const WithPagination: ComponentStory<typeof Table> = (args) => {
   const [page, setPage] = useState(1);
   return (
     <Table
+      name="users"
       {...args}
       columns={props.columns}
       data={props.data.slice((page - 1) * 5, page * 5)}
@@ -47,6 +37,42 @@ export const WithPagination: ComponentStory<typeof Table> = (args) => {
         page,
         setPage,
         total: props.data.length,
+      }}
+    />
+  );
+};
+
+export const WithStripes: ComponentStory<typeof Table> = (args) => {
+  const [page, setPage] = useState(1);
+  return (
+    <Table
+      name="users"
+      stripes
+      {...args}
+      columns={props.columns}
+      data={props.data.slice((page - 1) * 5, page * 5)}
+      pagination={{
+        itemsPerPage: 5,
+        page,
+        setPage,
+        total: props.data.length,
+      }}
+    />
+  );
+};
+
+export const NoData: ComponentStory<typeof Table> = (args) => {
+  return (
+    <Table
+      name="users"
+      {...args}
+      columns={props.columns}
+      data={[]}
+      pagination={{
+        itemsPerPage: 5,
+        page: 1,
+        setPage() {},
+        total: 0,
       }}
     />
   );

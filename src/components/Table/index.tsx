@@ -8,7 +8,7 @@ export interface TableProps {
   data: { id: string | number; [key: string]: string | ReactNode }[];
   name?: string;
   noDataPlaceholder?: ReactNode;
-  pagination?: PaginationProps;
+  pagination: PaginationProps;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -32,11 +32,7 @@ export const Table: React.FC<TableProps> = ({
   <div className="flex flex-col">
     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-        <div
-          className={`${
-            !pagination && 'border-b rounded-b-lg'
-          } rounded-t-lg shadow overflow-hidden border-gray-200`}
-        >
+        <div className="border-b rounded-b-lg rounded-t-lg shadow overflow-hidden border-gray-200">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -78,7 +74,7 @@ export const Table: React.FC<TableProps> = ({
                 </tr>
               )}
             </tbody>
-            {pagination && (
+            {data.length > 0 && (
               <tfoot>
                 <tr>
                   <td colSpan={columns.length}>
