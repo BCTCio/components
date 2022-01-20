@@ -38,18 +38,16 @@ export const NoData: ComponentStory<typeof Table> = (args) => {
 export const WithPagination: ComponentStory<typeof Table> = (args) => {
   const [page, setPage] = useState(1);
   return (
-    <>
-      <Table
-        {...args}
-        columns={props.columns}
-        data={props.data.slice((page - 1) * 5, page * 5)}
-        pagination={{
-          itemsPerPage: 5,
-          page,
-          setPage,
-          total: props.data.length,
-        }}
-      />
-    </>
+    <Table
+      {...args}
+      columns={props.columns}
+      data={props.data.slice((page - 1) * 5, page * 5)}
+      pagination={{
+        itemsPerPage: 5,
+        page,
+        setPage,
+        total: props.data.length,
+      }}
+    />
   );
 };
