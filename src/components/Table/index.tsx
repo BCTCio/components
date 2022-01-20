@@ -1,6 +1,6 @@
-import { InformationCircleIcon } from '@heroicons/react/outline';
 import React, { ReactNode } from 'react';
 import { PaginationProps, Pagination } from '../Pagination';
+import NoData from '../../constants/assets/NoData.svg';
 
 export interface TableProps {
   stripes?: boolean;
@@ -18,8 +18,8 @@ export const Table: React.FC<TableProps> = ({
   name,
   noDataPlaceholder = (
     <div className="text-center">
-      <InformationCircleIcon className="mx-auto h-12 text-gray-400" />
-      <h3 className="mt-2 text-sm font-medium text-gray-500">
+      <img src={NoData} className="mx-auto text-gray-400" />
+      <h3 className="mt-2 text-sm font-medium text-gray-900">
         No {name || 'data'}
       </h3>
       <p className="mt-1 text-sm text-gray-500">
@@ -42,6 +42,7 @@ export const Table: React.FC<TableProps> = ({
               <tr>
                 {columns.map((column) => (
                   <th
+                    key={column}
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
@@ -60,7 +61,10 @@ export const Table: React.FC<TableProps> = ({
                     }
                   >
                     {columns.map((column) => (
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td
+                        key={column}
+                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                      >
                         {row[column]}
                       </td>
                     ))}
