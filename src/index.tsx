@@ -10,4 +10,5 @@ export * from './components/SingleDropdown';
 export * from './components/MultiDropdown';
 export * from './components/Pagination';
 export * from './components/SearchInput';
+export * from './components/Table';
 export * from './constants/interfaces';

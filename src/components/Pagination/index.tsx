@@ -4,7 +4,6 @@ import React from 'react';
 export interface PaginationProps {
   page: number;
   setPage: (page: number) => void | Promise<void>;
-  totalPages: number;
   total: number;
   itemsPerPage: number;
 }
@@ -12,13 +11,13 @@ export interface PaginationProps {
 export const Pagination: React.FC<PaginationProps> = ({
   page,
   setPage,
-  totalPages,
   total,
   itemsPerPage,
 }) => {
+  const totalPages = Math.ceil(total / itemsPerPage);
   return (
     <nav
-      className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+      className="bg-white px-4 py-3 flex items-center justify-between border-gray-200 sm:px-6 rounded-b-lg"
       aria-label="Pagination"
     >
       <div className="hidden sm:block">

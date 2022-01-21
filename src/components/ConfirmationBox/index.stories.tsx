@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ConfirmationBox } from '.';
+import { ConfirmationBox, ConfirmationBoxData } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -10,8 +10,7 @@ export default {
   component: ConfirmationBox,
 } as ComponentMeta<typeof ConfirmationBox>;
 
-const props = {
-  show: true,
+const props: ConfirmationBoxData = {
   title: 'Title',
   description: 'Description',
   type: 'info',
@@ -19,36 +18,32 @@ const props = {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof ConfirmationBox> = (args) => {
-  const [state, setState] = useState(props);
+export const Default: ComponentStory<typeof ConfirmationBox> = (args: any) => {
+  const [dataState, _setDataState] = useState(props);
+  const [show, setShow] = useState(false);
   return (
-    <ConfirmationBox
-      {...state}
-      {...args}
-      setShow={(v: boolean) => setState({ ...state, show: v })}
-    />
+    <>
+      <button onClick={() => setShow(true)}>Open</button>
+      <ConfirmationBox {...dataState} show={show} {...args} setShow={setShow} />
+    </>
   );
 };
+
 Default.parameters = {
   docs: {
     source: {
       language: 'tsx',
-      code: `// Hookstate:
-  // States File:
-    import { ConfirmationBoxState } from '@bctc/components';
-    const globalConfirmationBox = createState<ConfirmationBoxState>({
-      show: false,
-      title: '',
-      description: '',
-      type: 'info',
-      onConfirm() {}
-    });
+      code: `import { ConfirmationBox, ConfirmationBoxData } from '@bctc/components';
+import { useState } from 'react';
 
-  // App.tsx
-    import { globalConfirmationBox } from 'path/to/statesFile';
-    const confirmationBox = useHookstate(globalConfirmationBox);
-    // ...Do code until in component return...
-    <ConfirmationBox {...confirmationBox.value} setShow={confirmationBox.show.set} />`,
+const [confirmationBoxData, setConfirmationBoxData] = useState<ConfirmationBoxData>({
+  title: '',
+  type: 'info',
+  onConfirm: () => {},
+});
+const [confirmationBoxShow, setConfirmationBoxShow] = useState(false);
+
+<ConfirmationBox {...confirmationBoxData} show={confirmationBoxShow} setShow={setConfirmationBoxShow} />`,
     },
   },
 };
