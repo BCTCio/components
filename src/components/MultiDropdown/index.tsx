@@ -10,6 +10,7 @@ export interface MultiDropdownProps {
   data: DropdownData[];
   onChange: (v: DropdownData['id'][]) => void;
   value: DropdownData['id'][];
+  clickTarget?: HTMLElement;
 }
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -18,16 +19,17 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   data,
   onChange,
   value,
+  clickTarget = document,
 }) => {
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: Event) => {
       if (!multiDropdown.current?.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClick);
+    clickTarget.addEventListener('mousedown', handleClick);
     return () => {
-      document.removeEventListener('mousedown', handleClick);
+      clickTarget.removeEventListener('mousedown', handleClick);
     };
   }, []);
   const multiDropdown = useRef<HTMLDivElement>(null);
