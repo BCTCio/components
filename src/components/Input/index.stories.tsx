@@ -64,6 +64,21 @@ export const NumberWithLimits: ComponentStory<typeof Input> = (args: any) => {
   );
 };
 
+export const IntegerOnlyNumber: ComponentStory<typeof Input> = (args: any) => {
+  const [state, setState] = useState(0);
+  return (
+    <Input
+      {...props}
+      type="number"
+      description="Only integers are allowed"
+      integerOnly
+      {...args}
+      value={state}
+      onChange={setState}
+    />
+  );
+};
+
 export const PasswordWithMaxLength: ComponentStory<typeof Input> = (
   args: any
 ) => {

@@ -21,6 +21,7 @@ export interface InputProps {
   max?: number;
   focusColor?: string;
   error?: string;
+  integerOnly?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -36,6 +37,7 @@ export const Input: React.FC<InputProps> = ({
   max,
   focusColor = 'focus:ring-blue-300',
   error,
+  integerOnly,
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -77,11 +79,6 @@ export const Input: React.FC<InputProps> = ({
     onChange((type === 'number' ? +val : val) as never);
   };
 
-  const checkInputType = (): string => {
-    if (type === 'password' && passwordVisibility) return 'text';
-    return type;
-  };
-
   return (
     <div>
       <label
@@ -95,7 +92,7 @@ export const Input: React.FC<InputProps> = ({
         <input
           name={label}
           id={label}
-          type={checkInputType()}
+          type={type === 'password' && passwordVisibility ? 'text' : type}
           className={classNames(
             {
               'pr-16': type === 'password' && error,
@@ -107,9 +104,16 @@ export const Input: React.FC<InputProps> = ({
             'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none'
           )}
           placeholder={placeholder}
-          onKeyPress={(e) => (keyPressed = e.key)}
+          onKeyPress={(e) => {
+            if (integerOnly && e.key === '.') e.preventDefault();
+            keyPressed = e.key;
+          }}
           onChange={handleChange}
-          value={value}
+          value={
+            integerOnly && type === 'number'
+              ? Math.floor(+value).toString()
+              : value
+          }
         />
         <div className="right-0 absolute inset-y-0 pr-3 flex items-center">
           {type === 'password' &&
