@@ -33,8 +33,8 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   required,
   maxLength,
-  min,
-  max,
+  min = Number.MIN_SAFE_INTEGER, // If a value gets below this, it will lose precision, looking strange to the user
+  max = Number.MAX_SAFE_INTEGER, // If a value gets above this, it will lose precision, looking strange to the user
   focusColor = 'focus:ring-blue-300',
   error,
   integerOnly,
@@ -58,6 +58,8 @@ export const Input: React.FC<InputProps> = ({
     e.preventDefault();
     let val = e.target.value;
     if (type === 'number') {
+      if (keyPressed === '-') val = (-value).toString();
+      val = (+val).toString();
       if (min && +val < min) {
         setTooltip(`Your number must be ${min} or above`);
         setTooltipShow(true);
@@ -68,7 +70,13 @@ export const Input: React.FC<InputProps> = ({
         setTooltipShow(true);
         return;
       }
-      if (keyPressed === '-') val = (-value).toString();
+
+      // Prevents input from going into scientific notation
+      if (+val < 1e-6 && +val > -1e-6 && val !== '0' && val !== '') {
+        setTooltip('Your number is far too precise');
+        setTooltipShow(true);
+        return;
+      }
     } else {
       if (maxLength && val.length > maxLength) {
         setTooltip(`Your text can be at most ${maxLength} characters long`);
@@ -80,14 +88,16 @@ export const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div>
-      <label
-        htmlFor={label}
-        className="block text-sm font-medium text-gray-700"
-      >
-        {label}
-        <span className="text-red-500">{required && ' *'}</span>
-      </label>
+    <div className="relative">
+      {label && (
+        <label
+          htmlFor={label}
+          className="block text-sm font-medium text-gray-700"
+        >
+          {label}
+          <span className="text-red-500">{required && ' *'}</span>
+        </label>
+      )}
       <div className="mt-1 relative shadow-sm">
         <input
           name={label}
@@ -115,26 +125,28 @@ export const Input: React.FC<InputProps> = ({
               : value
           }
         />
-        <div className="right-0 absolute inset-y-0 pr-3 flex items-center">
-          {type === 'password' &&
-            (passwordVisibility ? (
-              <EyeOffIcon
-                className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
-                onClick={() => setPasswordVisibility(false)}
+        {(type === 'password' || error) && (
+          <div className="right-0 absolute inset-y-0 pr-3 flex items-center">
+            {type === 'password' &&
+              (passwordVisibility ? (
+                <EyeOffIcon
+                  className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
+                  onClick={() => setPasswordVisibility(false)}
+                />
+              ) : (
+                <EyeIcon
+                  className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
+                  onClick={() => setPasswordVisibility(true)}
+                />
+              ))}
+            {error && (
+              <ExclamationCircleIcon
+                className="ml-1 h-5 w-5 text-red-500"
+                aria-hidden="true"
               />
-            ) : (
-              <EyeIcon
-                className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
-                onClick={() => setPasswordVisibility(true)}
-              />
-            ))}
-          {error && (
-            <ExclamationCircleIcon
-              className="ml-1 h-5 w-5 text-red-500"
-              aria-hidden="true"
-            />
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
       <Transition
         show={tooltipShow}
@@ -143,6 +155,7 @@ export const Input: React.FC<InputProps> = ({
         enterFrom="opacity-0"
         enterTo="opacity-100"
         leaveTo="opacity-0 ease-in"
+        className="absolute right-0"
       >
         <div className="flex flex-col items-end -mb-10">
           <svg
@@ -162,8 +175,10 @@ export const Input: React.FC<InputProps> = ({
           </div>
         </div>
       </Transition>
-      <p className="mt-2 text-red-600 text-sm">{error}</p>
-      <p className="mt-2 text-gray-500 text-sm">{description}</p>
+      {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
+      {description && (
+        <p className="mt-2 text-gray-500 text-sm">{description}</p>
+      )}
     </div>
   );
 };
