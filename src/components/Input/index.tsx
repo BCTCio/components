@@ -39,7 +39,8 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
-  const [passwordVis, setPasswordVis] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  let keyPressed: string;
 
   useEffect(() => {
     if (tooltipShow) {
@@ -65,6 +66,7 @@ export const Input: React.FC<InputProps> = ({
         setTooltipShow(true);
         return;
       }
+      if (keyPressed === '-') val = (-value).toString();
     } else {
       if (maxLength && val.length > maxLength) {
         setTooltip(`Your text can be at most ${maxLength} characters long`);
@@ -75,8 +77,8 @@ export const Input: React.FC<InputProps> = ({
     onChange((type === 'number' ? +val : val) as never);
   };
 
-  const handleType = (): string => {
-    if (type === 'password' && passwordVis) return 'text';
+  const checkInputType = (): string => {
+    if (type === 'password' && passwordVisibility) return 'text';
     return type;
   };
 
@@ -93,7 +95,7 @@ export const Input: React.FC<InputProps> = ({
         <input
           name={label}
           id={label}
-          type={handleType()}
+          type={checkInputType()}
           className={classNames(
             {
               'pr-16': type === 'password' && error,
@@ -105,20 +107,21 @@ export const Input: React.FC<InputProps> = ({
             'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none'
           )}
           placeholder={placeholder}
+          onKeyPress={(e) => (keyPressed = e.key)}
           onChange={handleChange}
           value={value}
         />
         <div className="right-0 absolute inset-y-0 pr-3 flex items-center">
           {type === 'password' &&
-            (passwordVis ? (
+            (passwordVisibility ? (
               <EyeOffIcon
                 className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
-                onClick={() => setPasswordVis(false)}
+                onClick={() => setPasswordVisibility(false)}
               />
             ) : (
               <EyeIcon
                 className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
-                onClick={() => setPasswordVis(true)}
+                onClick={() => setPasswordVisibility(true)}
               />
             ))}
           {error && (
