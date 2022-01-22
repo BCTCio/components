@@ -12,6 +12,7 @@ export interface SearchInputProps {
   onInputChange?: (v: string) => void;
   onChange: (v: DropdownData['id'][]) => void;
   value: DropdownData['id'][];
+  clickTarget?: HTMLElement;
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({
@@ -22,6 +23,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onInputChange,
   onChange,
+  clickTarget = document,
 }) => {
   const [filter, setFilter] = useState('');
   const [open, setOpen] = useState(false);
@@ -36,14 +38,14 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   );
 
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: Event) => {
       if (!searchInput.current?.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    document.addEventListener('click', handleClick);
+    clickTarget.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener('click', handleClick);
+      clickTarget.removeEventListener('click', handleClick);
     };
   }, []);
 
