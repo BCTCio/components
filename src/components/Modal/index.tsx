@@ -1,4 +1,4 @@
-import React, { ReactNode, Fragment, useRef } from 'react';
+import React, { ReactNode, Fragment, useRef, MutableRefObject } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 export interface ModalData {
@@ -11,6 +11,7 @@ export interface ModalData {
 export interface ModalProps extends ModalData {
   show: boolean;
   setShow: (v: boolean) => void;
+  ref?: MutableRefObject<HTMLDivElement>;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -21,6 +22,7 @@ export const Modal: React.FC<ModalProps> = ({
   onCancel,
   show,
   setShow,
+  ref,
 }) => {
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   return (
@@ -63,7 +65,10 @@ export const Modal: React.FC<ModalProps> = ({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block text-left align-bottom transition-all transform shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div
+              ref={ref}
+              className="inline-block text-left align-bottom transition-all transform shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            >
               <div className="px-4 pt-5 pb-4 bg-white sm:p-5 sm:pb-4 rounded-t-lg">
                 <div className="sm:flex sm:items-start">
                   <div className="w-full mt-3 text-center sm:mt-0 sm:ml-2 sm:text-left">
