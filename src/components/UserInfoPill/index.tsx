@@ -108,7 +108,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                   }`}
                 >
                   {(buttons as Button[]).map((buttonObj) => (
-                    <Menu.Item>
+                    <Menu.Item key={buttonObj.title}>
                       {({ active }) => (
                         <button
                           onClick={buttonObj?.onClick}
