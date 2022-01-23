@@ -1,5 +1,10 @@
 import React, { ReactNode, useRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
 
 export interface ModalData {
   title: string;
@@ -25,13 +30,38 @@ export const Modal: React.FC<ModalProps> = ({
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const [pseudoShow, setPseudoShow] = useState(false);
   const [modalDeleted, setModalDeleted] = useState(true);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const showRef = useRef(show);
+  if (showRef.current !== show) showRef.current = show;
+
   useEffect(() => {
     if (show && modalDeleted && !pseudoShow) setModalDeleted(false);
     else if (show && !modalDeleted && !pseudoShow) {
       setPseudoShow(true);
       cancelButtonRef.current?.focus();
-    } else if (!show && !modalDeleted && pseudoShow) setPseudoShow(false);
+      modalRef.current?.scroll({ top: 0 });
+      disableBodyScroll(modalRef.current as HTMLDivElement);
+    } else if (!show && !modalDeleted && pseudoShow) {
+      setPseudoShow(false);
+      enableBodyScroll(modalRef.current as HTMLDivElement);
+    }
   }, [show, modalDeleted, pseudoShow]);
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (showRef.current && e.key === 'Escape') {
+      setShow(false);
+      onCancel?.call(null);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+      clearAllBodyScrollLocks();
+    };
+  }, []);
   return (
     <>
       {!modalDeleted && (
@@ -39,9 +69,10 @@ export const Modal: React.FC<ModalProps> = ({
           className={classNames(
             pseudoShow
               ? 'ease-out duration-300 opacity-100'
-              : 'duration-200 ease-in pointer-events-none',
-            'fixed inset-0 z-10 overflow-y-auto transition-opacity opacity-0'
+              : 'duration-200 ease-in pointer-events-none opacity-0',
+            'fixed inset-0 z-10 overflow-y-auto transition-opacity'
           )}
+          ref={modalRef}
           onTransitionEnd={() => !show && setModalDeleted(true)}
         >
           <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
