@@ -116,7 +116,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                             active
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
-                            'text-left block px-4 py-2 text-sm whitespace-nowrap'
+                            'text-left w-full block px-4 py-2 text-sm whitespace-nowrap'
                           )}
                         >
                           {buttonObj.title}
