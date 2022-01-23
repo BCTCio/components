@@ -1,4 +1,4 @@
-import React, { ReactNode, Fragment, useRef, MutableRefObject } from 'react';
+import React, { ReactNode, Fragment, useRef, RefObject } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 export interface ModalData {
@@ -11,7 +11,7 @@ export interface ModalData {
 export interface ModalProps extends ModalData {
   show: boolean;
   setShow: (v: boolean) => void;
-  ref?: MutableRefObject<HTMLDivElement>;
+  ref?: RefObject<HTMLDivElement>;
 }
 
 export const Modal: React.FC<ModalProps> = ({
