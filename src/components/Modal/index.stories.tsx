@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Modal, ModalData } from './';
+import { PersistentModal, PersistentModalData } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Overlays/Modal',
-  component: Modal,
-} as ComponentMeta<typeof Modal>;
+  component: PersistentModal,
+} as ComponentMeta<typeof PersistentModal>;
 
-const props: ModalData = {
+const props: PersistentModalData = {
   title: 'Title',
   body: <h1>Hello</h1>,
   onSubmit() {
@@ -19,13 +19,13 @@ const props: ModalData = {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof Modal> = (args: any) => {
+export const Default: ComponentStory<typeof PersistentModal> = (args: any) => {
   const [modalData, _setModalData] = useState(props);
   const [show, setShow] = useState(false);
   return (
     <>
       <button onClick={() => setShow(true)}>Open</button>
-      <Modal {...modalData} show={show} {...args} setShow={setShow} />
+      <PersistentModal {...modalData} show={show} {...args} setShow={setShow} />
     </>
   );
 };

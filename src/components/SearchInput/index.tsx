@@ -12,7 +12,6 @@ export interface SearchInputProps {
   onInputChange?: (v: string) => void;
   onChange: (v: DropdownData['id'][]) => void;
   value: DropdownData['id'][];
-  clickTarget?: HTMLElement;
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({
@@ -23,7 +22,6 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onInputChange,
   onChange,
-  clickTarget = document,
 }) => {
   const [filter, setFilter] = useState('');
   const [open, setOpen] = useState(false);
@@ -43,9 +41,9 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         setOpen(false);
       }
     };
-    clickTarget.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick);
     return () => {
-      clickTarget.removeEventListener('click', handleClick);
+      document.removeEventListener('click', handleClick);
     };
   }, []);
 
