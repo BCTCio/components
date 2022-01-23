@@ -1,19 +1,19 @@
 import React, { ReactNode, useRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-export interface PersistentModalData {
+export interface ModalData {
   title: string;
   body?: ReactNode;
   onSubmit: () => Promise<void> | void;
   onCancel?: () => Promise<void> | void;
   submitText?: string;
 }
-export interface ModalProps extends PersistentModalData {
+export interface ModalProps extends ModalData {
   show: boolean;
   setShow: (v: boolean) => void;
 }
 
-export const PersistentModal: React.FC<ModalProps> = ({
+export const Modal: React.FC<ModalProps> = ({
   title,
   body,
   submitText = 'Submit',
