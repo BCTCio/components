@@ -25,7 +25,19 @@ export const Default: ComponentStory<typeof Modal> = (args: any) => {
   return (
     <>
       <button onClick={() => setShow(true)}>Open</button>
-      <Modal {...modalData} show={show} {...args} setShow={setShow} />
+      <Modal
+        {...modalData}
+        show={show}
+        {...args}
+        body={new Array(20).fill('').map((_, i) => (
+          <h1 key={i}>I automatically scroll you to the top</h1>
+        ))}
+        setShow={setShow}
+      />
+      <br />
+      {new Array(30).fill('').map((_, i) => (
+        <h1 key={i}>I get scroll locked</h1>
+      ))}
     </>
   );
 };
