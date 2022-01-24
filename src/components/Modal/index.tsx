@@ -5,13 +5,17 @@ import {
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
+import { Spinner } from '../Spinner';
 
 export interface ModalData {
   title: string;
-  body?: ReactNode;
+  subtitle?: string;
   onSubmit: () => Promise<void> | void;
   onCancel?: () => Promise<void> | void;
   submitText?: string;
+  icon?: ReactNode;
+  loading?: boolean;
+  children: ReactNode;
 }
 export interface ModalProps extends ModalData {
   show: boolean;
@@ -20,12 +24,15 @@ export interface ModalProps extends ModalData {
 
 export const Modal: React.FC<ModalProps> = ({
   title,
-  body,
-  submitText = 'Submit',
+  subtitle,
+  submitText,
   onSubmit,
   onCancel,
   show,
   setShow,
+  icon,
+  loading,
+  children,
 }) => {
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const [pseudoShow, setPseudoShow] = useState(false);
@@ -95,10 +102,27 @@ export const Modal: React.FC<ModalProps> = ({
               <div className="px-4 pt-5 pb-4 bg-white sm:p-5 sm:pb-4 rounded-t-lg">
                 <div className="sm:flex sm:items-start">
                   <div className="w-full mt-3 text-center sm:mt-0 sm:ml-2 sm:text-left">
-                    <h3 className="text-xl font-medium leading-6 text-gray-900">
-                      {title}
-                    </h3>
-                    <div className="mt-2">{body}</div>
+                    <div className="flex justify-between">
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-xl font-medium leading-6 text-gray-900">
+                            {title}
+                          </h3>
+                          {loading && <Spinner color="dark" size="h-4" />}
+                        </div>
+                        {subtitle && (
+                          <p className="mt-1 text-sm text-gray-500">
+                            {subtitle}
+                          </p>
+                        )}
+                      </div>
+                      {icon && (
+                        <div className="overflow-hidden w-12 h-12 rounded-full">
+                          {icon}
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-2">{children}</div>
                   </div>
                 </div>
               </div>
@@ -106,14 +130,20 @@ export const Modal: React.FC<ModalProps> = ({
               <div className="px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:text-sm rounded-b-lg">
                 <button
                   type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto"
+                  className={classNames(
+                    loading
+                      ? 'cursor-not-allowed bg-green-700 text-gray-100'
+                      : 'focus:ring-green-500 hover:bg-green-700 bg-green-600 text-white',
+                    'inline-flex justify-center w-full px-4 py-2 font-medium border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto'
+                  )}
                   onClick={onSubmit}
+                  disabled={loading}
                 >
-                  {submitText}
+                  {submitText || (loading ? 'Submitting' : 'Submit')}
                 </button>
                 <button
                   type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 mt-3 font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto"
+                  className="inline-flex justify-center w-full px-4 py-2 mt-3 font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 sm:mt-0 sm:ml-3 sm:w-auto"
                   onClick={() => {
                     setShow(false);
                     onCancel?.call(null);

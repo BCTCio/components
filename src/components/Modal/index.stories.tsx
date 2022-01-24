@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Modal, ModalData } from '.';
+import { UserAddIcon } from '@heroicons/react/outline';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -12,7 +13,13 @@ export default {
 
 const props: ModalData = {
   title: 'Title',
-  body: <h1>Hello</h1>,
+  children: (
+    <>
+      <h1>Hello,</h1>
+      <h1>I am a few</h1>
+      <h1>lines of text</h1>
+    </>
+  ),
   onSubmit() {
     console.log('Submitted');
   },
@@ -25,19 +32,58 @@ export const Default: ComponentStory<typeof Modal> = (args: any) => {
   return (
     <>
       <button onClick={() => setShow(true)}>Open</button>
+      <Modal {...modalData} show={show} {...args} setShow={setShow} />
+    </>
+  );
+};
+
+export const WithSubtitle: ComponentStory<typeof Modal> = (args: any) => {
+  const [modalData, _setModalData] = useState(props);
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button onClick={() => setShow(true)}>Open</button>
       <Modal
         {...modalData}
         show={show}
+        subtitle="I am a subtitle"
         {...args}
-        body={new Array(20).fill('').map((_, i) => (
-          <h1 key={i}>I automatically scroll you to the top</h1>
-        ))}
         setShow={setShow}
       />
-      <br />
-      {new Array(30).fill('').map((_, i) => (
-        <h1 key={i}>I get scroll locked</h1>
-      ))}
+    </>
+  );
+};
+
+export const Loading: ComponentStory<typeof Modal> = (args: any) => {
+  const [modalData, _setModalData] = useState(props);
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button onClick={() => setShow(true)}>Open</button>
+      <Modal {...modalData} show={show} loading {...args} setShow={setShow} />
+    </>
+  );
+};
+
+export const WithIcon: ComponentStory<typeof Modal> = (args: any) => {
+  const [modalData, _setModalData] = useState(props);
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button onClick={() => setShow(true)}>Open</button>
+      <Modal
+        {...modalData}
+        show={show}
+        subtitle="I am a subtitle"
+        icon={
+          <UserAddIcon
+            className="p-2 bg-green-100 text-green-500"
+            aria-hidden="true"
+          />
+        }
+        {...args}
+        setShow={setShow}
+      />
     </>
   );
 };
