@@ -79,13 +79,14 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     list: DropdownData[]
   ) => {
     if (e.key === 'ArrowDown') {
+      e.preventDefault();
       const nextNotDisabled =
         i + 1 + list.slice(i + 1).findIndex((item) => !item.disabled);
       if (nextNotDisabled !== -1) {
         itemsList.current?.scroll({
           top:
             (itemsList.current.scrollHeight / list.length) *
-            (nextNotDisabled - 3),
+            (nextNotDisabled - 2.5),
           behavior: 'smooth',
         });
         (
@@ -103,7 +104,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         itemsList.current?.scroll({
           top:
             (itemsList.current.scrollHeight / list.length) *
-            (nextNotDisabled - 3),
+            (nextNotDisabled - 2.5),
           behavior: 'smooth',
         });
         (
