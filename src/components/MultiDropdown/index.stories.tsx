@@ -10,9 +10,12 @@ export default {
 } as ComponentMeta<typeof MultiDropdown>;
 
 const props = {
-  data: new Array(20)
-    .fill(0)
-    .map((_v, i) => ({ id: i, title: `Option ${i + 1}`, active: !!(i % 2) })),
+  data: new Array(20).fill(0).map((_v, i) => ({
+    id: i,
+    title: `Option ${i + 1}`,
+    active: !(i % 2),
+    disabled: !(i % 4),
+  })),
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

@@ -82,10 +82,14 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
                       value={item.id}
                       className={({ active }) =>
                         classNames(
-                          'flex items-center text-gray-900 cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-green-100',
-                          { 'bg-green-100': active }
+                          'flex items-center select-none relative py-2 pl-3 pr-9',
+                          { 'bg-green-100': active },
+                          item.disabled
+                            ? 'bg-gray-50 cursor-not-allowed text-gray-500'
+                            : 'hover:bg-green-100 cursor-pointer text-gray-900'
                         )
                       }
+                      disabled={item.disabled}
                     >
                       {showStatus && (
                         <span
