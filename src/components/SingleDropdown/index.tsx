@@ -23,7 +23,7 @@ export const SingleDropdown: React.FC<SingleDropdownProps> = ({
   return (
     <div className="flex w-full rounded-md shadow-sm">
       <Listbox value={value} onChange={onChange}>
-        <div className="relative w-full mt-1">
+        <div className="relative w-full">
           <Listbox.Label className="text-sm font-medium text-gray-700">
             {label}
           </Listbox.Label>

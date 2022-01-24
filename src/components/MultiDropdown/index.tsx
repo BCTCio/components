@@ -43,7 +43,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           );
         }}
       >
-        <div className="relative w-full mt-1">
+        <div className="relative w-full">
           <Listbox.Label className="text-sm font-medium text-gray-700">
             {label}
           </Listbox.Label>
