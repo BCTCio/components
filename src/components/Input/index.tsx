@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import React, { useEffect, useState, ChangeEventHandler } from 'react';
 
 export interface InputProps {
-  type: 'text' | 'number' | 'password';
+  type?: 'text' | 'number' | 'password';
   onChange: ((v: string) => void) | ((v: number) => void);
   value: string | number;
   label?: string;
