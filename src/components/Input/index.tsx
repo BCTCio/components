@@ -8,6 +8,20 @@ import {
 import classNames from 'classnames';
 import React, { useEffect, useState, ChangeEventHandler } from 'react';
 
+const createBreak = (text: string): string => {
+  if (text.length > 32) {
+    let middle = Math.floor(text.length / 2);
+    const before = text.lastIndexOf(' ', middle);
+    const after = text.indexOf(' ', middle + 1);
+    if (middle - before < after - middle) {
+      middle = before;
+    } else {
+      middle = after;
+    }
+    return text.slice(0, middle) + '\n' + text.slice(middle + 1);
+  } else return text;
+};
+
 export interface InputProps {
   type?: 'text' | 'number' | 'password' | 'email' | 'url' | 'tel';
   onChange: ((v: string) => void) | ((v: number) => void);
@@ -60,12 +74,12 @@ export const Input: React.FC<InputProps> = ({
     if (type === 'number') {
       if (keyPressed === '-') val = (-value).toString();
       val = (+val).toString();
-      if (min && +val < min) {
+      if (isFinite(min) && +val < min) {
         setTooltip(`Your number must be ${min} or above`);
         setTooltipShow(true);
         return;
       }
-      if (max && +val > max) {
+      if (isFinite(max) && +val > max) {
         setTooltip(`Your number must be ${max} or under`);
         setTooltipShow(true);
         return;
@@ -157,7 +171,7 @@ export const Input: React.FC<InputProps> = ({
         leaveTo="opacity-0 ease-in"
         className="absolute right-0"
       >
-        <div className="flex flex-col items-end -mb-10">
+        <div className="flex flex-col items-end absolute right-0 z-10 -mb-10">
           <svg
             className="fill-gray-200 h-2 mr-2"
             xmlns="http://www.w3.org/2000/svg"
@@ -166,12 +180,14 @@ export const Input: React.FC<InputProps> = ({
           >
             <polygon points="12,0 0,18 24,18" />
           </svg>
-          <div className="flex justify-between items-center bg-gray-200 p-2 rounded-lg">
+          <div className="flex justify-between items-start bg-gray-200 p-2 rounded-lg">
             <InformationCircleIcon
-              className="h-4 text-gray-400 mr-1"
+              className="h-4 w-4 text-gray-400 mr-1"
               aria-hidden="true"
             />
-            <span className="text-xs text-gray-600">{tooltip}</span>
+            <span className="text-xs text-gray-600 select-none whitespace-pre">
+              {innerWidth > 400 ? tooltip : createBreak(tooltip)}
+            </span>
           </div>
         </div>
       </Transition>
