@@ -11,6 +11,7 @@ export interface SearchInputProps {
   data: DropdownData[];
   onInputChange?: (v: string) => void;
   onChange: (v: DropdownData['id'][]) => void;
+  rawOnChange: (v: { id: string; isSelected: boolean }) => void;
   value: DropdownData['id'][];
 }
 
@@ -22,6 +23,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onInputChange,
   onChange,
+  rawOnChange,
 }) => {
   const [filter, setFilter] = useState('');
   const [open, setOpen] = useState(false);
@@ -49,9 +51,12 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     };
   }, []);
 
-  const handleSelect = (id: string) => {
-    const idRemoved = value.filter((v) => v !== id);
-    onChange(idRemoved.length === value.length ? [...value, id] : idRemoved);
+  const handleSelect = (id: string, isSelected: boolean) => {
+    rawOnChange?.call(null, { id, isSelected });
+    if (onChange) {
+      const idRemoved = value.filter((v) => v !== id);
+      onChange(isSelected ? [...value, id] : idRemoved);
+    }
   };
 
   const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -177,7 +182,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                   value.find((v) => v === item.id) !== undefined;
                 return (
                   <button
-                    onClick={() => handleSelect(item.id)}
+                    onClick={() => handleSelect(item.id, !isSelected)}
                     key={item.id}
                     className={classNames(
                       'w-full flex items-center text-gray-900 select-none relative py-2 pl-3 pr-9 focus:outline-none',
