@@ -10,8 +10,8 @@ export interface SearchInputProps {
   placeholder?: string;
   data: DropdownData[];
   onInputChange?: (v: string) => void;
-  onChange: (v: DropdownData['id'][]) => void;
-  rawOnChange: (v: { id: string; isSelected: boolean }) => void;
+  onChange?: (v: DropdownData['id'][]) => void;
+  rawOnChange?: (v: { id: string; isSelected: boolean }) => void;
   value: DropdownData['id'][];
 }
 
