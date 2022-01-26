@@ -10,9 +10,9 @@ export interface SearchInputProps {
   placeholder?: string;
   data: DropdownData[];
   onInputChange?: (v: string) => void;
-  onChange?: (v: DropdownData['id'][]) => void;
-  rawOnChange?: (v: { id: string; isSelected: boolean }) => void;
-  value: DropdownData['id'][];
+  onChange?: (v: DropdownData[]) => void;
+  rawOnChange?: (v: { option: DropdownData; isSelected: boolean }) => void;
+  value: DropdownData[];
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({
@@ -51,11 +51,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     };
   }, []);
 
-  const handleSelect = (id: string, isSelected: boolean) => {
-    rawOnChange?.call(null, { id, isSelected });
+  const handleSelect = (option: DropdownData, isSelected: boolean) => {
+    rawOnChange?.call(null, { option, isSelected });
     if (onChange) {
-      const idRemoved = value.filter((v) => v !== id);
-      onChange(isSelected ? [...value, id] : idRemoved);
+      const optionRemoved = value.filter((v) => v.id !== option.id);
+      onChange(isSelected ? [...value, option] : optionRemoved);
     }
   };
 
@@ -178,11 +178,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           >
             {(onInputChange ? data : filteredData).length ? (
               (onInputChange ? data : filteredData).map((item, i, list) => {
-                const isSelected =
-                  value.find((v) => v === item.id) !== undefined;
+                const isSelected = value.find((v) => v.id === item.id);
                 return (
                   <button
-                    onClick={() => handleSelect(item.id, !isSelected)}
+                    onClick={() => handleSelect(item, !isSelected)}
                     key={item.id}
                     className={classNames(
                       'w-full flex items-center text-gray-900 select-none relative py-2 pl-3 pr-9 focus:outline-none',

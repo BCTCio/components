@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { SearchInput } from '.';
+import { DropdownData } from '../..';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -20,20 +21,25 @@ const props = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof SearchInput> = (args) => {
-  const [state, setState] = useState<string[]>([]);
+  const [state, setState] = useState<DropdownData[]>([]);
   return (
-    <SearchInput
-      {...props}
-      {...args}
-      value={state}
-      onChange={(v) => setState(v)}
-      onInputChange={undefined}
-    />
+    <>
+      <SearchInput
+        {...props}
+        {...args}
+        value={state}
+        onChange={(v) => setState(v)}
+        onInputChange={undefined}
+      />
+      <p className="text-gray-500 text-sm mt-2">
+        You have selected: {state.map((v) => v.title).join(', ')}
+      </p>
+    </>
   );
 };
 
 export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
-  const [state, setState] = useState<string[]>([]);
+  const [state, setState] = useState<DropdownData[]>([]);
   return (
     <SearchInput
       {...props}
@@ -47,7 +53,7 @@ export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
 };
 
 export const WithStatus: ComponentStory<typeof SearchInput> = (args) => {
-  const [state, setState] = useState<string[]>([]);
+  const [state, setState] = useState<DropdownData[]>([]);
   return (
     <SearchInput
       {...props}
