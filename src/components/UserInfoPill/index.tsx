@@ -34,11 +34,10 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
     hrefProperty: 'href',
   },
 }) => {
-  const Link = customLink.component;
   return (
     <div className="px-6 py-4">
       <div className="flex items-center justify-between space-x-4">
-        <Link
+        <customLink.component
           className="flex items-center space-x-4"
           {...{ [customLink.hrefProperty]: redirectTo }}
         >
@@ -76,7 +75,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               </span>
             )}
           </div>
-        </Link>
+        </customLink.component>
         {buttons?.length &&
           (buttons.length === 1 ? (
             <div>
