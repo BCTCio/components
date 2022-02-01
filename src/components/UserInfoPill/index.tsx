@@ -15,6 +15,10 @@ export interface UserInfoPillProps {
   redirectTo?: string;
   statusBadge?: string;
   statusType?: 'danger' | 'warning' | 'success' | 'plain';
+  customLink?: {
+    component: any;
+    hrefProperty: string;
+  };
 }
 
 export const UserInfoPill: React.FC<UserInfoPillProps> = ({
@@ -25,15 +29,17 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
   redirectTo,
   statusBadge,
   statusType,
+  customLink = {
+    component: (props: any) => <a {...props} />,
+    hrefProperty: 'href',
+  },
 }) => {
   return (
     <div className="px-6 py-4">
       <div className="flex items-center justify-between space-x-4">
-        <a
+        <customLink.component
           className="flex items-center space-x-4"
-          href={redirectTo}
-          target="_blank"
-          rel="noreferrer"
+          {...{ [customLink.hrefProperty]: redirectTo }}
         >
           <div className="flex-shrink-0">
             <img
@@ -69,7 +75,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               </span>
             )}
           </div>
-        </a>
+        </customLink.component>
         {buttons?.length &&
           (buttons.length === 1 ? (
             <div>
