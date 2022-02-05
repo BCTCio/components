@@ -25,6 +25,7 @@ const createBreak = (text: string): string => {
 export interface InputProps {
   type?: 'text' | 'number' | 'password' | 'email' | 'url' | 'tel';
   onChange: ((v: string) => void) | ((v: number) => void);
+  onEnter?: () => void | Promise<void>;
   value: string | number;
   label?: string;
   description?: string;
@@ -41,6 +42,7 @@ export interface InputProps {
 export const Input: React.FC<InputProps> = ({
   type = 'text',
   onChange,
+  onEnter,
   value,
   label,
   description,
@@ -131,6 +133,7 @@ export const Input: React.FC<InputProps> = ({
           onKeyPress={(e) => {
             if (integerOnly && e.key === '.') e.preventDefault();
             keyPressed = e.key;
+            if (onEnter && e.key === 'Enter') onEnter();
           }}
           onChange={handleChange}
           value={
