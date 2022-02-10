@@ -1,0 +1,115 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import * as stories from './index.stories.tsx';
+import { HueRangeExample } from './examples.tsx';
+
+# Formatting
+
+BCTC Components comes prepackaged with some formatting functions that can be used in many situations
+
+## Format Phone Number
+
+```ts
+const formatPhoneNumber = (phoneNumberString?: string | null): string => {};
+// Example input: 1234567890
+// Example Output: (123) 456-7890
+```
+
+- If `phoneNumberString` is `null` or `undefined`, it returns `''`
+- If `phoneNumberString` is not a 10 digit number, it returns the input
+
+## Format Number
+
+```ts
+const formatNumber = (num?: number | null): string => {};
+// Example input: 1234567890.1234567890
+// Example Output: 1,234,567,890.123
+```
+
+- If `num` is `null` or `undefined`, it returns `0`
+- Otherwise, it will separate each 3 digits with a comma, remove trailing zeros in the decimal, and round to the nearest thousandths
+
+## Capitalize
+
+```ts
+const capitalize = (str: string): string => {};
+// Example input: 'hElLo'
+// Example Output: 'Hello'
+```
+
+- Returns the string with the first letter capitalized and the rest lowercased
+
+## Revert Camel Case
+
+```ts
+const unCamelCase = (str: string): string => {};
+// Example input: 'helloWorld'
+// Example Output: 'Hello World'
+```
+
+- Turns cammel case into normal text
+- Documentation of camel case [here](https://en.wikipedia.org/wiki/Camel_case)
+
+## Revert Screaming Snake Case
+
+```ts
+const unScreamingSnakeCase = (str: string): string => {};
+// Example input: 'HELLO_WORLD'
+// Example Output: 'Hello World'
+```
+
+- Turns screaming snake case (enum format) into normal text
+- Documentation of screaming snake case [here](https://en.wikipedia.org/wiki/Snake_case)
+
+## Color from Hue Range
+
+```ts
+const colorFromHueRange = (
+  {
+    from,
+    to,
+    saturation = 100,
+    lightness = 50,
+  }: {
+    from: number; // Hue of when value is 0
+    to: number; // Hue of when value is 1
+    saturation?: number; // From 0 to 100
+    lightness?: number; // From 0 to 100
+  },
+  value: number // From 0 to 1 - determines hue
+): string => {};
+// Example input: { from: 0, to: 120 }, .5
+// Example Output: 'hsl(60, 100%, 46%)'
+```
+
+- Returns a color of a hue determined by `value`
+- Will scale hue from `from` to `to`
+
+- Example: <HueRangeExample />
+
+- ```tsx
+  // Code:
+
+  const [hueRangeTest, setHueRangeTest] = useState(0);
+  return (
+    <div>
+      <h1
+        style={{
+          color: colorFromHueRange({ from: 0, to: 120 }, hueRangeTest),
+        }}
+      >
+        Hue Range Example (red to green)
+      </h1>
+      <input
+        type="range"
+        value={hueRangeTest}
+        onChange={(e) => setHueRangeTest(+e.target.value)}
+        min={0}
+        max={1}
+        step={1e-9}
+      />
+    </div>
+  ```
+
+```
+
+```
