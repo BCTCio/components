@@ -68,7 +68,7 @@ const colorFromHueRange = (
     from,
     to,
     saturation = 100,
-    lightness = 50,
+    lightness = 40,
   }: {
     from: number; // Hue of when value is 0
     to: number; // Hue of when value is 1
@@ -78,38 +78,34 @@ const colorFromHueRange = (
   value: number // From 0 to 1 - determines hue
 ): string => {};
 // Example input: { from: 0, to: 120 }, .5
-// Example Output: 'hsl(60, 100%, 46%)'
+// Example Output: 'hsl(60, 100%, 43.333333333333336%)'
 ```
 
 - Returns a color of a hue determined by `value`
 - Will scale hue from `from` to `to`
 
-- Example: <HueRangeExample />
+<HueRangeExample />
 
-- ```tsx
-  // Code:
-
-  const [hueRangeTest, setHueRangeTest] = useState(0);
-  return (
-    <div>
-      <h1
-        style={{
-          color: colorFromHueRange({ from: 0, to: 120 }, hueRangeTest),
-        }}
-      >
-        Hue Range Example (red to green)
-      </h1>
-      <input
-        type="range"
-        value={hueRangeTest}
-        onChange={(e) => setHueRangeTest(+e.target.value)}
-        min={0}
-        max={1}
-        step={1e-9}
-      />
-    </div>
-  ```
-
-```
-
+```tsx
+// Example Code:
+const [hueRangeTest, setHueRangeTest] = useState(0);
+return (
+  <div>
+    <h1
+      style={{
+        color: colorFromHueRange({ from: 0, to: 120 }, hueRangeTest),
+      }}
+    >
+      Hue Range Example (red to green)
+    </h1>
+    <input
+      type="range"
+      value={hueRangeTest}
+      onChange={(e) => setHueRangeTest(+e.target.value)}
+      min={0}
+      max={1}
+      step={1e-9}
+    />
+  </div>
+);
 ```
