@@ -23,7 +23,15 @@ const createBreak = (text: string): string => {
 };
 
 export interface InputProps {
-  type?: 'text' | 'number' | 'password' | 'email' | 'url' | 'tel';
+  type?:
+    | 'text'
+    | 'number'
+    | 'password'
+    | 'email'
+    | 'url'
+    | 'tel'
+    | 'date'
+    | 'time';
   onChange: ((v: string) => void) | ((v: number) => void);
   onEnter?: () => void | Promise<void>;
   value: string | number;
