@@ -30,7 +30,7 @@ export const colorFromHueRange = (
     from,
     to,
     saturation = 100,
-    lightness = 50,
+    lightness = 40,
   }: {
     from: number;
     to: number;
@@ -46,5 +46,5 @@ export const colorFromHueRange = (
     hue = from - value * (from - to);
   }
   const distanceFromGreen = Math.abs(180 - ((hue + 60) % 360)); // For correcting eye sensitivity to green
-  return `hsl(${hue}, ${saturation}%, ${lightness - distanceFromGreen / 15}%)`;
+  return `hsl(${hue}, ${saturation}%, ${lightness + distanceFromGreen / 18}%)`;
 };
