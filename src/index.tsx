@@ -12,5 +12,6 @@ export * from './components/Pagination';
 export * from './components/SearchInput';
 export * from './components/Table';
 export * from './components/Input';
+export * from './components/Formatting';
 
 export * from './constants/interfaces';
