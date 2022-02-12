@@ -35,10 +35,10 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
   },
 }) => {
   return (
-    <div className="px-6 py-4">
+    <div className="pr-6 py-4">
       <div className="flex items-center justify-between space-x-4">
         <customLink.component
-          className="flex items-center space-x-4"
+          className="flex items-center space-x-4 truncate pl-6"
           {...{ [customLink.hrefProperty]: redirectTo }}
         >
           <div className="flex-shrink-0">
@@ -55,7 +55,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
             />
           </div>
           <div className="flex flex-col min-w-0">
-            <p className="inline w-24 text-sm font-medium text-gray-900 truncate">
+            <p className="inline text-sm font-medium text-gray-900 truncate">
               {title}
             </p>
 
