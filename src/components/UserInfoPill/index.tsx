@@ -54,15 +54,15 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               alt="Profile picture"
             />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="inline text-sm font-medium text-gray-900 truncate">
+          <div className="flex flex-col min-w-0">
+            <p className="inline w-24 text-sm font-medium text-gray-900 truncate">
               {title}
             </p>
 
             {statusBadge && (
               <span
                 className={classNames(
-                  'ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium',
+                  'inline-flex mt-1 w-min whitespace-nowrap px-2 py-0.5 rounded-full text-xs font-medium',
                   {
                     'text-red-800 bg-red-100': statusType === 'danger',
                     'text-green-800 bg-green-100': statusType === 'success',
@@ -95,7 +95,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                   } active:bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100`}
                 >
                   <span className="sr-only">Open options</span>
-                  <DotsVerticalIcon className="h-5 w-5" aria-hidden="true" />
+                  <DotsVerticalIcon className="w-5 h-5" aria-hidden="true" />
                 </Menu.Button>
               </div>
 
