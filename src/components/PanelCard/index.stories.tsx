@@ -23,8 +23,8 @@ export const WithDivider: ComponentStory<typeof PanelCard> = (args) => (
   <PanelCard {...props} divider {...args} padding />
 );
 
-export const Loading: ComponentStory<typeof PanelCard> = (args) => (
-  <PanelCard {...props} {...args} padding loading divider />
+export const LoadingHandled: ComponentStory<typeof PanelCard> = (args) => (
+  <PanelCard {...props} {...args} padding loading handleLoading divider />
 );
 
 export const WithSubtitle: ComponentStory<typeof PanelCard> = (args) => (
