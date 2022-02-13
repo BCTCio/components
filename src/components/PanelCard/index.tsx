@@ -11,6 +11,7 @@ export interface PanelCardProps {
   headerRight?: ReactNode;
   padding?: boolean;
   loading?: boolean;
+  handleLoading?: boolean;
 }
 
 export const PanelCard: React.FC<PanelCardProps> = ({
@@ -22,6 +23,7 @@ export const PanelCard: React.FC<PanelCardProps> = ({
   padding,
   headerRight,
   loading,
+  handleLoading,
 }) => {
   return (
     <div
@@ -50,11 +52,12 @@ export const PanelCard: React.FC<PanelCardProps> = ({
         {headerRight && headerRight}
       </div>
       <div
-        className={classNames('', {
-          'sm:p-6 px-4 py-5': padding,
+        className={classNames({
+          'sm:p-6 px-4 py-5': padding || (handleLoading && loading),
+          'text-gray-500': handleLoading && loading,
         })}
       >
-        {children}
+        {handleLoading && loading ? 'Loading...' : children}
       </div>
       {footer && footer}
     </div>
