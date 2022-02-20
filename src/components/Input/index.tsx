@@ -43,7 +43,6 @@ export interface InputProps {
   maxLength?: number;
   min?: number;
   max?: number;
-  focusColor?: string;
   error?: string;
   integerOnly?: boolean;
 }

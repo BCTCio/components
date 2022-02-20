@@ -11,7 +11,6 @@ export interface UserInfoPillProps {
   avatar: string;
   title: string;
   buttons?: Button[];
-  ringColor?: string;
   redirectTo?: string;
   statusBadge?: string;
   statusType?: 'danger' | 'warning' | 'success' | 'plain';
@@ -25,7 +24,6 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
   avatar,
   title,
   buttons,
-  ringColor,
   redirectTo,
   statusBadge,
   statusType,
@@ -89,11 +87,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
           ) : (
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button
-                  className={`${
-                    ringColor || 'active:ring-THEME-400'
-                  } active:bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100`}
-                >
+                <Menu.Button className="active:ring-THEME-400 active:bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100">
                   <span className="sr-only">Open options</span>
                   <DotsVerticalIcon className="w-5 h-5" aria-hidden="true" />
                 </Menu.Button>
@@ -108,11 +102,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items
-                  className={`z-10 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none ${
-                    ringColor || 'active:ring-THEME-400'
-                  }`}
-                >
+                <Menu.Items className="z-10 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none active:ring-THEME-400">
                   {(buttons as Button[]).map((buttonObj) => (
                     <Menu.Item key={buttonObj.title}>
                       {({ active }) => (
