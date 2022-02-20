@@ -31,10 +31,32 @@
 }
 ```
 
+If you use tailwind (tailwind.config.js):
+
+```js
+const colors = require('tailwindcss/colors');
+
+module.exports = {
+  content: [
+    './node_modules/@bctc/components/dist/components.cjs.production.min.js',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        THEME: colors.YOUR_COLOR,
+      },
+    },
+  },
+};
+```
+
 ```tsx
 import React, { useState } from 'react';
 import { ToggleSwitch, UserInfoPill } from '@bctc/components';
-import '@bctc/components/dist/tailwind.css'; // This should be imported at the root tsx file, just import it once there is enough
+
+// If you don't use tailwind. Remember to put this BEFORE your stylesheet imports. Place this in the root index file.
+import '@bctc/components/dist/tailwind.css';
+
 import './App.css';
 
 function App() {

@@ -60,7 +60,6 @@ export const Input: React.FC<InputProps> = ({
   maxLength,
   min = Number.MIN_SAFE_INTEGER, // If a value gets below this, it will lose precision, looking strange to the user
   max = Number.MAX_SAFE_INTEGER, // If a value gets above this, it will lose precision, looking strange to the user
-  focusColor = 'focus:ring-blue-300',
   error,
   integerOnly,
 }) => {
@@ -173,15 +172,16 @@ export const Input: React.FC<InputProps> = ({
           className={classNames(
             {
               'pr-16': type === 'password' && error,
-              'pr-10': +(type === 'password') ^ +!!error,
+              'pr-10': (type === 'password') !== !!error,
+
               'pl-7': type === 'money',
-              'pr-12': +(type === 'money') ^ +!!error,
+              'pr-12': (type === 'money') !== !!error,
               'pr-20': type === 'money' && error,
             },
             error
               ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
-              : focusColor,
-            'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md focus:outline-none'
+              : 'focus:ring-THEME-500 focus:border-THEME-500',
+            'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md'
           )}
           placeholder={placeholder}
           onKeyPress={(e) => {
