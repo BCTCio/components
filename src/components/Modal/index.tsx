@@ -132,8 +132,8 @@ export const Modal: React.FC<ModalProps> = ({
                   type="button"
                   className={classNames(
                     loading
-                      ? 'cursor-not-allowed bg-green-700 text-gray-100'
-                      : 'focus:ring-green-500 hover:bg-green-700 bg-green-600 text-white',
+                      ? 'cursor-not-allowed bg-THEME-700 text-gray-100'
+                      : 'focus:ring-THEME-500 hover:bg-THEME-700 bg-THEME-600 text-white',
                     'inline-flex justify-center w-full px-4 py-2 font-medium border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto'
                   )}
                   onClick={onSubmit}

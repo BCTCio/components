@@ -91,7 +91,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               <div>
                 <Menu.Button
                   className={`${
-                    ringColor || 'active:ring-blue-400'
+                    ringColor || 'active:ring-THEME-400'
                   } active:bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100`}
                 >
                   <span className="sr-only">Open options</span>
@@ -110,7 +110,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               >
                 <Menu.Items
                   className={`z-10 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none ${
-                    ringColor || 'active:ring-blue-400'
+                    ringColor || 'active:ring-THEME-400'
                   }`}
                 >
                   {(buttons as Button[]).map((buttonObj) => (

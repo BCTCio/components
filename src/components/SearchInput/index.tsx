@@ -159,7 +159,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
               setFilter(e.target.value);
               onInputChange?.call(null, e.target.value);
             }}
-            className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full border-gray-300 rounded-md text-sm"
+            className="shadow-sm focus:ring-THEME-500 focus:border-THEME-500 block w-full border-gray-300 rounded-md text-sm"
             placeholder={placeholder}
             onKeyDown={handleInputKeyDown}
             ref={input}
@@ -187,7 +187,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                       'w-full flex items-center text-gray-900 select-none relative py-2 pl-3 pr-9 focus:outline-none',
                       item.disabled
                         ? 'bg-gray-50 cursor-not-allowed text-gray-500'
-                        : 'hover:bg-green-100 focus:bg-green-100 cursor-pointer text-gray-900'
+                        : 'hover:bg-THEME-100 focus:bg-THEME-100 cursor-pointer text-gray-900'
                     )}
                     disabled={item.disabled}
                     onKeyDown={(e) => handleItemKeyDown(e, i, list)}
@@ -195,7 +195,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                     {showStatus && (
                       <span
                         className={classNames(
-                          item.active ? 'bg-green-400' : 'bg-gray-200',
+                          item.active ? 'bg-THEME-400' : 'bg-gray-200',
                           'flex-shrink-0 inline-block h-2 w-2 rounded-full mr-3'
                         )}
                         aria-hidden="true"
@@ -212,7 +212,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                     {isSelected && (
                       <span
                         className={classNames(
-                          isSelected ? 'text-green-600' : 'text-white',
+                          isSelected ? 'text-THEME-600' : 'text-white',
                           'absolute inset-y-0 right-0 flex items-center pr-4'
                         )}
                       >
