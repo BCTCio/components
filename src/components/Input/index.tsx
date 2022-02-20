@@ -31,7 +31,8 @@ export interface InputProps {
     | 'url'
     | 'tel'
     | 'date'
-    | 'time';
+    | 'time'
+    | 'money';
   onChange: ((v: string) => void) | ((v: number) => void);
   onEnter?: () => void | Promise<void>;
   value: string | number;
@@ -101,6 +102,31 @@ export const Input: React.FC<InputProps> = ({
         setTooltipShow(true);
         return;
       }
+    } else if (type === 'money') {
+      if (keyPressed === '-') val = (-value).toString();
+      val = (+val).toString();
+      if (isFinite(min) && +val < min) {
+        setTooltip(`Your number must be ${min} or above`);
+        setTooltipShow(true);
+        return;
+      }
+      if (isFinite(max) && +val > max) {
+        setTooltip(`Your number must be ${max} or under`);
+        setTooltipShow(true);
+        return;
+      }
+      if (val.includes('e')) {
+        setTooltip(`Your number cannot be in scientific notation`);
+        setTooltipShow(true);
+        return;
+      }
+
+      // Prevents input from going into scientific notation
+      if (+val - Math.floor(+val * 100) / 100 !== 0) {
+        setTooltip('Your number cannot have more than 3 decimal places');
+        setTooltipShow(true);
+        return;
+      }
     } else {
       if (maxLength && val.length > maxLength) {
         setTooltip(`Your text can be at most ${maxLength} characters long`);
@@ -108,7 +134,19 @@ export const Input: React.FC<InputProps> = ({
         return;
       }
     }
-    onChange((type === 'number' ? +val : val) as never);
+    onChange((type === 'number' || type === 'money' ? +val : val) as never);
+  };
+
+  const getType = () => {
+    switch (type) {
+      case 'password':
+        if (passwordVisibility) return 'text';
+        else return type;
+      case 'money':
+        return 'number';
+      default:
+        return type;
+    }
   };
 
   return (
@@ -123,14 +161,22 @@ export const Input: React.FC<InputProps> = ({
         </label>
       )}
       <div className="mt-1 relative shadow-sm">
+        {type === 'money' && (
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <span className="text-gray-500 sm:text-sm">$</span>
+          </div>
+        )}
         <input
           name={label}
           id={label}
-          type={type === 'password' && passwordVisibility ? 'text' : type}
+          type={getType()}
           className={classNames(
             {
               'pr-16': type === 'password' && error,
               'pr-10': +(type === 'password') ^ +!!error,
+              'pl-7': type === 'money',
+              'pr-12': +(type === 'money') ^ +!!error,
+              'pr-20': type === 'money' && error,
             },
             error
               ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
@@ -149,9 +195,15 @@ export const Input: React.FC<InputProps> = ({
               ? Math.floor(+value).toString()
               : value
           }
+          aria-describedby={type === 'money' ? 'price-currency' : undefined}
         />
-        {(type === 'password' || error) && (
-          <div className="right-0 absolute inset-y-0 pr-3 flex items-center">
+        {(type === 'password' || type === 'money' || error) && (
+          <div
+            className={classNames(
+              { 'pointer-events-none': type === 'money' || error },
+              'right-0 absolute inset-y-0 pr-3 flex items-center'
+            )}
+          >
             {type === 'password' &&
               (passwordVisibility ? (
                 <EyeOffIcon
@@ -164,6 +216,16 @@ export const Input: React.FC<InputProps> = ({
                   onClick={() => setPasswordVisibility(true)}
                 />
               ))}
+            {type === 'money' && (
+              <span
+                className={classNames(
+                  { 'mr-1': error },
+                  'text-gray-500 sm:text-sm'
+                )}
+              >
+                USD
+              </span>
+            )}
             {error && (
               <ExclamationCircleIcon
                 className="ml-1 h-5 w-5 text-red-500"

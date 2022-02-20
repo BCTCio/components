@@ -79,6 +79,21 @@ export const IntegerOnlyNumber: ComponentStory<typeof Input> = (args: any) => {
   );
 };
 
+export const PositiveMoney: ComponentStory<typeof Input> = (args: any) => {
+  const [state, setState] = useState(0);
+  return (
+    <Input
+      {...props}
+      type="money"
+      description="You can only use positive values"
+      min={0}
+      {...args}
+      value={state}
+      onChange={setState}
+    />
+  );
+};
+
 export const PasswordWithMaxLength: ComponentStory<typeof Input> = (
   args: any
 ) => {
