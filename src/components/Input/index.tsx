@@ -190,7 +190,7 @@ export const Input: React.FC<InputProps> = ({
           }}
           onChange={handleChange}
           value={
-            integerOnly && type === 'number'
+            integerOnly && (type === 'number' || type === 'money')
               ? Math.floor(+value).toString()
               : value
           }
