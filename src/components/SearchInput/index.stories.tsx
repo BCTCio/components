@@ -38,12 +38,28 @@ export const Default: ComponentStory<typeof SearchInput> = (args) => {
   );
 };
 
-export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
+export const WithDetails: ComponentStory<typeof SearchInput> = (args) => {
   const [state, setState] = useState<DropdownData[]>([]);
   return (
     <SearchInput
       {...props}
       label="Label"
+      description="Do stuff with this"
+      required
+      {...args}
+      value={state}
+      onChange={(v) => setState(v)}
+      onInputChange={undefined}
+    />
+  );
+};
+
+export const Loading: ComponentStory<typeof SearchInput> = (args) => {
+  const [state, setState] = useState<DropdownData[]>([]);
+  return (
+    <SearchInput
+      {...props}
+      loading
       {...args}
       value={state}
       onChange={(v) => setState(v)}

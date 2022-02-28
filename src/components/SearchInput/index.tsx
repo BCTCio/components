@@ -3,6 +3,7 @@ import { CheckIcon } from '@heroicons/react/outline';
 import React, { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { DropdownData } from '../../constants/interfaces';
+import { Spinner } from '../Spinner';
 
 export interface SearchInputProps {
   showStatus?: boolean;
@@ -13,6 +14,9 @@ export interface SearchInputProps {
   onChange?: (v: DropdownData[]) => void;
   rawOnChange?: (v: { option: DropdownData; isSelected: boolean }) => void;
   value: DropdownData[];
+  loading?: boolean;
+  description?: string;
+  required?: boolean;
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({
@@ -24,6 +28,9 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   onInputChange,
   onChange,
   rawOnChange,
+  loading,
+  description,
+  required,
 }) => {
   const [filter, setFilter] = useState('');
   const [open, setOpen] = useState(false);
@@ -143,6 +150,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           className="text-sm font-medium text-gray-700 mb-1"
         >
           {label}
+          <span className="text-red-500">{required && ' *'}</span>
         </label>
       )}
       <div className="w-full relative" ref={searchInput}>
@@ -165,6 +173,11 @@ export const SearchInput: React.FC<SearchInputProps> = ({
             ref={input}
             autoComplete="off"
           />
+          {loading && (
+            <div className="absolute right-2 bottom-2 pointer-events-none">
+              <Spinner />
+            </div>
+          )}
         </div>
         <Transition
           show={open}
@@ -230,6 +243,9 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           </div>
         </Transition>
       </div>
+      {description && (
+        <p className="mt-2 text-gray-500 text-sm">{description}</p>
+      )}
     </div>
   );
 };

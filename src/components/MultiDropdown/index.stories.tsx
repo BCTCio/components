@@ -31,12 +31,14 @@ export const Default: ComponentStory<typeof MultiDropdown> = (args) => {
   );
 };
 
-export const WithLabel: ComponentStory<typeof MultiDropdown> = (args) => {
+export const WithDetails: ComponentStory<typeof MultiDropdown> = (args) => {
   const [state, setState] = useState<string[]>([]);
   return (
     <MultiDropdown
       {...props}
       label="Label"
+      description="Do stuff with this"
+      required
       {...args}
       value={state}
       onChange={(v) => setState(v)}
