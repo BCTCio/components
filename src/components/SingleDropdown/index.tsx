@@ -10,6 +10,8 @@ export interface SingleDropdownProps {
   data: DropdownData[];
   onChange: (v: DropdownData['id']) => void;
   value: DropdownData['id'];
+  description?: string;
+  required?: boolean;
 }
 
 export const SingleDropdown: React.FC<SingleDropdownProps> = ({
@@ -18,14 +20,17 @@ export const SingleDropdown: React.FC<SingleDropdownProps> = ({
   data,
   onChange,
   value,
+  description,
+  required,
 }) => {
   const selected = data.find((v) => v.id === value);
   return (
-    <div className="flex w-full rounded-md shadow-sm">
+    <div className="w-full rounded-md shadow-sm">
       <Listbox value={value} onChange={onChange}>
         <div className="relative w-full">
           <Listbox.Label className="text-sm font-medium text-gray-700">
             {label}
+            <span className="text-red-500">{required && ' *'}</span>
           </Listbox.Label>
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-THEME-500 focus:border-THEME-500 sm:text-sm">
             <div className="flex items-center">
@@ -108,6 +113,9 @@ export const SingleDropdown: React.FC<SingleDropdownProps> = ({
           </Transition>
         </div>
       </Listbox>
+      {description && (
+        <p className="mt-2 text-gray-500 text-sm">{description}</p>
+      )}
     </div>
   );
 };

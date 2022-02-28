@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import React from 'react';
 
 export interface SpinnerProps {
-  color?: 'green' | 'light' | 'dark';
+  color?: 'green' | 'light' | 'dark' | 'theme';
   size?: string;
 }
 
 export const Spinner: React.FC<SpinnerProps> = ({
-  color = 'light',
+  color = 'theme',
   size = 'h-5',
 }) => (
   <svg
@@ -15,6 +15,7 @@ export const Spinner: React.FC<SpinnerProps> = ({
       'text-white': color === 'light',
       'text-gray-900': color === 'dark',
       'text-green-500': color === 'green',
+      'text-THEME-500': color === 'theme',
     })}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

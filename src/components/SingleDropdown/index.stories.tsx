@@ -31,12 +31,14 @@ export const Default: ComponentStory<typeof SingleDropdown> = (args) => {
   );
 };
 
-export const WithLabel: ComponentStory<typeof SingleDropdown> = (args) => {
+export const WithDetails: ComponentStory<typeof SingleDropdown> = (args) => {
   const [state, setState] = useState('');
   return (
     <SingleDropdown
       {...props}
       label="Label"
+      description="Do stuff with this"
+      required
       {...args}
       value={state}
       onChange={(v) => setState(v)}

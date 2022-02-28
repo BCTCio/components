@@ -10,6 +10,8 @@ export interface MultiDropdownProps {
   data: DropdownData[];
   onChange: (v: DropdownData['id'][]) => void;
   value: DropdownData['id'][];
+  description?: string;
+  required?: boolean;
 }
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -18,6 +20,8 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   data,
   onChange,
   value,
+  description,
+  required,
 }) => {
   useEffect(() => {
     const handleClick = (e: Event) => {
@@ -46,6 +50,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
         <div className="relative w-full">
           <Listbox.Label className="text-sm font-medium text-gray-700">
             {label}
+            <span className="text-red-500">{required && ' *'}</span>
           </Listbox.Label>
           <div ref={multiDropdown}>
             <div onClick={() => setOpen(!open)}>
@@ -126,6 +131,9 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           </div>
         </div>
       </Listbox>
+      {description && (
+        <p className="mt-2 text-gray-500 text-sm">{description}</p>
+      )}
     </div>
   );
 };
