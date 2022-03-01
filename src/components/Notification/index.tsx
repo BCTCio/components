@@ -24,6 +24,7 @@ export const error = (
   err: any,
   params?: { title?: string; fallback?: string; duration?: number }
 ): void => {
+  console.trace(err);
   globalNotifications.set({
     title: params?.title || 'Something went wrong',
     description:
