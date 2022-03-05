@@ -40,12 +40,12 @@
   "module": "dist/bctc-components.esm.js",
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.4.9",
+    "@storybook/addon-links": "^6.4.19",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addons": "^6.4.9",
-    "@storybook/react": "^6.4.9",
+    "@storybook/addons": "^6.4.19",
+    "@storybook/react": "^6.4.19",
     "@tailwindcss/forms": "^0.4.0",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react": "^17.0.37",
@@ -64,8 +64,8 @@
     "typescript": "^4.5.3"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.2",
-    "@heroicons/react": "^1.0.5",
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.6",
     "@hookstate/core": "^3.0.13",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1"
