@@ -94,10 +94,10 @@ export const InlineButtons: ComponentStory<typeof UserInfoPill> = (args) => (
     buttons={[
       {
         title: (
-          <h1 className="flex items-center">
+          <div className="flex items-center">
             <ClipboardCopyIcon className="h-4 w-4 mr-1" />
             Button 1
-          </h1>
+          </div>
         ),
         onClick() {
           alert('You clicked button 1!');
