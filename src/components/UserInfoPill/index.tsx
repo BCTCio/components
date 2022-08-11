@@ -1,10 +1,10 @@
 import { Menu, Transition } from '@headlessui/react';
 import { DotsVerticalIcon } from '@heroicons/react/outline';
 import classNames from 'classnames';
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 
 interface Button {
-  title: string;
+  title: ReactNode | string;
   onClick?: () => void | Promise<void>;
 }
 export interface UserInfoPillProps {
@@ -18,6 +18,7 @@ export interface UserInfoPillProps {
     component: any;
     hrefProperty: string;
   };
+  buttonStyle?: 'menuDropdown' | 'inline';
 }
 
 export const UserInfoPill: React.FC<UserInfoPillProps> = ({
@@ -31,6 +32,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
     component: (props: any) => <a {...props} />,
     hrefProperty: 'href',
   },
+  buttonStyle = 'menuDropdown',
 }) => {
   return (
     <div className="pr-6 py-4">
@@ -75,14 +77,18 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
           </div>
         </customLink.component>
         {buttons?.length &&
-          (buttons.length === 1 ? (
-            <div>
-              <button
-                className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50"
-                onClick={buttons[0]?.onClick}
-              >
-                {buttons[0].title}
-              </button>
+          (buttons.length === 1 || buttonStyle === 'inline' ? (
+            <div className="flex items-center">
+              {buttons.map((buttonObj, i) => (
+                <button
+                  className={`${
+                    i !== buttons.length && 'mr-2'
+                  } inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 truncate`}
+                  onClick={buttonObj?.onClick}
+                >
+                  {buttonObj.title}
+                </button>
+              ))}
             </div>
           ) : (
             <Menu as="div" className="relative inline-block text-left">
@@ -103,8 +109,8 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items className="z-10 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none active:ring-THEME-400">
-                  {(buttons as Button[]).map((buttonObj) => (
-                    <Menu.Item key={buttonObj.title}>
+                  {buttons.map((buttonObj, i) => (
+                    <Menu.Item key={i}>
                       {({ active }) => (
                         <button
                           onClick={buttonObj?.onClick}
