@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { UserInfoPill, UserInfoPillProps } from './';
 import { userAvatar } from '../../constants/assets';
+import { ClipboardCopyIcon } from '@heroicons/react/outline';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -84,4 +85,31 @@ export const WithBadge: ComponentStory<typeof UserInfoPill> = (args) => (
       {...args}
     />
   </>
+);
+
+export const InlineButtons: ComponentStory<typeof UserInfoPill> = (args) => (
+  <UserInfoPill
+    {...props}
+    buttonStyle="inline"
+    buttons={[
+      {
+        title: (
+          <div className="flex items-center">
+            <ClipboardCopyIcon className="h-4 w-4 mr-1" />
+            Button 1
+          </div>
+        ),
+        onClick() {
+          alert('You clicked button 1!');
+        },
+      },
+      {
+        title: 'Button 2',
+        onClick() {
+          alert('You clicked button 2!');
+        },
+      },
+    ]}
+    {...args}
+  />
 );
