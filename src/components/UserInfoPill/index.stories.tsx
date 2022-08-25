@@ -95,7 +95,7 @@ export const InlineButtons: ComponentStory<typeof UserInfoPill> = (args) => (
       {
         title: (
           <div className="flex items-center">
-            <ClipboardCopyIcon className="h-4 w-4 mr-1" />
+            <ClipboardCopyIcon className="w-4 h-4 mr-1" />
             Button 1
           </div>
         ),
