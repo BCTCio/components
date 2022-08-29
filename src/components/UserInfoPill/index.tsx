@@ -35,10 +35,10 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
   buttonStyle = 'menuDropdown',
 }) => {
   return (
-    <div className="pr-6 py-4">
+    <div className="py-4 pr-6">
       <div className="flex items-center justify-between space-x-4">
         <customLink.component
-          className="flex items-center space-x-4 truncate pl-6"
+          className="flex items-center pl-6 space-x-4 truncate"
           {...{ [customLink.hrefProperty]: redirectTo }}
         >
           <div className="flex-shrink-0">
@@ -93,7 +93,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
           ) : (
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button className="active:ring-THEME-400 active:bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100">
+                <Menu.Button className="flex items-center text-gray-400 rounded-full active:ring-THEME-400 active:bg-gray-100 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100">
                   <span className="sr-only">Open options</span>
                   <DotsVerticalIcon className="w-5 h-5" aria-hidden="true" />
                 </Menu.Button>
@@ -108,7 +108,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="z-10 mt-2 right-0 absolute overflow-hidden origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 active:outline-none active:ring-THEME-400">
+                <Menu.Items className="absolute right-0 z-10 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 active:outline-none active:ring-THEME-400">
                   {buttons.map((buttonObj, i) => (
                     <Menu.Item key={i}>
                       {({ active }) => (
