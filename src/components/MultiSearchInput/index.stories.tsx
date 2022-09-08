@@ -10,14 +10,12 @@ export default {
   component: MultiSearchInput,
 } as ComponentMeta<typeof MultiSearchInput>;
 
-const props = {
-  data: new Array(20).fill(0).map((_v, i) => ({
-    id: i,
-    title: `Option ${i + 1}`,
-    active: !(i % 2),
-    disabled: !(i % 4),
-  })),
-};
+const data = new Array(20).fill(0).map((_v, i) => ({
+  id: i.toString(),
+  title: `Option ${i + 1}`,
+  active: !(i % 2),
+  disabled: !(i % 4),
+}));
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof MultiSearchInput> = args => {
@@ -25,8 +23,8 @@ export const Default: ComponentStory<typeof MultiSearchInput> = args => {
   return (
     <>
       <MultiSearchInput
-        {...props}
         {...args}
+        data={data}
         value={state}
         onChange={v => setState(v)}
         onInputChange={undefined}
@@ -42,11 +40,11 @@ export const WithDetails: ComponentStory<typeof MultiSearchInput> = args => {
   const [state, setState] = useState<DropdownData[]>([]);
   return (
     <MultiSearchInput
-      {...props}
       label="Label"
       description="Do stuff with this"
       required
       {...args}
+      data={data}
       value={state}
       onChange={v => setState(v)}
       onInputChange={undefined}
@@ -54,16 +52,22 @@ export const WithDetails: ComponentStory<typeof MultiSearchInput> = args => {
   );
 };
 
-export const Loading: ComponentStory<typeof MultiSearchInput> = args => {
+export const WithLoading: ComponentStory<typeof MultiSearchInput> = args => {
   const [state, setState] = useState<DropdownData[]>([]);
+  const [displayed, setDisplayed] = useState(data);
   return (
     <MultiSearchInput
-      {...props}
-      loading
       {...args}
       value={state}
+      data={displayed}
       onChange={v => setState(v)}
-      onInputChange={undefined}
+      onInputChange={async (v, signal) => {
+        await new Promise(res => setTimeout(res, 1000, { signal }));
+        if (signal.aborted) return;
+        setDisplayed(
+          data.filter(({ title }) => title.toLowerCase().includes(v))
+        );
+      }}
     />
   );
 };
@@ -72,9 +76,9 @@ export const WithStatus: ComponentStory<typeof MultiSearchInput> = args => {
   const [state, setState] = useState<DropdownData[]>([]);
   return (
     <MultiSearchInput
-      {...props}
       showStatus
       {...args}
+      data={data}
       value={state}
       onChange={v => setState(v)}
       onInputChange={undefined}

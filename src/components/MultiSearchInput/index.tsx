@@ -1,19 +1,22 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { DropdownData } from '../../constants/interfaces';
 import { Spinner } from '../Spinner';
+import { useDebouncedValue } from '@mantine/hooks';
+import { error } from '../Notification';
 
 export interface MultiSearchInputProps {
   showStatus?: boolean;
   label?: string;
   placeholder?: string;
   data: DropdownData[];
-  onInputChange?: (v: string) => void;
+  onInputChange?: (v: string, signal: AbortSignal) => void | Promise<void>;
   onChange: (v: DropdownData[]) => void;
+  debounceTime?: number;
+  handleFetchError?: (e: any) => void;
   value: DropdownData[];
-  loading?: boolean;
   description?: string;
   required?: boolean;
 }
@@ -27,6 +30,10 @@ const filterDuplicates = (...data: DropdownData[][]) =>
       [] as DropdownData[]
     );
 
+/**
+ * @param onInputChange - If this uses asynchronous action, make it an async function/promise that is fulfilled/rejected on completion (second parameter is abort signal which is aborted upon new request; pass into fetching function [eg. fetch] or return if signal.aborted after request)
+ * @param handleFetchError - If you are not using `@bctc/components` notification, put your own fetching error handler here
+ */
 export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
   showStatus,
   label,
@@ -35,11 +42,15 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
   value,
   onInputChange,
   onChange,
-  loading,
+  debounceTime = 300,
+  handleFetchError = error,
   description,
   required,
 }) => {
   const [filter, setFilter] = useState('');
+  const [debouncedFilter] = useDebouncedValue(filter, debounceTime);
+  const [loading, setLoading] = useState(false);
+  const currentRequest = useRef(new AbortController());
 
   const lowercaseData = data.map(item => ({
     ...item,
@@ -48,6 +59,27 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
   const filteredData = data.filter((_x, i) =>
     lowercaseData[i].title.includes(filter.toLowerCase())
   );
+
+  useEffect(() => {
+    (async () => {
+      if (onInputChange) {
+        currentRequest.current.abort();
+        setLoading(true);
+        try {
+          currentRequest.current = new AbortController();
+          await onInputChange(
+            debouncedFilter.toLowerCase(),
+            currentRequest.current.signal
+          );
+          setLoading(false);
+        } catch (e) {
+          if ((e as any)?.name === 'AbortError') return;
+          handleFetchError(e);
+          setLoading(false);
+        }
+      }
+    })();
+  }, [debouncedFilter]);
 
   return (
     <Combobox as="div" value={value} onChange={onChange} multiple>
@@ -59,10 +91,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
           <div className="relative mt-1">
             <Combobox.Input
               className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-THEME-500 focus:outline-none focus:ring-1 focus:ring-THEME-500 sm:text-sm"
-              onChange={event => {
-                setFilter(event.target.value);
-                if (onInputChange) onInputChange(event.target.value);
-              }}
+              onChange={event => setFilter(event.target.value)}
               displayValue={v => `${v?.length || 'No'} options selected`}
               placeholder={placeholder}
               onClick={({ target }: any) =>
