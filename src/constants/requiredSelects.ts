@@ -4,13 +4,8 @@ import { error } from 'src/components/Notification';
  * Checks all select/search inputs that are required and if they are, returns and shows an error
  * @param e The form submit event
  */
-export const checkRequiredSelects = (
-  e: SubmitEvent,
-  throwIfUnsuccessful = false
-) => {
-  const requiredButEmptyLabels = Array.from(
-    (e.target as any).elements as HTMLElement[]
-  )
+export const checkRequiredSelects = (e: any, throwIfUnsuccessful = false) => {
+  const requiredButEmptyLabels = Array.from(e.target.elements as HTMLElement[])
     .filter(
       element =>
         element.hasAttribute('data-custom-input-required') &&
