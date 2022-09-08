@@ -34,7 +34,7 @@ const filterDuplicates = (
     );
 
 /**
- * @param onInputChange - If this uses asynchronous action, make it an async function/promise that is fulfilled/rejected on completion (second parameter is abort signal which is aborted upon new request; pass into fetching function [eg. fetch] or return if signal.aborted after request)
+ * @param onInputChange - If this uses asynchronous action, make it an async function/promise that is fulfilled/rejected on completion (second parameter is abort signal which is aborted upon new request; pass into fetching function [eg. fetch] or run signal.throwIfAborted() after fetching)
  * @param handleFetchError - If you are not using `@bctc/components` notification, put your own fetching error handler here
  */
 export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({

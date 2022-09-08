@@ -63,7 +63,7 @@ export const WithLoading: ComponentStory<typeof MultiSearchInput> = args => {
       onChange={v => setState(v)}
       onInputChange={async (v, signal) => {
         await new Promise(res => setTimeout(res, 1000, { signal }));
-        if (signal.aborted) return;
+        signal.throwIfAborted();
         setDisplayed(
           data.filter(({ title }) => title.toLowerCase().includes(v))
         );
