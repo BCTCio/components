@@ -30,7 +30,8 @@ export const error = (
     description:
       typeof err === 'string'
         ? err
-        : err?.message?.toString() || params?.fallback,
+        : err?.response?.data || err?.message?.toString() || params?.fallback,
+    // String, Axios, Error, Fallback
     show: true,
     type: 'error',
   });
