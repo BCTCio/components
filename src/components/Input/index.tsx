@@ -1,10 +1,10 @@
 import { Transition } from '@headlessui/react';
-import { InformationCircleIcon } from '@heroicons/react/outline';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import {
   ExclamationCircleIcon,
   EyeIcon,
-  EyeOffIcon,
-} from '@heroicons/react/solid';
+  EyeSlashIcon,
+} from '@heroicons/react/24/solid';
 import classNames from 'classnames';
 import React, { useEffect, useState, ChangeEventHandler } from 'react';
 
@@ -77,7 +77,7 @@ export const Input: React.FC<InputProps> = ({
     return;
   }, [tooltipShow]);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
     e.preventDefault();
     let val = e.target.value;
     if (type === 'number') {
@@ -168,6 +168,7 @@ export const Input: React.FC<InputProps> = ({
           name={label}
           id={label}
           type={getType()}
+          required={required}
           className={classNames(
             {
               'pr-16': type === 'password' && error,
@@ -183,7 +184,7 @@ export const Input: React.FC<InputProps> = ({
             'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md'
           )}
           placeholder={placeholder}
-          onKeyPress={(e) => {
+          onKeyPress={e => {
             if (integerOnly && e.key === '.') e.preventDefault();
             keyPressed = e.key;
             if (onEnter && e.key === 'Enter') onEnter();
@@ -205,7 +206,7 @@ export const Input: React.FC<InputProps> = ({
           >
             {type === 'password' &&
               (passwordVisibility ? (
-                <EyeOffIcon
+                <EyeSlashIcon
                   className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
                   onClick={() => setPasswordVisibility(false)}
                 />
@@ -258,7 +259,7 @@ export const Input: React.FC<InputProps> = ({
               aria-hidden="true"
             />
             <span className="text-xs text-gray-600 select-none whitespace-pre">
-              {innerWidth > 400 ? tooltip : createBreak(tooltip)}
+              {createBreak(tooltip)}
             </span>
           </div>
         </div>

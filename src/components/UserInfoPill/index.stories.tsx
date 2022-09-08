@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { UserInfoPill, UserInfoPillProps } from './';
 import { userAvatar } from '../../constants/assets';
-import { ClipboardCopyIcon } from '@heroicons/react/outline';
+import { ClipboardIcon } from '@heroicons/react/24/outline';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -95,7 +95,7 @@ export const InlineButtons: ComponentStory<typeof UserInfoPill> = (args) => (
       {
         title: (
           <div className="flex items-center">
-            <ClipboardCopyIcon className="w-4 h-4 mr-1" />
+            <ClipboardIcon className="w-4 h-4 mr-1" />
             Button 1
           </div>
         ),

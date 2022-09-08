@@ -49,7 +49,59 @@ const unCamelCase = (str: string): string => {};
 - Turns cammel case into normal text
 - Documentation of camel case [here](https://en.wikipedia.org/wiki/Camel_case)
 
-## Revert Screaming Snake Case
+## Get Tint String
+
+```ts
+const getTintString = (tintColor?: number | [number, number, number], tintStrength = 0.5): string => {};
+// Example input: [0, 255, 255], .1
+// Example Output: `
+  linear-gradient(
+    rgba(0, 255, 255, .1),
+    rgba(0, 255, 255, .1)
+  ),`
+```
+
+- Gets a tint string to tint a specified image in a background-image property
+
+## Hex to RGB
+
+```ts
+const hexToRGB = (hex: string): [number, number, number] => {};
+// Example input: '#00ff11'
+// Example Output: [0, 255, 17]
+```
+
+- Converts hex to an RGB string
+
+## Remove List Duplicates
+
+```ts
+const removeListDuplicates = (list: any[], key: string): any[] => {};
+// Example input: [{id: 0}, {id: 1}, {id: 1}, {id: 2}], 'id'
+// Example Output: [{id: 0}, {id: 1}, {id: 2}]
+```
+
+- Removes duplicates in a list. More info is provided in JSDoc.
+
+## Lean
+
+```ts
+const lean = (obj: any): any => {};
+// Example input: {a: 0, b: 1}
+// Example Output: {a: 0, b: 1}
+```
+
+- Turns dates into strings, fixes proxy/reference errors, etc (stringifies then parses)
+
+## Falsey to Empty
+
+```ts
+const falseyToEmpty = (obj: any): any => {};
+// Example input: {a: null, b: 'tree'}
+// Example Output: {a: '', b: 'tree'}
+```
+
+- Converts falsey values in the object into empty strings (good for forms)
 
 ```ts
 const unScreamingSnakeCase = (str: string): string => {};
@@ -101,7 +153,7 @@ return (
     <input
       type="range"
       value={hueRangeTest}
-      onChange={(e) => setHueRangeTest(+e.target.value)}
+      onChange={e => setHueRangeTest(+e.target.value)}
       min={0}
       max={1}
       step={1e-9}

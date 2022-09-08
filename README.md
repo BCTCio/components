@@ -2,22 +2,15 @@
 
 0. If you haven't installed np, run `npm i -g np`
 1. Create a new branch and make changes
-2. Make a PR, get it approved, and merge into master
-3. Make sure tests are successful in the PR
-4. Go into master branch and `np --yolo`
+1. Make a PR, get it approved, and merge into master
+1. Make sure tests are successful in the PR
+1. Go into master branch and `np --yolo`
 
 ## Versions
 
 - Update major for breaking changes
 - Update minor for creating a new component
 - Update patch for fixing a bug or adding a property to a component
-
-## FAQ
-
-- Why does my package not export when using from actual project?
-  - This may be due to your components not using named export and using default export, note: the current export pattern from this library supports named exports ONLY. Meaning: `export const Modal` instead of `export default Modal`.
-- Why does my component render an undefined when using in actual project?
-  - You may have only published the component recently in latest version, restart your dev server in actual project.
 
 ## How to use this package?
 
@@ -79,6 +72,13 @@ function App() {
 
 export default App;
 ```
+
+## FAQ
+
+- Why does my package not export when using from actual project?
+  - This may be due to your components not using named export and using default export, note: the current export pattern from this library supports named exports ONLY. Meaning: `export const Modal` instead of `export default Modal`.
+- Why does my component render an undefined when using in actual project?
+  - You may have only published the component recently in latest version, restart your dev server in actual project.
 
 ## Commands
 

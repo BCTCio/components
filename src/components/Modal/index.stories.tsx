@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Modal, ModalData } from '.';
-import { UserAddIcon } from '@heroicons/react/outline';
+import { UserPlusIcon } from '@heroicons/react/24/outline';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -76,7 +76,7 @@ export const WithIcon: ComponentStory<typeof Modal> = (args: any) => {
         show={show}
         subtitle="I am a subtitle"
         icon={
-          <UserAddIcon
+          <UserPlusIcon
             className="p-2 bg-green-100 text-green-500"
             aria-hidden="true"
           />

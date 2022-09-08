@@ -13,8 +13,9 @@ export default {
 const props: ConfirmationBoxData = {
   title: 'Title',
   description: 'Description',
-  type: 'info',
-  onConfirm: () => console.log('Confirmed'),
+  onConfirm() {
+    alert('Confirmed');
+  },
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -38,7 +39,7 @@ import { useState } from 'react';
 
 const [confirmationBoxData, setConfirmationBoxData] = useState<ConfirmationBoxData>({
   title: '',
-  type: 'info',
+  description: '',
   onConfirm: () => {},
 });
 const [confirmationBoxShow, setConfirmationBoxShow] = useState(false);
