@@ -1,10 +1,10 @@
 # Publishing
 
-0. If you haven't installed np, run `npm i -g np`
-1. Create a new branch and make changes
-1. Make a PR, get it approved, and merge into master
-1. Make sure tests are successful in the PR
-1. Go into master branch and `np --yolo`
+1. If you haven't installed np, run `npm i -g np`
+2. Create a new branch and make changes
+3. Make a PR, get it approved, and merge into master
+4. Make sure tests are successful in the PR
+5. Go into master branch and `np --yolo`
 
 ## Versions
 
