@@ -5,29 +5,26 @@ import {
   InformationCircleIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
+import { createState, useHookstate } from '@hookstate/core';
+import { ConfirmationBoxData } from '../ConfirmationBox';
 
-export interface ConfirmationBoxData {
-  title: string;
-  description: string;
-  type?: 'info' | 'warning';
-  onConfirm: () => Promise<void> | void;
-  onCancel?: () => Promise<void> | void;
-}
+const globalConfirmation = createState<ConfirmationBoxData & { show: boolean }>(
+  {
+    title: '',
+    description: '',
+    show: false,
+    onConfirm() {},
+  }
+);
 
-export interface ConfirmationBoxProps extends ConfirmationBoxData {
-  show: boolean;
-  setShow: (v: boolean) => void;
-}
+export const confirmation = (data: ConfirmationBoxData) =>
+  globalConfirmation.set({ type: 'warning', ...data, show: true });
 
-export const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
-  show,
-  title,
-  description,
-  type = 'warning',
-  onConfirm,
-  onCancel,
-  setShow,
-}) => {
+export const GlobalConfirmationBox: React.FC = () => {
+  const {
+    value: { show, title, description, type = 'warning', onConfirm, onCancel },
+    show: { set: setShow },
+  } = useHookstate(globalConfirmation);
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const renderIcon = () => {
     switch (type) {

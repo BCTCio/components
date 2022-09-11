@@ -24,7 +24,7 @@ const props = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 
-export const Default: ComponentStory<typeof Table> = (args) => {
+export const Default: ComponentStory<typeof Table> = args => {
   const [page, setPage] = useState(1);
   return (
     <Table
@@ -42,7 +42,13 @@ export const Default: ComponentStory<typeof Table> = (args) => {
   );
 };
 
-export const WithStripes: ComponentStory<typeof Table> = (args) => {
+export const AutomaticPagination: ComponentStory<typeof Table> = args => {
+  return (
+    <Table name="users" {...args} columns={props.columns} data={props.data} />
+  );
+};
+
+export const WithStripes: ComponentStory<typeof Table> = args => {
   const [page, setPage] = useState(1);
   return (
     <Table
@@ -61,7 +67,7 @@ export const WithStripes: ComponentStory<typeof Table> = (args) => {
   );
 };
 
-export const NoData: ComponentStory<typeof Table> = (args) => {
+export const NoData: ComponentStory<typeof Table> = args => {
   return (
     <Table
       name="users"

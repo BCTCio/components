@@ -18,12 +18,15 @@ export const capitalize = (str: string): string =>
   str[0]?.toUpperCase() + str.slice(1).toLowerCase();
 
 export const unCamelCase = (str: string): string =>
-  str.replace(/([A-Z]|\d)/g, ' $1').replace(/^./, function (str) {
+  str.replace(/([A-Z]|\d)/g, ' $1').replace(/^./, function(str) {
     return str.toUpperCase();
   });
 
 export const unScreamingSnakeCase = (str: string): string =>
-  str.split('_').map(capitalize).join(' ');
+  str
+    .split('_')
+    .map(capitalize)
+    .join(' ');
 
 export const colorFromHueRange = (
   {
@@ -48,3 +51,68 @@ export const colorFromHueRange = (
   const distanceFromGreen = Math.abs(180 - ((hue + 60) % 360)); // For correcting eye sensitivity to green
   return `hsl(${hue}, ${saturation}%, ${lightness + distanceFromGreen / 18}%)`;
 };
+
+/**
+ * A function that gets a tint string to tint a specified image in a background-image property
+ * @param tintColor The tint's RGB color (if only 1 number is provided all 3 RGB values will be set to it to produce a gray; interpreted as 0-1)
+ * @param tintStrength The opacity of the tint (0 - 1)
+ * @returns A CSS linear gradient which can be applied to a background-image style as `getTintString(...) url('backgroundImage')`
+ */
+export const getTintString = (
+  tintColor?: number | [number, number, number],
+  tintStrength = 0.5
+) => {
+  if (tintColor === undefined) return '';
+  let tintArray =
+    typeof tintColor === 'number'
+      ? new Array(3).fill(tintColor * 255)
+      : tintColor;
+  tintArray.push(tintStrength);
+  return `
+    linear-gradient(
+      rgba(${tintArray.join(',')}),
+      rgba(${tintArray.join(',')})
+    ),`;
+};
+
+export const hexToRGB = (hex: string) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : null;
+};
+
+/**
+ * Removes duplicate objects/primitives
+ * @param list The list of objects/primitives
+ * @param key The key that you want remove duplicates by (eg. 'id') (if there is none provided, it requires the list be of primitives eg. strings)
+ * @returns A list without duplicate objects/primitives
+ */
+export const removeListDuplicates = <S,>(list: S[], key?: keyof S): S[] =>
+  list.reduce(
+    (prev, curr) =>
+      (key
+      ? prev.find(item => item[key] === curr[key])
+      : prev.includes(curr))
+        ? prev
+        : prev.concat(curr),
+    [] as S[]
+  );
+
+export const lean = <T,>(obj: T): T => JSON.parse(JSON.stringify(obj));
+
+/**
+ * Replaces all falsey values in an object with '' (for handling forms)
+ * @param value The object to replace falsey values with ''
+ * @returns The object with all falsey values as ''
+ */
+export const falseyToEmpty = (obj: any) =>
+  Object.fromEntries(
+    Object.entries(obj).map(([key, value]) =>
+      value ? [key, value as string] : [key, '']
+    )
+  );

@@ -4,8 +4,8 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon,
   XCircleIcon,
-} from '@heroicons/react/outline';
-import { XIcon } from '@heroicons/react/solid';
+} from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 import { createState, useHookstate } from '@hookstate/core';
 
 const globalNotifications = createState<{
@@ -22,17 +22,27 @@ const globalNotifications = createState<{
 
 export const error = (
   err: any,
-  params?: { title?: string; fallback?: string; duration?: number }
+  {
+    title = 'Something went wrong',
+    fallback,
+    duration,
+  }: {
+    title?: string;
+    fallback?: string;
+    duration?: number;
+  } = {}
 ): void => {
   console.trace(err);
   globalNotifications.set({
-    title: params?.title || 'Something went wrong',
+    title,
     description:
       typeof err === 'string'
         ? err
-        : err?.message?.toString() || params?.fallback,
+        : err?.response?.data || err?.message?.toString() || fallback,
+    // String, Axios, Error, Fallback
     show: true,
     type: 'error',
+    duration,
   });
 };
 
@@ -82,7 +92,7 @@ export const Notification: React.FC = () => {
       return () => clearTimeout(timeout);
     }
     return;
-  }, [state.show.value]);
+  }, [state.value]);
 
   const renderIcon = () => {
     switch (state.type.value) {
@@ -143,7 +153,7 @@ export const Notification: React.FC = () => {
                   }}
                 >
                   <span className="sr-only">Close</span>
-                  <XIcon className="h-5 w-5" aria-hidden="true" />
+                  <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
             </div>

@@ -19,7 +19,8 @@
     "prepare": "yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-tailwind": "cross-env NODE_ENV=production npx tailwindcss -o ./dist/tailwind.css --minify"
+    "build-tailwind": "cross-env NODE_ENV=production npx tailwindcss -o ./dist/tailwind.css --minify",
+    "package-update": "npm i --package-lock-only && yarn"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -40,16 +41,16 @@
   "module": "dist/bctc-components.esm.js",
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.4.19",
+    "@storybook/addon-links": "^6.5.10",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addons": "^6.4.19",
-    "@storybook/react": "^6.4.19",
+    "@storybook/addons": "^6.5.10",
+    "@storybook/react": "^6.5.10",
     "@tailwindcss/forms": "^0.4.0",
     "@types/body-scroll-lock": "^3.1.0",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
+    "@types/react": "^18.0.18",
+    "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
@@ -64,9 +65,10 @@
     "typescript": "^4.5.3"
   },
   "dependencies": {
-    "@headlessui/react": "^1.5.0",
-    "@heroicons/react": "^1.0.6",
-    "@hookstate/core": "^3.0.13",
+    "@headlessui/react": "^1.7.0",
+    "@heroicons/react": "^2.0.10",
+    "@hookstate/core": "3.0.13",
+    "@mantine/hooks": "^5.2.7",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1"
   }

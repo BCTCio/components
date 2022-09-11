@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { DotsVerticalIcon } from '@heroicons/react/outline';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import React, { Fragment, ReactNode } from 'react';
 
@@ -81,10 +81,10 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
             <div className="flex items-center">
               {buttons.map((buttonObj, i) => (
                 <button
-                  className={`${
-                    i !== buttons.length && 'mr-2'
-                  } inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 truncate`}
+                  className={`${i !== buttons.length &&
+                    'mr-2'} inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 truncate`}
                   onClick={buttonObj?.onClick}
+                  key={i}
                 >
                   {buttonObj.title}
                 </button>
@@ -95,7 +95,10 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               <div>
                 <Menu.Button className="flex items-center text-gray-400 rounded-full active:ring-THEME-400 active:bg-gray-100 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100">
                   <span className="sr-only">Open options</span>
-                  <DotsVerticalIcon className="w-5 h-5" aria-hidden="true" />
+                  <EllipsisVerticalIcon
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                  />
                 </Menu.Button>
               </div>
 
