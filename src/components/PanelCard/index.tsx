@@ -38,7 +38,7 @@ export const PanelCard: React.FC<PanelCardProps> = ({
               {headerText}
               {loading && (
                 <div className="pl-3">
-                  <Spinner color="dark" size="h-4" />
+                  <Spinner color="dark" className="h-4" />
                 </div>
               )}
             </h3>

@@ -110,7 +110,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
               </Combobox.Button>
               {loading && (
                 <div className="absolute inset-y-0 right-6 flex items-center rounded-r-md px-2 focus:outline-none pointer-events-none">
-                  <Spinner size="h-5" />
+                  <Spinner className="h-5" />
                 </div>
               )}
             </div>
