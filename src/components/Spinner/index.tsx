@@ -3,15 +3,15 @@ import React from 'react';
 
 export interface SpinnerProps {
   color?: 'green' | 'light' | 'dark' | 'theme';
-  size?: string;
+  className?: string;
 }
 
 export const Spinner: React.FC<SpinnerProps> = ({
   color = 'theme',
-  size = 'h-5',
+  className = 'h-5',
 }) => (
   <svg
-    className={classNames('animate-spin', size, {
+    className={classNames('animate-spin', className, {
       'text-white': color === 'light',
       'text-gray-900': color === 'dark',
       'text-green-500': color === 'green',
