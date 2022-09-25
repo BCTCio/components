@@ -8,7 +8,7 @@ const NoDataSVG: React.FC<{ className?: string }> = ({ className }) => (
     height="158"
     className={className}
   >
-    <g id="_016" data-name="016">
+    <g>
       <ellipse
         cx="192.57"
         cy="252.06"

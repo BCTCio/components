@@ -1,3 +1,4 @@
+import { useId } from '@mantine/hooks';
 import classNames from 'classnames';
 import React, { FC, ReactNode, useState } from 'react';
 
@@ -9,14 +10,15 @@ export type TabsProps = {
 
 export const Tabs: FC<TabsProps> = props => {
   const [selected, setSelected] = useState(props.initial);
+  const id = useId();
   return (
     <div>
       <div className="sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
+        <label htmlFor={id} className="sr-only">
           Select a tab
         </label>
         <select
-          id="tabs"
+          id={id}
           name="tabs"
           className="block w-full rounded-md border-gray-300 focus:border-THEME-500 focus:ring-THEME-500"
           value={selected}
@@ -29,7 +31,7 @@ export const Tabs: FC<TabsProps> = props => {
       </div>
       <div className="hidden sm:block">
         <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+          <nav className="-mb-px flex" aria-label="Tabs">
             {props.tabs.map(tab => (
               <button
                 key={tab.name}
@@ -37,7 +39,7 @@ export const Tabs: FC<TabsProps> = props => {
                   selected === tab.name
                     ? 'border-THEME-500 text-THEME-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                  'group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm'
+                  'group inline-flex items-center py-2 px-4 border-b-2 font-medium text-sm'
                 )}
                 onClick={() => setSelected(tab.name)}
               >

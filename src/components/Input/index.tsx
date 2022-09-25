@@ -4,6 +4,7 @@ import {
   EyeIcon,
   EyeSlashIcon,
 } from '@heroicons/react/24/solid';
+import { useId } from '@mantine/hooks';
 import classNames from 'classnames';
 import React, { useEffect, useState, ChangeEventHandler } from 'react';
 
@@ -51,6 +52,7 @@ export const Input: React.FC<InputProps> = ({
   const [tooltipShow, setTooltipShow] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   let keyPressed: string;
+  const id = useId();
 
   useEffect(() => {
     if (tooltipShow) {
@@ -135,10 +137,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="relative">
       {label && (
-        <label
-          htmlFor={label}
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor={id} className="block text-sm font-medium text-gray-700">
           {label}
           <span className="text-red-500">{required && ' *'}</span>
         </label>
@@ -151,7 +150,7 @@ export const Input: React.FC<InputProps> = ({
         )}
         <input
           name={label}
-          id={label}
+          id={id}
           type={getType()}
           required={required}
           className={classNames(

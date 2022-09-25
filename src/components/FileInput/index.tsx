@@ -1,6 +1,7 @@
 import { ArrowUpOnSquareIcon } from '@heroicons/react/24/outline';
+import { useId } from '@mantine/hooks';
 import classNames from 'classnames';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { formatFileSize } from '../Formatting';
 
 export interface FileInputProps {
@@ -30,7 +31,7 @@ export const FileInput: FC<FileInputProps> = ({
   onChange,
   icon = ArrowUpOnSquareIcon,
 }) => {
-  const id = useMemo(() => (label || '') + Math.random(), [label]);
+  const id = useId();
   const [fileName, setFileName] = useState<string | string[]>('');
   const [error, setError] = useState('');
   const Icon = icon;

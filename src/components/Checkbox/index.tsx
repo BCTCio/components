@@ -1,5 +1,6 @@
+import { useId } from '@mantine/hooks';
 import classNames from 'classnames';
-import React, { FC, useId } from 'react';
+import React, { FC } from 'react';
 
 export interface CheckboxProps {
   value: boolean;

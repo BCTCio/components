@@ -90,7 +90,7 @@ export const ImageInput: FC<ImageInputProps> = props => {
       />
       {fileURL && (
         <p
-          className="text-blue-500 text-sm cursor-pointer mt-1"
+          className="text-THEME-500 text-sm cursor-pointer mt-1"
           onClick={() =>
             setShowModal(true)
           }
