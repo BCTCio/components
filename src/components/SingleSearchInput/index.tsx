@@ -88,8 +88,13 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
     <Combobox as="div" value={value} onChange={onChange}>
       {({ open }) => (
         <>
-          <Combobox.Label className="block text-sm font-medium text-gray-700">
+          <Combobox.Label className="text-sm font-medium text-gray-800">
             {label} {required && <span className="text-red-500">*</span>}
+            {description && (
+              <p className="text-gray-500 text-xs font-normal mb-1">
+                {description}
+              </p>
+            )}
           </Combobox.Label>
           <div className="relative mt-1">
             <Combobox.Input
@@ -160,6 +165,11 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
                             )}
                           >
                             {option.title}
+                            {option.description && (
+                              <p className="text-gray-500 text-xs font-normal">
+                                {option.description}
+                              </p>
+                            )}
                           </span>
                         </div>
 
@@ -173,11 +183,6 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
                   </Combobox.Option>
                 ))}
               </Combobox.Options>
-            )}
-          </div>
-          <div className="mt-2">
-            {description && (
-              <p className="text-sm text-gray-500">{description}</p>
             )}
           </div>
         </>

@@ -92,6 +92,21 @@ export const FileInput: FC<FileInputProps> = ({
             <span className="text-red-500">{required && ' *'}</span>
           </p>
         )}
+        {(description || maxSize || types) && (
+          <p className="text-gray-500 text-xs font-normal mb-1">
+            {description}{' '}
+            {maxSize || types
+              ? `(${maxSize ? `Must be under ${formatFileSize(maxSize)}` : ''}${
+                  maxSize && types ? ' and ' : ''
+                }${
+                  types
+                    ? (maxSize ? 'm' : 'M') +
+                      `ust be of the following types: ${types.join(', ')}`
+                    : ''
+                })`
+              : ''}
+          </p>
+        )}
         <div
           className={classNames(
             'flex gap-2 p-2 shadow-sm sm:text-sm border border-gray-300 rounded-md',
@@ -105,21 +120,6 @@ export const FileInput: FC<FileInputProps> = ({
         </div>
       </label>
       {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
-      {(description || maxSize || types) && (
-        <p className="mt-2 text-gray-500 text-sm">
-          {description}{' '}
-          {maxSize || types
-            ? `(${maxSize ? `Must be under ${formatFileSize(maxSize)}` : ''}${
-                maxSize && types ? ' and ' : ''
-              }${
-                types
-                  ? (maxSize ? 'm' : 'M') +
-                    `ust be of the following types: ${types.join(', ')}`
-                  : ''
-              })`
-            : ''}
-        </p>
-      )}
     </div>
   );
 };

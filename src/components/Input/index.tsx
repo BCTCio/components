@@ -137,9 +137,12 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="relative">
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+        <label htmlFor={id} className="block text-sm font-medium text-gray-800">
           {label}
           <span className="text-red-500">{required && ' *'}</span>
+          {description && (
+            <p className="text-gray-500 text-xs font-normal">{description}</p>
+          )}
         </label>
       )}
       <div className="mt-1 relative shadow-sm">
@@ -242,9 +245,6 @@ export const Input: React.FC<InputProps> = ({
         </div>
       </div>
       {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
-      {description && (
-        <p className="mt-2 text-gray-500 text-sm">{description}</p>
-      )}
     </div>
   );
 };

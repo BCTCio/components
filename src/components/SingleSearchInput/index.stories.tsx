@@ -13,6 +13,7 @@ export default {
 const data = new Array(20).fill(0).map((_v, i) => ({
   id: i.toString(),
   title: `Option ${i + 1}`,
+  description: `Description ${i + 1}`,
   active: !(i % 2),
   disabled: !(i % 4),
 }));

@@ -27,11 +27,16 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     <div className="w-full rounded-md shadow-sm">
       <Listbox value={value} onChange={onChange} multiple>
         <div className="relative w-full">
-          <Listbox.Label className="text-sm font-medium text-gray-700">
+          <Listbox.Label className="text-sm font-medium text-gray-800">
             {label} {required && <span className="text-red-500">*</span>}
+            {description && (
+              <p className="text-gray-500 text-xs font-normal mb-1">
+                {description}
+              </p>
+            )}
           </Listbox.Label>
           <Listbox.Button
-            className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-THEME-500 focus:border-THEME-500 sm:text-sm"
+            className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-THEME-500 focus:border-THEME-500 sm:text-sm"
             data-custom-input-required={required ? true : undefined}
             data-custom-input-has-data={value.length ? true : undefined}
             data-custom-input-label={label}
@@ -88,6 +93,11 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
                         )}
                       >
                         {item.title}
+                        {item.description && (
+                          <p className="text-gray-500 text-xs font-normal">
+                            {item.description}
+                          </p>
+                        )}
                       </span>
                       {isSelected && (
                         <span
@@ -107,9 +117,6 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           </Transition>
         </div>
       </Listbox>
-      {description && (
-        <p className="mt-2 text-gray-500 text-sm">{description}</p>
-      )}
     </div>
   );
 };
