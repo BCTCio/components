@@ -1,4 +1,4 @@
-import { error } from 'src/components/Notification';
+import { error } from '../components/Notification';
 
 /**
  * Checks all select/search inputs that are required and if they are, returns and shows an error
