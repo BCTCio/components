@@ -20,6 +20,7 @@ export * from './components/SingleSearchInput';
 export * from './components/Spinner';
 export * from './components/Table';
 export * from './components/Tabs';
+export * from './components/TextArea';
 export * from './components/ToggleSwitch';
 export * from './components/Tooltip';
 export * from './components/UserInfoPill';
