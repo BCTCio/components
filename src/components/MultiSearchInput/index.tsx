@@ -86,7 +86,8 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
   }, [debouncedFilter]);
 
   return (
-    <Combobox as="div" value={value} onChange={onChange} multiple>
+    // @ts-ignore
+    <Combobox as="div" value={value} onChange={onChange} multiple by="id">
       {({ open }) => (
         <>
           <Combobox.Label className="text-sm font-medium text-gray-800">

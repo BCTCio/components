@@ -89,7 +89,8 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
   }, [debouncedFilter]);
 
   return (
-    <Combobox as="div" value={value} onChange={onChange}>
+    // @ts-ignore
+    <Combobox as="div" value={value} onChange={onChange} by="id">
       {({ open }) => (
         <>
           <Combobox.Label className="text-sm font-medium text-gray-800">
