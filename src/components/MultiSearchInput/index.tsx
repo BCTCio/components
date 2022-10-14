@@ -73,7 +73,11 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
           );
           setLoading(false);
         } catch (e) {
-          if ((e as any)?.name === 'AbortError') return;
+          if (
+            (e as any)?.name === 'AbortError' ||
+            (e as any)?.name === 'CanceledError'
+          )
+            return;
           handleFetchError(e);
           setLoading(false);
         }
