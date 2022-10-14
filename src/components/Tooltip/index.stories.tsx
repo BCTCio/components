@@ -9,13 +9,22 @@ export default {
 } as ComponentMeta<typeof ToolTip>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof ToolTip> = _args => {
-  return <ToolTip tooltip="Hello, I am a tooltip.">Hover Over Me</ToolTip>;
+export const Default: ComponentStory<typeof ToolTip> = args => {
+  return (
+    // @ts-ignore
+    <ToolTip tooltip="Hello, I am a tooltip." {...args}>
+      Hover Over Me
+    </ToolTip>
+  );
 };
 
-export const LongTooltip: ComponentStory<typeof ToolTip> = _args => {
+export const LongTooltip: ComponentStory<typeof ToolTip> = args => {
   return (
-    <ToolTip tooltip="Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. ">
+    <ToolTip
+      // @ts-ignore
+      tooltip="Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. Hello, I am a tooltip. "
+      {...args}
+    >
       Hover Over Me
     </ToolTip>
   );
