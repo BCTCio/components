@@ -10,10 +10,10 @@ export default {
 } as ComponentMeta<typeof Tabs>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof Tabs> = _args => {
+export const Default: ComponentStory<typeof Tabs> = (_args) => {
   return (
     <Tabs
-      initial="Tab A"
+      initial='Tab A'
       tabs={[{ name: 'Tab A' }, { name: 'Tab B' }, { name: 'Tab C' }]}
       content={{
         'Tab A': <div>A</div>,
@@ -24,10 +24,10 @@ export const Default: ComponentStory<typeof Tabs> = _args => {
   );
 };
 
-export const WithIcons: ComponentStory<typeof Tabs> = _args => {
+export const WithIcons: ComponentStory<typeof Tabs> = (_args) => {
   return (
     <Tabs
-      initial="Tab A"
+      initial='Tab A'
       tabs={[
         { name: 'Tab A', icon: CogIcon },
         { name: 'Tab B', icon: EyeIcon },

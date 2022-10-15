@@ -31,20 +31,20 @@ export const PanelCard: React.FC<PanelCardProps> = ({
         'divide-y divide-gray-200': !!divider,
       })}
     >
-      <div className="px-4 py-5 sm:px-6 flex items-center justify-between flex-wrap sm:flex-nowrap">
+      <div className='px-4 py-5 sm:px-6 flex items-center justify-between flex-wrap sm:flex-nowrap'>
         <div>
           {headerText && (
-            <h3 className="text-lg leading-6 font-medium text-gray-900 flex items-center">
+            <h3 className='text-lg leading-6 font-medium text-gray-900 flex items-center'>
               {headerText}
               {loading && (
-                <div className="pl-3">
-                  <Spinner color="dark" className="h-4" />
+                <div className='pl-3'>
+                  <Spinner color='dark' className='h-4' />
                 </div>
               )}
             </h3>
           )}
           {headerSubtitle && (
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            <p className='mt-1 max-w-2xl text-sm text-gray-500'>
               {headerSubtitle}
             </p>
           )}

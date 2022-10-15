@@ -35,13 +35,13 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
   buttonStyle = 'menuDropdown',
 }) => {
   return (
-    <div className="py-4 pr-6">
-      <div className="flex items-center justify-between space-x-4">
+    <div className='py-4 pr-6'>
+      <div className='flex items-center justify-between space-x-4'>
         <customLink.component
-          className="flex items-center pl-6 space-x-4 truncate"
+          className='flex items-center pl-6 space-x-4 truncate'
           {...{ [customLink.hrefProperty]: redirectTo }}
         >
-          <div className="flex-shrink-0">
+          <div className='flex-shrink-0'>
             <img
               className={classNames('w-8 h-8 rounded-full focus:outline-none', {
                 'ring-2 ring-offset-2': !!statusBadge,
@@ -51,11 +51,11 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 'ring-gray-500': statusType === 'plain',
               })}
               src={avatar}
-              alt="Profile picture"
+              alt='Profile picture'
             />
           </div>
-          <div className="flex flex-col min-w-0">
-            <p className="inline text-sm font-medium text-gray-900 truncate">
+          <div className='flex flex-col min-w-0'>
+            <p className='inline text-sm font-medium text-gray-900 truncate'>
               {title}
             </p>
 
@@ -68,7 +68,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                     'text-green-800 bg-green-100': statusType === 'success',
                     'text-yellow-800 bg-yellow-100': statusType === 'warning',
                     'text-gray-800 bg-gray-100': statusType === 'plain',
-                  }
+                  },
                 )}
               >
                 {statusBadge}
@@ -78,11 +78,12 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
         </customLink.component>
         {buttons?.length &&
           (buttons.length === 1 || buttonStyle === 'inline' ? (
-            <div className="flex items-center">
+            <div className='flex items-center'>
               {buttons.map((buttonObj, i) => (
                 <button
-                  className={`${i !== buttons.length &&
-                    'mr-2'} inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 truncate`}
+                  className={`${
+                    i !== buttons.length && 'mr-2'
+                  } inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 truncate`}
                   onClick={buttonObj?.onClick}
                   key={i}
                 >
@@ -91,27 +92,27 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               ))}
             </div>
           ) : (
-            <Menu as="div" className="relative inline-block text-left">
+            <Menu as='div' className='relative inline-block text-left'>
               <div>
-                <Menu.Button className="flex items-center text-gray-400 rounded-full active:ring-THEME-400 active:bg-gray-100 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100">
-                  <span className="sr-only">Open options</span>
+                <Menu.Button className='flex items-center text-gray-400 rounded-full active:ring-THEME-400 active:bg-gray-100 hover:text-gray-600 active:outline-none active:ring-2 active:ring-offset-2 active:ring-offset-gray-100'>
+                  <span className='sr-only'>Open options</span>
                   <EllipsisVerticalIcon
-                    className="w-5 h-5"
-                    aria-hidden="true"
+                    className='w-5 h-5'
+                    aria-hidden='true'
                   />
                 </Menu.Button>
               </div>
 
               <Transition
                 as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
+                enter='transition ease-out duration-100'
+                enterFrom='transform opacity-0 scale-95'
+                enterTo='transform opacity-100 scale-100'
+                leave='transition ease-in duration-75'
+                leaveFrom='transform opacity-100 scale-100'
+                leaveTo='transform opacity-0 scale-95'
               >
-                <Menu.Items className="absolute right-0 z-10 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 active:outline-none active:ring-THEME-400">
+                <Menu.Items className='absolute right-0 z-10 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 active:outline-none active:ring-THEME-400'>
                   {buttons.map((buttonObj, i) => (
                     <Menu.Item key={i}>
                       {({ active }) => (
@@ -121,7 +122,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                             active
                               ? 'bg-gray-100 text-gray-900'
                               : 'text-gray-700',
-                            'text-left w-full block px-4 py-2 text-sm whitespace-nowrap'
+                            'text-left w-full block px-4 py-2 text-sm whitespace-nowrap',
                           )}
                         >
                           {buttonObj.title}

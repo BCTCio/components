@@ -52,7 +52,7 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
         'rounded-full': backupImage === 'avatar',
         'opacity-0': status === Status.LOADING,
       },
-      'transition-opacity duration-300 w-full h-full'
+      'transition-opacity duration-300 w-full h-full',
     ),
     onError: () => setStatus(Status.ERROR),
     onLoad: () => status === Status.LOADING && setStatus(Status.SUCCESS),
@@ -64,7 +64,7 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
   return (
     <div className={'relative ' + className}>
       {showImage && (
-        <div className="absolute w-full h-full">
+        <div className='absolute w-full h-full'>
           {ImageElement ? <ImageElement {...props} /> : <img {...props} />}
         </div>
       )}
@@ -74,7 +74,7 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
           'border-none transition-opacity duration-300',
           {
             'opacity-0': status !== Status.LOADING,
-          }
+          },
         )}
       />
     </div>

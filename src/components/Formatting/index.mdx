@@ -10,8 +10,6 @@ BCTC Components comes prepackaged with some formatting functions that can be use
 
 ```ts
 const formatPhoneNumber = (phoneNumberString?: string | null): string => {};
-// Example input: 1234567890
-// Example Output: (123) 456-7890
 ```
 
 - If `phoneNumberString` is `null` or `undefined`, it returns `''`
@@ -21,8 +19,6 @@ const formatPhoneNumber = (phoneNumberString?: string | null): string => {};
 
 ```ts
 const formatNumber = (num?: number | null): string => {};
-// Example input: 1234567890.1234567890
-// Example Output: 1,234,567,890.123
 ```
 
 - If `num` is `null` or `undefined`, it returns `0`
@@ -32,8 +28,6 @@ const formatNumber = (num?: number | null): string => {};
 
 ```ts
 const capitalize = (str: string): string => {};
-// Example input: 'hElLo'
-// Example Output: 'Hello'
 ```
 
 - Returns the string with the first letter capitalized and the rest lowercased
@@ -42,8 +36,6 @@ const capitalize = (str: string): string => {};
 
 ```ts
 const unCamelCase = (str: string): string => {};
-// Example input: 'helloWorld'
-// Example Output: 'Hello World'
 ```
 
 - Turns cammel case into normal text
@@ -67,8 +59,6 @@ const getTintString = (tintColor?: number | [number, number, number], tintStreng
 
 ```ts
 const hexToRGB = (hex: string): [number, number, number] => {};
-// Example input: '#00ff11'
-// Example Output: [0, 255, 17]
 ```
 
 - Converts hex to an RGB string
@@ -77,8 +67,6 @@ const hexToRGB = (hex: string): [number, number, number] => {};
 
 ```ts
 const removeListDuplicates = (list: any[], key: string): any[] => {};
-// Example input: [{id: 0}, {id: 1}, {id: 1}, {id: 2}], 'id'
-// Example Output: [{id: 0}, {id: 1}, {id: 2}]
 ```
 
 - Removes duplicates in a list. More info is provided in JSDoc.
@@ -87,8 +75,6 @@ const removeListDuplicates = (list: any[], key: string): any[] => {};
 
 ```ts
 const lean = (obj: any): any => {};
-// Example input: {a: 0, b: 1}
-// Example Output: {a: 0, b: 1}
 ```
 
 - Turns dates into strings, fixes proxy/reference errors, etc (stringifies then parses)
@@ -97,8 +83,6 @@ const lean = (obj: any): any => {};
 
 ```ts
 const falseyToEmpty = (obj: any): any => {};
-// Example input: {a: null, b: 'tree'}
-// Example Output: {a: '', b: 'tree'}
 ```
 
 - Converts falsey values in the object into empty strings (good for forms)
@@ -107,8 +91,6 @@ const falseyToEmpty = (obj: any): any => {};
 
 ```ts
 const formatFileSize = (bytes: number): string => {};
-// Example input: 1000000
-// Example Output: '1.0 MB'
 ```
 
 - Converts number of bytes into human readable file size
@@ -117,8 +99,6 @@ const formatFileSize = (bytes: number): string => {};
 
 ```ts
 const unScreamingSnakeCase = (str: string): string => {};
-// Example input: 'HELLO_WORLD'
-// Example Output: 'Hello World'
 ```
 
 - Turns screaming snake case (enum format) into normal text
@@ -134,15 +114,13 @@ const colorFromHueRange = (
     saturation = 100,
     lightness = 40,
   }: {
-    from: number; // Hue of when value is 0
-    to: number; // Hue of when value is 1
-    saturation?: number; // From 0 to 100
-    lightness?: number; // From 0 to 100
+    from: number;
+    to: number;
+    saturation?: number;
+    lightness?: number;
   },
-  value: number // From 0 to 1 - determines hue
+  value: number,
 ): string => {};
-// Example input: { from: 0, to: 120 }, .5
-// Example Output: 'hsl(60, 100%, 43.333333333333336%)'
 ```
 
 - Returns a color of a hue determined by `value`
@@ -151,7 +129,6 @@ const colorFromHueRange = (
 <HueRangeExample />
 
 ```tsx
-// Example Code:
 const [hueRangeTest, setHueRangeTest] = useState(0);
 return (
   <div>
@@ -163,9 +140,9 @@ return (
       Hue Range Example (red to green)
     </h1>
     <input
-      type="range"
+      type='range'
       value={hueRangeTest}
-      onChange={e => setHueRangeTest(+e.target.value)}
+      onChange={(e) => setHueRangeTest(+e.target.value)}
       min={0}
       max={1}
       step={1e-9}

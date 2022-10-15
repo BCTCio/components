@@ -20,34 +20,34 @@ const props = {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof SingleDropdown> = args => {
+export const Default: ComponentStory<typeof SingleDropdown> = (args) => {
   const [state, setState] = useState('');
   return (
     <SingleDropdown
       {...props}
       {...args}
       value={state}
-      onChange={v => setState(v)}
+      onChange={(v) => setState(v)}
     />
   );
 };
 
-export const WithDetails: ComponentStory<typeof SingleDropdown> = args => {
+export const WithDetails: ComponentStory<typeof SingleDropdown> = (args) => {
   const [state, setState] = useState('');
   return (
     <SingleDropdown
       {...props}
-      label="Label"
-      description="Do stuff with this"
+      label='Label'
+      description='Do stuff with this'
       required
       {...args}
       value={state}
-      onChange={v => setState(v)}
+      onChange={(v) => setState(v)}
     />
   );
 };
 
-export const WithStatus: ComponentStory<typeof SingleDropdown> = args => {
+export const WithStatus: ComponentStory<typeof SingleDropdown> = (args) => {
   const [state, setState] = useState('');
   return (
     <SingleDropdown
@@ -55,7 +55,7 @@ export const WithStatus: ComponentStory<typeof SingleDropdown> = args => {
       showStatus={true}
       {...args}
       value={state}
-      onChange={v => setState(v)}
+      onChange={(v) => setState(v)}
     />
   );
 };

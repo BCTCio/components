@@ -64,7 +64,7 @@ export const Input: React.FC<InputProps> = ({
     return;
   }, [tooltipShow]);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     let val = e.target.value;
     if (type === 'number') {
@@ -135,20 +135,20 @@ export const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className="relative">
+    <div className='relative'>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-gray-800">
+        <label htmlFor={id} className='block text-sm font-medium text-gray-800'>
           {label}
-          <span className="text-red-500">{required && ' *'}</span>
+          <span className='text-red-500'>{required && ' *'}</span>
           {description && (
-            <p className="text-gray-500 text-xs font-normal">{description}</p>
+            <p className='text-gray-500 text-xs font-normal'>{description}</p>
           )}
         </label>
       )}
-      <div className="mt-1 relative shadow-sm">
+      <div className='mt-1 relative shadow-sm'>
         {type === 'money' && (
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <span className="text-gray-500 sm:text-sm">$</span>
+          <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+            <span className='text-gray-500 sm:text-sm'>$</span>
           </div>
         )}
         <input
@@ -168,10 +168,10 @@ export const Input: React.FC<InputProps> = ({
             error
               ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
               : 'focus:ring-THEME-500 focus:border-THEME-500',
-            'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md'
+            'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md',
           )}
           placeholder={placeholder}
-          onKeyPress={e => {
+          onKeyPress={(e) => {
             if (integerOnly && e.key === '.') e.preventDefault();
             keyPressed = e.key;
             if (onEnter && e.key === 'Enter') onEnter();
@@ -188,18 +188,18 @@ export const Input: React.FC<InputProps> = ({
           <div
             className={classNames(
               { 'pointer-events-none': type === 'money' || error },
-              'right-0 absolute inset-y-0 pr-3 flex items-center'
+              'right-0 absolute inset-y-0 pr-3 flex items-center',
             )}
           >
             {type === 'password' &&
               (passwordVisibility ? (
                 <EyeSlashIcon
-                  className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
+                  className='h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer'
                   onClick={() => setPasswordVisibility(false)}
                 />
               ) : (
                 <EyeIcon
-                  className="h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer"
+                  className='h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer'
                   onClick={() => setPasswordVisibility(true)}
                 />
               ))}
@@ -207,7 +207,7 @@ export const Input: React.FC<InputProps> = ({
               <span
                 className={classNames(
                   { 'mr-1': error },
-                  'text-gray-500 sm:text-sm'
+                  'text-gray-500 sm:text-sm',
                 )}
               >
                 USD
@@ -215,8 +215,8 @@ export const Input: React.FC<InputProps> = ({
             )}
             {error && (
               <ExclamationCircleIcon
-                className="ml-1 h-5 w-5 text-red-500"
-                aria-hidden="true"
+                className='ml-1 h-5 w-5 text-red-500'
+                aria-hidden='true'
               />
             )}
           </div>
@@ -224,27 +224,27 @@ export const Input: React.FC<InputProps> = ({
         <div
           className={classNames(
             'flex flex-col items-end absolute right-0 z-10 top-10 transition-opacity',
-            tooltipShow ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            tooltipShow ? 'opacity-100' : 'opacity-0 pointer-events-none',
           )}
         >
           <svg
-            className="fill-gray-200 h-2 mr-2"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 18"
+            className='fill-gray-200 h-2 mr-2'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 18'
           >
-            <polygon points="12,0 0,18 24,18" />
+            <polygon points='12,0 0,18 24,18' />
           </svg>
-          <div className="flex gap-1 items-start bg-gray-200 p-2 rounded-lg">
+          <div className='flex gap-1 items-start bg-gray-200 p-2 rounded-lg'>
             <InformationCircleIcon
-              className="w-4 text-gray-400 flex-none"
-              aria-hidden="true"
+              className='w-4 text-gray-400 flex-none'
+              aria-hidden='true'
             />
-            <span className="text-xs text-gray-600 select-none">{tooltip}</span>
+            <span className='text-xs text-gray-600 select-none'>{tooltip}</span>
           </div>
         </div>
       </div>
-      {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
+      {error && <p className='mt-2 text-red-600 text-sm'>{error}</p>}
     </div>
   );
 };

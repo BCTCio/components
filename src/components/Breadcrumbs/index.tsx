@@ -25,8 +25,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   },
 }) => {
   return (
-    <nav className="flex" aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-4">
+    <nav className='flex' aria-label='Breadcrumb'>
+      <ol role='list' className='flex items-center space-x-4'>
         <li>
           <div>
             <customLink.component
@@ -38,17 +38,17 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 'text-white': links.length === 1,
               })}
             >
-              <HomeIcon className="flex-shrink-0 w-5 h-5" aria-hidden="true" />
-              <span className="sr-only">Home</span>
+              <HomeIcon className='flex-shrink-0 w-5 h-5' aria-hidden='true' />
+              <span className='sr-only'>Home</span>
             </customLink.component>
           </div>
         </li>
         {links.slice(1).map((page, i) => (
           <li key={i} title={page.title}>
-            <div className="flex items-center">
+            <div className='flex items-center'>
               <ChevronRightIcon
-                className="flex-shrink-0 w-5 h-5 text-gray-300"
-                aria-hidden="true"
+                className='flex-shrink-0 w-5 h-5 text-gray-300'
+                aria-hidden='true'
               />
               <customLink.component
                 {...{ [customLink.hrefProperty]: page.href }}
@@ -59,7 +59,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                     'hover:text-black': !page.isCurrent,
                     'hover:text-gray-200': page.isCurrent,
                     'text-white': page.isCurrent,
-                  }
+                  },
                 )}
                 aria-current={page.isCurrent ? 'page' : undefined}
               >

@@ -31,7 +31,7 @@ export const WithSubtitle: ComponentStory<typeof PanelCard> = (args) => (
   <PanelCard
     {...props}
     divider
-    headerSubtitle="I am subtitle"
+    headerSubtitle='I am subtitle'
     padding
     {...args}
   />
@@ -42,21 +42,21 @@ export const WithFooter: ComponentStory<typeof PanelCard> = (args) => (
     {...props}
     divider
     padding
-    headerSubtitle="I am subtitle"
+    headerSubtitle='I am subtitle'
     footer={<h1>This is a footer</h1>}
     {...args}
   />
 );
 
 export const WithNoPadding: ComponentStory<typeof PanelCard> = (args) => (
-  <PanelCard {...props} divider headerSubtitle="I am subtitle" {...args} />
+  <PanelCard {...props} divider headerSubtitle='I am subtitle' {...args} />
 );
 
 export const WithHeaderRight: ComponentStory<typeof PanelCard> = (args) => (
   <PanelCard
     {...props}
     divider
-    headerSubtitle="I am subtitle"
+    headerSubtitle='I am subtitle'
     headerRight={<button>This is a button</button>}
     padding
     {...args}

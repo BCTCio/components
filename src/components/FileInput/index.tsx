@@ -36,13 +36,13 @@ export const FileInput: FC<FileInputProps> = ({
   const [error, setError] = useState('');
   const Icon = icon;
   return (
-    <div className="select-none">
+    <div className='select-none'>
       <input
-        className="hidden"
-        type="file"
+        className='hidden'
+        type='file'
         id={id}
         required={required}
-        onChange={e => {
+        onChange={(e) => {
           if (
             maxSize &&
             e.target.files &&
@@ -52,7 +52,7 @@ export const FileInput: FC<FileInputProps> = ({
             return setError(
               `${
                 multiple ? 'All of your files' : 'Your file'
-              } size must be under ${formatFileSize(maxSize)}`
+              } size must be under ${formatFileSize(maxSize)}`,
             );
           }
           if (
@@ -64,15 +64,15 @@ export const FileInput: FC<FileInputProps> = ({
             return setError(
               `${
                 multiple ? 'All of your files' : 'Your file'
-              } must be of the following types: ${types.join(', ')}`
+              } must be of the following types: ${types.join(', ')}`,
             );
           }
 
           if (e.target.files?.length) {
             setFileName(
               multiple
-                ? Array.from(e.target.files).map(file => file.name)
-                : e.target.files[0].name
+                ? Array.from(e.target.files).map((file) => file.name)
+                : e.target.files[0].name,
             );
             if (multiple) onChange(e.target.files as any);
             else onChange(e.target.files[0] as any);
@@ -87,13 +87,13 @@ export const FileInput: FC<FileInputProps> = ({
         className={disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
       >
         {label && (
-          <p className="block text-sm font-medium text-gray-700">
+          <p className='block text-sm font-medium text-gray-700'>
             {label}
-            <span className="text-red-500">{required && ' *'}</span>
+            <span className='text-red-500'>{required && ' *'}</span>
           </p>
         )}
         {(description || maxSize || types) && (
-          <p className="text-gray-500 text-xs font-normal mb-1">
+          <p className='text-gray-500 text-xs font-normal mb-1'>
             {description}{' '}
             {maxSize || types
               ? `(${maxSize ? `Must be under ${formatFileSize(maxSize)}` : ''}${
@@ -110,16 +110,16 @@ export const FileInput: FC<FileInputProps> = ({
         <div
           className={classNames(
             'flex gap-2 p-2 shadow-sm sm:text-sm border border-gray-300 rounded-md',
-            { 'bg-gray-100': disabled }
+            { 'bg-gray-100': disabled },
           )}
         >
-          <Icon className="w-5" />
+          <Icon className='w-5' />
           {(typeof fileName === 'string' ? fileName : fileName.join(', ')) || (
-            <span className="text-gray-400">{placeholder}</span>
+            <span className='text-gray-400'>{placeholder}</span>
           )}
         </div>
       </label>
-      {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
+      {error && <p className='mt-2 text-red-600 text-sm'>{error}</p>}
     </div>
   );
 };

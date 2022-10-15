@@ -68,20 +68,20 @@ export const WithBadge: ComponentStory<typeof UserInfoPill> = (args) => (
   <>
     <UserInfoPill
       {...props}
-      statusBadge="Paid"
-      statusType="success"
+      statusBadge='Paid'
+      statusType='success'
       {...args}
     />
     <UserInfoPill
       {...props}
-      statusBadge="50% Paid"
-      statusType="warning"
+      statusBadge='50% Paid'
+      statusType='warning'
       {...args}
     />
     <UserInfoPill
       {...props}
-      statusBadge="0% Paid"
-      statusType="danger"
+      statusBadge='0% Paid'
+      statusType='danger'
       {...args}
     />
   </>
@@ -90,12 +90,12 @@ export const WithBadge: ComponentStory<typeof UserInfoPill> = (args) => (
 export const InlineButtons: ComponentStory<typeof UserInfoPill> = (args) => (
   <UserInfoPill
     {...props}
-    buttonStyle="inline"
+    buttonStyle='inline'
     buttons={[
       {
         title: (
-          <div className="flex items-center">
-            <ClipboardIcon className="w-4 h-4 mr-1" />
+          <div className='flex items-center'>
+            <ClipboardIcon className='w-4 h-4 mr-1' />
             Button 1
           </div>
         ),

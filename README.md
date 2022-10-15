@@ -47,7 +47,6 @@ module.exports = {
 import React, { useState } from 'react';
 import { ToggleSwitch, UserInfoPill } from '@bctc/components';
 
-// If you don't use tailwind. Remember to put this BEFORE your stylesheet imports. Place this in the root index file.
 import '@bctc/components/dist/tailwind.css';
 
 import './App.css';
@@ -56,10 +55,10 @@ function App() {
   const [changed, setChanged] = useState(false);
 
   return (
-    <div className="App">
+    <div className='App'>
       <UserInfoPill
         showButton
-        buttonText="View"
+        buttonText='View'
         data={{
           avatar: 'https://avatars.githubusercontent.com/u/13799221?v=4',
           title: 'foo',

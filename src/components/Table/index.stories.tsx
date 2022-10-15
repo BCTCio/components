@@ -15,7 +15,7 @@ const props = {
     email: `email${i + 1}@gmail.com`,
     name: `Name ${i + 1}`,
     delete: (
-      <button className="text-red-600 hover:text-red-500 font-medium">
+      <button className='text-red-600 hover:text-red-500 font-medium'>
         Delete
       </button>
     ),
@@ -24,11 +24,11 @@ const props = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 
-export const Default: ComponentStory<typeof Table> = args => {
+export const Default: ComponentStory<typeof Table> = (args) => {
   const [page, setPage] = useState(1);
   return (
     <Table
-      name="users"
+      name='users'
       {...args}
       columns={props.columns}
       data={props.data.slice((page - 1) * 5, page * 5)}
@@ -42,17 +42,17 @@ export const Default: ComponentStory<typeof Table> = args => {
   );
 };
 
-export const AutomaticPagination: ComponentStory<typeof Table> = args => {
+export const AutomaticPagination: ComponentStory<typeof Table> = (args) => {
   return (
-    <Table name="users" {...args} columns={props.columns} data={props.data} />
+    <Table name='users' {...args} columns={props.columns} data={props.data} />
   );
 };
 
-export const WithStripes: ComponentStory<typeof Table> = args => {
+export const WithStripes: ComponentStory<typeof Table> = (args) => {
   const [page, setPage] = useState(1);
   return (
     <Table
-      name="users"
+      name='users'
       stripes
       {...args}
       columns={props.columns}
@@ -67,10 +67,10 @@ export const WithStripes: ComponentStory<typeof Table> = args => {
   );
 };
 
-export const NoData: ComponentStory<typeof Table> = args => {
+export const NoData: ComponentStory<typeof Table> = (args) => {
   return (
     <Table
-      name="users"
+      name='users'
       {...args}
       columns={props.columns}
       data={[]}

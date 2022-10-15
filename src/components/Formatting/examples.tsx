@@ -13,7 +13,7 @@ export const HueRangeExample = () => {
         Hue Range Example (red to green)
       </h1>
       <input
-        type="range"
+        type='range'
         value={hueRangeTest}
         onChange={(e) => setHueRangeTest(+e.target.value)}
         min={0}
