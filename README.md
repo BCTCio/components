@@ -30,9 +30,7 @@ If you use tailwind (tailwind.config.js):
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  content: [
-    './node_modules/@bctc/components/dist/components.cjs.production.min.js',
-  ],
+  content: ['./node_modules/@bctc/components/dist/**/*.js'],
   theme: {
     extend: {
       colors: {
