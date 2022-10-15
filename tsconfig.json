@@ -1,6 +1,6 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["src/**/*.stories.tsx", "src/**/example.tsx"],
   "compilerOptions": {
     "module": "ESNext",
