@@ -18,10 +18,7 @@
     "prepare": "yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "package-update": "npm i --package-lock-only && yarn"
-  },
-  "peerDependencies": {
-    "react": ">=16"
+    "package-update": "npm i --package-lock-only --legacy-peer-deps && yarn"
   },
   "name": "@bctc/components",
   "author": "mxdi9i7",
@@ -42,21 +39,21 @@
     "cross-env": "^7.0.3",
     "husky": "^7.0.4",
     "postcss": "^8.4.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-is": "^16.8.6",
     "tailwindcss": "^3.1.8",
-    "tslib": "^2.4.0",
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.0",
-    "@heroicons/react": "^2.0.10",
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.12",
     "@hookstate/core": "3.0.13",
-    "@mantine/hooks": "^5.2.7",
+    "@mantine/hooks": "^5.5.5",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1",
     "compressorjs": "^1.1.1",
-    "gifsicle-wasm-browser": "^1.5.16"
+    "gifsicle-wasm-browser": "^1.5.16",
+    "tslib": "^2.4.0"
   }
 }
