@@ -27,9 +27,12 @@ export const PanelCard: React.FC<PanelCardProps> = ({
 }) => {
   return (
     <div
-      className={classNames('bg-white shadow rounded-lg', {
-        'divide-y divide-gray-200': !!divider,
-      })}
+      className={classNames(
+        'bg-white shadow shadow-gray-300 rounded-lg border border-gray-300',
+        {
+          'divide-y divide-gray-300': !!divider,
+        },
+      )}
     >
       <div className='px-4 py-5 sm:px-6 flex items-center justify-between flex-wrap sm:flex-nowrap'>
         <div>
