@@ -22,7 +22,7 @@ export const Default: ComponentStory<typeof ButtonGroup> = (args) => {
         {...props}
         {...args}
         selected={selected === 0}
-        position="left"
+        position='left'
         onClick={() => setSelected(0)}
       />
       <ButtonGroup
@@ -38,7 +38,7 @@ export const Default: ComponentStory<typeof ButtonGroup> = (args) => {
         {...props}
         {...args}
         selected={selected === 3}
-        position="right"
+        position='right'
         onClick={() => setSelected(3)}
       />
     </>

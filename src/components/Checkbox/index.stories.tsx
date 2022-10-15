@@ -13,7 +13,7 @@ export const Default: ComponentStory<typeof Checkbox> = (args: any) => {
   const [checked, setChecked] = useState(false);
   return (
     <Checkbox
-      label="Checkbox"
+      label='Checkbox'
       {...args}
       value={checked}
       onChange={setChecked}

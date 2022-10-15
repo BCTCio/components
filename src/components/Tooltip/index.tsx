@@ -18,14 +18,14 @@ export const ToolTip: React.FC<ToolTipProps> = ({
   const { ref, hovered } = useHover();
   const [debouncedHover] = useDebouncedValue(hovered, delay);
   return (
-    <div className="relative">
+    <div className='relative'>
       <div ref={ref}>{children}</div>
       <div
         className={classNames(
           'absolute -bottom-1 translate-y-full transition-opacity bg-gray-700 text-white text-sm rounded px-2 py-1',
           hovered && debouncedHover && !disabled
             ? 'opacity-100'
-            : 'opacity-0 pointer-events-none'
+            : 'opacity-0 pointer-events-none',
         )}
       >
         {tooltip}

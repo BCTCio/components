@@ -13,7 +13,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof Notification> = () => {
   return (
-    <div className="grid grid-cols-1">
+    <div className='grid grid-cols-1'>
       <button
         onClick={() => notify({ title: 'Title', description: 'Description' })}
       >

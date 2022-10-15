@@ -18,12 +18,12 @@ export const WithDetails: ComponentStory<typeof TextArea> = (args: any) => {
   const [state, setState] = useState('');
   return (
     <TextArea
-      label="Text Area"
-      placeholder="You put stuff here"
-      description="Do stuff with this"
+      label='Text Area'
+      placeholder='You put stuff here'
+      description='Do stuff with this'
       required
       maxLength={100}
-      error="This is an error"
+      error='This is an error'
       {...args}
       value={state}
       onChange={setState}

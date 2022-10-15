@@ -46,7 +46,7 @@ export const WithSubtitle: ComponentStory<typeof Modal> = (args: any) => {
       <Modal
         {...modalData}
         show={show}
-        subtitle="I am a subtitle"
+        subtitle='I am a subtitle'
         {...args}
         setShow={setShow}
       />
@@ -74,11 +74,11 @@ export const WithIcon: ComponentStory<typeof Modal> = (args: any) => {
       <Modal
         {...modalData}
         show={show}
-        subtitle="I am a subtitle"
+        subtitle='I am a subtitle'
         icon={
           <UserPlusIcon
-            className="p-2 bg-green-100 text-green-500"
-            aria-hidden="true"
+            className='p-2 bg-green-100 text-green-500'
+            aria-hidden='true'
           />
         }
         {...args}

@@ -9,16 +9,16 @@ export default {
 } as ComponentMeta<typeof FileInput>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof FileInput> = args => {
+export const Default: ComponentStory<typeof FileInput> = (args) => {
   return <FileInput {...args} onChange={() => {}} />;
 };
 
-export const LabeledAndLimited: ComponentStory<typeof FileInput> = args => {
+export const LabeledAndLimited: ComponentStory<typeof FileInput> = (args) => {
   return (
     <FileInput
-      label="Label"
-      placeholder="Placeholder"
-      description="Description"
+      label='Label'
+      placeholder='Placeholder'
+      description='Description'
       required
       maxSize={1e5}
       types={['image/jpeg']}

@@ -17,7 +17,7 @@ const props = {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof Input> = (args: any) => {
   const [state, setState] = useState('');
-  return <Input type="text" {...args} value={state} onChange={setState} />;
+  return <Input type='text' {...args} value={state} onChange={setState} />;
 };
 
 export const WithDetails: ComponentStory<typeof Input> = (args: any) => {
@@ -25,8 +25,8 @@ export const WithDetails: ComponentStory<typeof Input> = (args: any) => {
   return (
     <Input
       {...props}
-      type="text"
-      description="Do stuff with this"
+      type='text'
+      description='Do stuff with this'
       {...args}
       value={state}
       onChange={setState}
@@ -39,8 +39,8 @@ export const WithError: ComponentStory<typeof Input> = (args: any) => {
   return (
     <Input
       {...props}
-      type="text"
-      error="Your input is terrible"
+      type='text'
+      error='Your input is terrible'
       {...args}
       value={state}
       onChange={setState}
@@ -53,10 +53,10 @@ export const NumberWithLimits: ComponentStory<typeof Input> = (args: any) => {
   return (
     <Input
       {...props}
-      type="number"
+      type='number'
       min={-50}
       max={50}
-      description="Min is -50 and max is 50"
+      description='Min is -50 and max is 50'
       {...args}
       value={state}
       onChange={setState}
@@ -69,8 +69,8 @@ export const IntegerOnlyNumber: ComponentStory<typeof Input> = (args: any) => {
   return (
     <Input
       {...props}
-      type="number"
-      description="Only integers are allowed"
+      type='number'
+      description='Only integers are allowed'
       integerOnly
       {...args}
       value={state}
@@ -84,8 +84,8 @@ export const PositiveMoney: ComponentStory<typeof Input> = (args: any) => {
   return (
     <Input
       {...props}
-      type="money"
-      description="You can only use positive values"
+      type='money'
+      description='You can only use positive values'
       min={0}
       {...args}
       value={state}
@@ -95,15 +95,15 @@ export const PositiveMoney: ComponentStory<typeof Input> = (args: any) => {
 };
 
 export const PasswordWithMaxLength: ComponentStory<typeof Input> = (
-  args: any
+  args: any,
 ) => {
   const [state, setState] = useState('');
   return (
     <Input
       {...props}
       maxLength={30}
-      type="password"
-      description="Max length is 30 characters"
+      type='password'
+      description='Max length is 30 characters'
       {...args}
       value={state}
       onChange={setState}

@@ -1,5 +1,5 @@
 export const formatPhoneNumber = (
-  phoneNumberString?: string | null
+  phoneNumberString?: string | null,
 ): string => {
   if (!phoneNumberString) return '';
   const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -18,15 +18,12 @@ export const capitalize = (str: string): string =>
   str[0]?.toUpperCase() + str.slice(1).toLowerCase();
 
 export const unCamelCase = (str: string): string =>
-  str.replace(/([A-Z]|\d)/g, ' $1').replace(/^./, function(str) {
+  str.replace(/([A-Z]|\d)/g, ' $1').replace(/^./, function (str) {
     return str.toUpperCase();
   });
 
 export const unScreamingSnakeCase = (str: string): string =>
-  str
-    .split('_')
-    .map(capitalize)
-    .join(' ');
+  str.split('_').map(capitalize).join(' ');
 
 export const colorFromHueRange = (
   {
@@ -40,7 +37,7 @@ export const colorFromHueRange = (
     saturation?: number;
     lightness?: number;
   },
-  value: number
+  value: number,
 ): string => {
   let hue: number;
   if (from < to) {
@@ -60,7 +57,7 @@ export const colorFromHueRange = (
  */
 export const getTintString = (
   tintColor?: number | [number, number, number],
-  tintStrength = 0.5
+  tintStrength = 0.5,
 ) => {
   if (tintColor === undefined) return '';
   let tintArray =
@@ -95,12 +92,10 @@ export const hexToRGB = (hex: string) => {
 export const removeListDuplicates = <S,>(list: S[], key?: keyof S): S[] =>
   list.reduce(
     (prev, curr) =>
-      (key
-      ? prev.find(item => item[key] === curr[key])
-      : prev.includes(curr))
+      (key ? prev.find((item) => item[key] === curr[key]) : prev.includes(curr))
         ? prev
         : prev.concat(curr),
-    [] as S[]
+    [] as S[],
   );
 
 export const lean = <T,>(obj: T): T => JSON.parse(JSON.stringify(obj));
@@ -113,8 +108,8 @@ export const lean = <T,>(obj: T): T => JSON.parse(JSON.stringify(obj));
 export const falseyToEmpty = (obj: any) =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) =>
-      value ? [key, value as string] : [key, '']
-    )
+      value ? [key, value as string] : [key, ''],
+    ),
   );
 
 export const formatFileSize = (bytes: number) => {

@@ -4,7 +4,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ConfirmationBox, ConfirmationBoxData } from '.';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Overlays/ConfirmationBox',
   component: ConfirmationBox,
@@ -18,7 +17,6 @@ const props: ConfirmationBoxData = {
   },
 };
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof ConfirmationBox> = (args: any) => {
   const [dataState, _setDataState] = useState(props);
   const [show, setShow] = useState(false);
