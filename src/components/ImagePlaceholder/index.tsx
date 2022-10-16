@@ -49,7 +49,6 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
     src: image,
     className: classNames(
       {
-        'rounded-full': backupImage === 'avatar',
         'opacity-0': status === Status.LOADING,
       },
       'transition-opacity duration-300 w-full h-full',
@@ -62,7 +61,13 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
   };
 
   return (
-    <div className={'relative ' + className}>
+    <div
+      className={classNames(
+        'relative overflow-hidden',
+        { 'rounded-full': backupImage === 'avatar' },
+        className,
+      )}
+    >
       {showImage && (
         <div className='absolute w-full h-full'>
           {ImageElement ? <ImageElement {...props} /> : <img {...props} />}

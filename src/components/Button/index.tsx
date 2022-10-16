@@ -10,7 +10,16 @@ export const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
       type='button'
       {...props}
       className={classNames(
-        'inline-flex items-center justify-center rounded border border-transparent px-2.5 py-1.5 font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 bg-THEME-500 disabled:bg-gray-200 hover:bg-THEME-600 disabled:hover:bg-gray-200 disabled:text-gray-400 focus:ring-THEME-400 disabled:focus:outline-none disabled:cursor-not-allowed disabled:ring-0',
+        'inline-flex items-center justify-center rounded px-2.5 py-1.5 font-medium shadow-sm focus:outline-none disabled:focus:outline-none disabled:cursor-not-allowed disabled:ring-0',
+        {
+          'border border-transparent': !props.className?.includes('border'),
+          'text-white': !props.className?.includes('text'),
+          'focus:ring-2 focus:ring-offset-2 focus:ring-THEME-400':
+            !props.className?.includes('focus:ring'),
+          'bg-THEME-500 hover:bg-THEME-600': !props.className?.includes('bg'),
+          'disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:text-gray-400':
+            !props.className?.includes('disabled:'),
+        },
         props.className,
       )}
     >
