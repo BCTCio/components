@@ -3,6 +3,7 @@ import {
   ExclamationCircleIcon,
   EyeIcon,
   EyeSlashIcon,
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/solid';
 import { useId } from '@mantine/hooks';
 import classNames from 'classnames';
@@ -18,7 +19,8 @@ export interface InputProps {
     | 'tel'
     | 'date'
     | 'time'
-    | 'money';
+    | 'money'
+    | 'search';
   onChange: ((v: string) => void) | ((v: number) => void);
   onEnter?: () => void | Promise<void>;
   value: string | number;
@@ -158,11 +160,11 @@ export const Input: React.FC<InputProps> = ({
           required={required}
           className={classNames(
             {
-              'pr-16': type === 'password' && error,
-              'pr-10': (type === 'password') !== !!error,
+              'pr-16': (type === 'password' || type === 'search') && error,
+              'pr-10': (type === 'password' || type === 'search') === !error,
 
               'pl-7': type === 'money',
-              'pr-12': (type === 'money') !== !!error,
+              'pr-12': (type === 'money') === !error,
               'pr-20': type === 'money' && error,
             },
             error
@@ -184,10 +186,16 @@ export const Input: React.FC<InputProps> = ({
           }
           aria-describedby={type === 'money' ? 'price-currency' : undefined}
         />
-        {(type === 'password' || type === 'money' || error) && (
+        {(type === 'password' ||
+          type === 'search' ||
+          type === 'money' ||
+          error) && (
           <div
             className={classNames(
-              { 'pointer-events-none': type === 'money' || error },
+              {
+                'pointer-events-none':
+                  type === 'money' || type === 'search' || error,
+              },
               'right-0 absolute inset-y-0 pr-3 flex items-center',
             )}
           >
@@ -203,6 +211,9 @@ export const Input: React.FC<InputProps> = ({
                   onClick={() => setPasswordVisibility(true)}
                 />
               ))}
+            {type === 'search' && (
+              <MagnifyingGlassIcon className='h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer' />
+            )}
             {type === 'money' && (
               <span
                 className={classNames(
