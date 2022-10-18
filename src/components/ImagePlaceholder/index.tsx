@@ -51,7 +51,7 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
       {
         'opacity-0': status === Status.LOADING,
       },
-      'transition-opacity duration-300 w-full h-full',
+      'transition-opacity duration-300 w-full aspect-square object-cover',
     ),
     onError: () => setStatus(Status.ERROR),
     onLoad: () => status === Status.LOADING && setStatus(Status.SUCCESS),
@@ -78,7 +78,7 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
           className,
           'border-none transition-opacity duration-300',
           {
-            'opacity-0': status !== Status.LOADING,
+            'opacity-0 pointer-events-none': status !== Status.LOADING,
           },
         )}
       />

@@ -13,7 +13,7 @@ export const Default: ComponentStory<typeof ImagePlaceholder> = (_args) => {
   return (
     <ImagePlaceholder
       src='https://example.com'
-      backupImage='https://picsum.photos/500'
+      backupImage='https://storage.googleapis.com/appin-356703.appspot.com/userAvatars/richardx366%40gmail.com'
       className='w-32 h-32 rounded-full border border-gray-200 overflow-hidden'
     />
   );
