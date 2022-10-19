@@ -122,3 +122,31 @@ export const formatFileSize = (bytes: number) => {
 
   return Math.max(bytes, 0.1).toFixed(1) + byteUnits[i];
 };
+
+export const dateInput = (date: Date | string) => {
+  const newDate = new Date(date);
+  const local = newDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  return local.split('/').reverse().join('-');
+};
+
+export const wordDate = (date: Date | string) => {
+  const newDate = new Date(date);
+  return newDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+export const numberDate = (date: Date | string) => {
+  const newDate = new Date(date);
+  return newDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+};
