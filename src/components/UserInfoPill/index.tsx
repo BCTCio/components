@@ -52,6 +52,10 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
               })}
               src={avatar}
               alt='Profile picture'
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = '/misc/emptyAvatar.svg';
+              }}
             />
           </div>
           <div className='flex flex-col min-w-0'>
