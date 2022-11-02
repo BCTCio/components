@@ -2,6 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import React, { Fragment, ReactNode } from 'react';
+import { ImagePlaceholder } from '../ImagePlaceholder';
 
 interface Button {
   title: ReactNode | string;
@@ -51,11 +52,9 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 'ring-gray-500': statusType === 'plain',
               })}
               src={avatar}
-              alt='Profile picture'
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null;
-                currentTarget.src = '/misc/emptyAvatar.svg';
-              }}
+              onError={() => (
+                <ImagePlaceholder backupImage={'/misc/emptyAvatar.svg'} />
+              )}
             />
           </div>
           <div className='flex flex-col min-w-0'>
