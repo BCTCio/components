@@ -43,7 +43,11 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
           {...{ [customLink.hrefProperty]: redirectTo }}
         >
           <div className='flex-shrink-0'>
-            <img
+            <ImagePlaceholder
+              backupImage={
+                'https://i1.wp.com/wilcity.com/wp-content/uploads/2020/06/115-1150152_default-profile-picture-avatar-png-green.jpg?fit=820%2C860&ssl=1'
+              }
+              src={avatar}
               className={classNames('w-8 h-8 rounded-full focus:outline-none', {
                 'ring-2 ring-offset-2': !!statusBadge,
                 'ring-green-500': statusType === 'success',
@@ -51,10 +55,6 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 'ring-yellow-500': statusType === 'warning',
                 'ring-gray-500': statusType === 'plain',
               })}
-              src={avatar}
-              onError={() => (
-                <ImagePlaceholder backupImage={'/misc/emptyAvatar.svg'} />
-              )}
             />
           </div>
           <div className='flex flex-col min-w-0'>
