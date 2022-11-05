@@ -19,7 +19,7 @@ export const Table: React.FC<TableProps> = ({
   data,
   name,
   noDataPlaceholder = (
-    <div className='text-center'>
+    <div className=''>
       <NoDataSVG className='mx-auto' />
       <h3 className='mt-2 text-sm font-medium text-gray-900'>
         No {name || 'data'}
@@ -53,14 +53,18 @@ export const Table: React.FC<TableProps> = ({
                     <th
                       key={column}
                       scope='col'
-                      className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider'
+                      className='px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider'
                     >
                       {column}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className={stripes ? '' : 'divide-y divide-gray-200'}>
+              <tbody
+                className={
+                  stripes ? '' : 'divide-y divide-gray-200 text-center'
+                }
+              >
                 {data.length ? (
                   (autoPagination
                     ? data.slice(
@@ -78,7 +82,7 @@ export const Table: React.FC<TableProps> = ({
                       {columns.map((column) => (
                         <td
                           key={column}
-                          className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'
+                          className='px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500'
                         >
                           {row[column]}
                         </td>
