@@ -8,6 +8,7 @@ interface Button {
   title: ReactNode | string;
   onClick?: () => void | Promise<void>;
 }
+
 export interface UserInfoPillProps {
   avatar: string;
   title: string;
@@ -20,6 +21,7 @@ export interface UserInfoPillProps {
     hrefProperty: string;
   };
   buttonStyle?: 'menuDropdown' | 'inline';
+  fallbackImage?: string;
 }
 
 export const UserInfoPill: React.FC<UserInfoPillProps> = ({
@@ -34,6 +36,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
     hrefProperty: 'href',
   },
   buttonStyle = 'menuDropdown',
+  fallbackImage = 'avatar',
 }) => {
   return (
     <div className='py-4 pr-6'>
@@ -44,9 +47,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
         >
           <div className='flex-shrink-0'>
             <ImagePlaceholder
-              backupImage={
-                'https://i1.wp.com/wilcity.com/wp-content/uploads/2020/06/115-1150152_default-profile-picture-avatar-png-green.jpg?fit=820%2C860&ssl=1'
-              }
+              backupImage={fallbackImage}
               src={avatar}
               className={classNames('w-8 h-8 rounded-full focus:outline-none', {
                 'ring-2 ring-offset-2': !!statusBadge,
