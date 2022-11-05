@@ -30,7 +30,7 @@ export const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
   if (status === Status.ERROR || !image) {
     switch (backupImage) {
       case 'avatar':
-        image = '/misc/emptyAvatar.svg`';
+        image = '/misc/emptyAvatar.svg';
         break;
       case 'image':
         image = '/misc/emptyImage.png';
