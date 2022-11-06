@@ -2,11 +2,13 @@ import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import React, { Fragment, ReactNode } from 'react';
+import { ImagePlaceholder } from '../ImagePlaceholder';
 
 interface Button {
   title: ReactNode | string;
   onClick?: () => void | Promise<void>;
 }
+
 export interface UserInfoPillProps {
   avatar: string;
   title: string;
@@ -19,6 +21,7 @@ export interface UserInfoPillProps {
     hrefProperty: string;
   };
   buttonStyle?: 'menuDropdown' | 'inline';
+  fallbackImage?: string;
 }
 
 export const UserInfoPill: React.FC<UserInfoPillProps> = ({
@@ -33,6 +36,7 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
     hrefProperty: 'href',
   },
   buttonStyle = 'menuDropdown',
+  fallbackImage = 'avatar',
 }) => {
   return (
     <div className='py-4 pr-6'>
@@ -42,7 +46,9 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
           {...{ [customLink.hrefProperty]: redirectTo }}
         >
           <div className='flex-shrink-0'>
-            <img
+            <ImagePlaceholder
+              backupImage={fallbackImage}
+              src={avatar}
               className={classNames('w-8 h-8 rounded-full focus:outline-none', {
                 'ring-2 ring-offset-2': !!statusBadge,
                 'ring-green-500': statusType === 'success',
@@ -50,8 +56,6 @@ export const UserInfoPill: React.FC<UserInfoPillProps> = ({
                 'ring-yellow-500': statusType === 'warning',
                 'ring-gray-500': statusType === 'plain',
               })}
-              src={avatar}
-              alt='Profile picture'
             />
           </div>
           <div className='flex flex-col min-w-0'>

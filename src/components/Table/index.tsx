@@ -18,13 +18,14 @@ export const Table: React.FC<TableProps> = ({
   columns,
   data,
   name,
+
   noDataPlaceholder = (
-    <div className=''>
-      <NoDataSVG className='mx-auto' />
-      <h3 className='mt-2 text-sm font-medium text-gray-900'>
+    <div className='text-center'>
+      <NoDataSVG className='mx-auto my-auto' />
+      <h3 className='mt-2 text-sm text-center font-medium text-gray-900'>
         No {name || 'data'}
       </h3>
-      <p className='mt-1 text-sm text-gray-500'>
+      <p className='mt-1 text-sm text-gray-500 text-center'>
         There {name ? 'are' : 'is'} currently no {name || 'data'} to display
       </p>
     </div>
@@ -60,11 +61,7 @@ export const Table: React.FC<TableProps> = ({
                   ))}
                 </tr>
               </thead>
-              <tbody
-                className={
-                  stripes ? '' : 'divide-y divide-gray-200 text-center'
-                }
-              >
+              <tbody className={stripes ? '' : 'divide-y divide-gray-200'}>
                 {data.length ? (
                   (autoPagination
                     ? data.slice(
@@ -82,7 +79,7 @@ export const Table: React.FC<TableProps> = ({
                       {columns.map((column) => (
                         <td
                           key={column}
-                          className='px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500'
+                          className='px-6 py-4 whitespace-nowrap text-sm  text-gray-500'
                         >
                           {row[column]}
                         </td>
@@ -90,9 +87,14 @@ export const Table: React.FC<TableProps> = ({
                     </tr>
                   ))
                 ) : (
-                  <tr>
-                    <td className='bg-white p-6' colSpan={columns.length}>
-                      {noDataPlaceholder}
+                  <tr className=''>
+                    <td
+                      className='bg-white w-full p-6 '
+                      colSpan={columns.length}
+                    >
+                      <span className='flex justify-center'>
+                        {noDataPlaceholder}
+                      </span>
                     </td>
                   </tr>
                 )}
