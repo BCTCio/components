@@ -18,7 +18,6 @@ export const Table: React.FC<TableProps> = ({
   columns,
   data,
   name,
-
   noDataPlaceholder = (
     <div className='text-center'>
       <NoDataSVG className='mx-auto my-auto' />
@@ -54,7 +53,7 @@ export const Table: React.FC<TableProps> = ({
                     <th
                       key={column}
                       scope='col'
-                      className='px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider'
+                      className='px-6 py-3 text-xs text-left font-medium text-gray-500 uppercase tracking-wider'
                     >
                       {column}
                     </th>
