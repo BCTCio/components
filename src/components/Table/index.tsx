@@ -86,9 +86,9 @@ export const Table: React.FC<TableProps> = ({
                     </tr>
                   ))
                 ) : (
-                  <tr className=''>
+                  <tr>
                     <td
-                      className='bg-white w-full p-6 '
+                      className='bg-white w-full p-6'
                       colSpan={columns.length}
                     >
                       <span className='flex justify-center'>
