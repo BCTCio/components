@@ -7,7 +7,7 @@ const automaticItemsPerPage = 10;
 export interface TableProps {
   stripes?: boolean;
   columns: string[];
-  data: { id: string | number; [key: string]: string | ReactNode }[];
+  data: { id: string | number; [key: string]: ReactNode }[];
   name?: string;
   noDataPlaceholder?: ReactNode;
   pagination?: PaginationProps;
