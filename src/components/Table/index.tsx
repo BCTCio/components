@@ -20,11 +20,11 @@ export const Table: React.FC<TableProps> = ({
   name,
   noDataPlaceholder = (
     <div className='text-center'>
-      <NoDataSVG className='mx-auto' />
-      <h3 className='mt-2 text-sm font-medium text-gray-900'>
+      <NoDataSVG className='mx-auto my-auto' />
+      <h3 className='mt-2 text-sm text-center font-medium text-gray-900'>
         No {name || 'data'}
       </h3>
-      <p className='mt-1 text-sm text-gray-500'>
+      <p className='mt-1 text-sm text-gray-500 text-center'>
         There {name ? 'are' : 'is'} currently no {name || 'data'} to display
       </p>
     </div>
@@ -53,7 +53,7 @@ export const Table: React.FC<TableProps> = ({
                     <th
                       key={column}
                       scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                      className='px-6 py-3 text-xs text-left font-medium text-gray-500 uppercase tracking-wider'
                     >
                       {column}
                     </th>
@@ -78,7 +78,7 @@ export const Table: React.FC<TableProps> = ({
                       {columns.map((column) => (
                         <td
                           key={column}
-                          className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'
+                          className='px-6 py-4 whitespace-nowrap text-sm  text-gray-500'
                         >
                           {row[column]}
                         </td>
@@ -87,8 +87,13 @@ export const Table: React.FC<TableProps> = ({
                   ))
                 ) : (
                   <tr>
-                    <td className='bg-white p-6' colSpan={columns.length}>
-                      {noDataPlaceholder}
+                    <td
+                      className='bg-white w-full p-6'
+                      colSpan={columns.length}
+                    >
+                      <span className='flex justify-center'>
+                        {noDataPlaceholder}
+                      </span>
                     </td>
                   </tr>
                 )}
