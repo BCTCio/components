@@ -18,11 +18,21 @@ const formatPhoneNumber = (phoneNumberString?: string | null): string => {};
 ## Format Number
 
 ```ts
-const formatNumber = (num?: number | null): string => {};
+const formatNumber = (num?: number | null): string =>
+  (num || 0).toLocaleString('en-US');
 ```
 
 - If `num` is `null` or `undefined`, it returns `0`
 - Otherwise, it will separate each 3 digits with a comma, remove trailing zeros in the decimal, and round to the nearest thousandths
+
+## Format Currency
+
+```ts
+const formatCurrency = (num?: number | null): string =>
+  (num || 0).toLocaleString('en-us', { style: 'currency', currency: 'USD' });
+```
+
+-
 
 ## Capitalize
 
