@@ -10,10 +10,8 @@ export const formatPhoneNumber = (
   return phoneNumberString;
 };
 
-
-export const formatNumber = (num?: number | null): string => {
-  return num ? num.toLocaleString('en-US') : '0';
-};
+export const formatNumber = (num?: number | null): string =>
+  (num || 0).toLocaleString('en-US');
 
 export const formatCurrency = (num?: number | null): string =>
   (num || 0).toLocaleString('en-us', { style: 'currency', currency: 'USD' });
