@@ -10,8 +10,16 @@ export const formatPhoneNumber = (
   return phoneNumberString;
 };
 
-export const formatNumber = (num?: number | null): string => {
-  return num ? num.toLocaleString('en-US') : '0';
+export const formatNumber = (number?: number): string => {
+  if (!number) {
+    return '0';
+  }
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  return formatter.format(number);
 };
 
 export const capitalize = (str: string): string =>

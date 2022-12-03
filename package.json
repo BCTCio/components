@@ -32,7 +32,7 @@
     "@storybook/react": "^6.5.12",
     "@tailwindcss/forms": "^0.5.3",
     "@types/body-scroll-lock": "^3.1.0",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
