@@ -25,17 +25,17 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   },
 }) => {
   return (
-    <nav className='flex' aria-label='Breadcrumb'>
+    <nav className='flex ' aria-label='Breadcrumb'>
       <ol role='list' className='flex items-center space-x-4'>
         <li>
           <div>
             <customLink.component
               {...{ [customLink.hrefProperty]: links[0].href }}
               className={classNames({
-                'text-gray-300': links.length > 1,
-                'hover:text-black': links.length > 1,
-                'hover:text-gray-200': links.length === 1,
-                'text-white': links.length === 1,
+                'dark:text-gray-300 text-gray-600 hover:text-gray-800 dark:hover:text-gray-100':
+                  links.length > 1,
+                'dark:hover:text-gray-200 hover:text-gray-900 text-gray-700 dark:text-gray-100':
+                  links.length === 1,
               })}
             >
               <HomeIcon className='flex-shrink-0 w-5 h-5' aria-hidden='true' />
@@ -55,11 +55,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 className={classNames(
                   'max-w-xs truncate ml-4 text-sm font-medium',
                   {
-                    'text-gray-300': !page.isCurrent,
-                    'hover:text-black': !page.isCurrent,
-                    'hover:text-gray-200': page.isCurrent,
-                    'text-white': page.isCurrent,
-                  },
+                    'hover:text-gray-700 text-gray-500 dark:text-gray-200 dark:hover:text-white':
+                      !page.isCurrent,
+                    'hover:text-gray-600 text-gray-400 dark:text-gray-300 dark:hover:text-gray-100':
+                      page.isCurrent,
+                  }
                 )}
                 aria-current={page.isCurrent ? 'page' : undefined}
               >
