@@ -1,0 +1,26 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: build
+  image: node:16
+  commands:
+    - unset CI
+    - yarn install
+    - yarn build-storybook
+
+- name: deploy
+  image: plugins/s3-sync:1
+  settings:
+    bucket: components.bctc.io
+    access_key: 
+      from_secret: AWS_ID
+    secret_key:
+      from_secret: AWS_KEY
+    acl: public-read
+    source: storybook-static/
+    target: /
+    when:
+      branch:
+      - master

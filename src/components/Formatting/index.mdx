@@ -24,6 +24,15 @@ const formatNumber = (num?: number | null): string => {};
 - If `num` is `null` or `undefined`, it returns `0`
 - Otherwise, it will separate each 3 digits with a comma, remove trailing zeros in the decimal, and round to the nearest thousandths
 
+## Format Currency
+
+```ts
+const formatCurrency = (num?: number | null): string => {};
+```
+
+- If `num` is `null` or `undefined`, it returns `$0.00`
+- Otherwise, it will separate each 3 digits with a comma, add a dollar sign, and use 2 decimal places.
+
 ## Capitalize
 
 ```ts
