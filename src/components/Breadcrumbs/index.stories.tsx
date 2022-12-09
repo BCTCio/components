@@ -26,10 +26,22 @@ const props: BreadcrumbsProps = {
     },
   ],
 };
-
+let className = '';
+if (props.darkMode === false) {
+  className =
+    'px-2 py-2 border border-gray-300 rounded-lg hover:border-gray-600';
+}
+if (props.darkMode === true) {
+  className =
+    'bg-gray-900 px-2 py-2 border border-gray-300 hover:border-gray-600 rounded-lg ';
+}
+if (!props.darkMode) {
+  className =
+    'dark:bg-gray-900 px-2 py-2 border border-gray-300 dark:hover:border-gray-600 rounded-lg hover:border-gray-600';
+}
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof Breadcrumbs> = (args) => (
-  <div className='dark:bg-gray-900 px-2 py-2 border border-gray-300 dark:hover:border-gray-600 rounded-lg hover:border-gray-600'>
+  <div className={className}>
     <Breadcrumbs {...props} {...args} />
   </div>
 );
