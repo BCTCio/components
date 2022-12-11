@@ -73,7 +73,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
                         { 'bg-THEME-100': active },
                         item.disabled
                           ? 'bg-gray-50 cursor-not-allowed text-gray-500'
-                          : 'hover:bg-THEME-100 cursor-pointer text-gray-900'
+                          : 'hover:bg-THEME-100 cursor-pointer text-gray-900',
                       )
                     }
                     disabled={item.disabled}
@@ -83,7 +83,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
                         <span
                           className={classNames(
                             item.active ? 'bg-THEME-400' : 'bg-gray-200',
-                            'flex-shrink-0 inline-block h-2 w-2 rounded-full mr-3'
+                            'flex-shrink-0 inline-block h-2 w-2 rounded-full mr-3',
                           )}
                           aria-hidden='true'
                         />
@@ -91,7 +91,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
                       <span
                         className={classNames(
                           isSelected ? 'font-semibold' : 'font-normal',
-                          'block truncate'
+                          'block truncate',
                         )}
                       >
                         {item.title}
@@ -105,7 +105,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
                         <span
                           className={classNames(
                             isSelected ? 'text-THEME-600' : 'text-white',
-                            'absolute inset-y-0 right-0 flex items-center pr-4 group-hover:text-white'
+                            'absolute inset-y-0 right-0 flex items-center pr-4 group-hover:text-white',
                           )}
                         >
                           <CheckIcon className='w-5 h-5' aria-hidden='true' />
