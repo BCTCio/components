@@ -19,19 +19,6 @@ export interface FileInputProps {
   icon?: FC;
 }
 
-export const formatNumber = (number?: number): string => {
-  if (!number) {
-    return '0';
-  }
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-
-  return formatter.format(number);
-};
-
-
 export const FileInput: FC<FileInputProps> = ({
   label,
   description,
