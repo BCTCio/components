@@ -26,6 +26,7 @@ export * from './components/TextArea';
 export * from './components/ToggleSwitch';
 export * from './components/Tooltip';
 export * from './components/UserInfoPill';
+export * from './components/TileCard';
 
 export * from './constants/interfaces';
 export * from './constants/requiredSelects';
