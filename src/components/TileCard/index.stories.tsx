@@ -11,5 +11,9 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof TileCard> = (args: any) => {
-  return <TileCard icon={BeakerIcon} link={'/'} title='Title' {...args} />;
+  return <TileCard icon={BeakerIcon} link='/' title='Title' {...args} />;
+};
+
+export const Disabled: ComponentStory<typeof TileCard> = (args: any) => {
+  return <TileCard disabled title={''} link={''} icon={BeakerIcon} />;
 };

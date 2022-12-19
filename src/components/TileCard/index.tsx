@@ -31,15 +31,14 @@ export const TileCard: React.FC<TileCardProps> = ({
       className={classNames(
         disabled
           ? 'bg-gray-200 hover:cursor-not-allowed pointer-events-none shadow-none opacity-20'
-          : '',
+          : 'bg-white focus-within:ring-2 focus within: ring',
         'relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 rounded-md shadow-md border',
       )}
     >
       <div>
         <span
           className={classNames(
-            'ring-white',
-            'rounded-lg inline-flex p-3 ring-4',
+            'rounded-lg inline-flex p-3 ring-4 ring-white',
             iconClassName,
           )}
         >
