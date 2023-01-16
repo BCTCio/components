@@ -8,6 +8,7 @@ import {
 import { useId } from '@mantine/hooks';
 import classNames from 'classnames';
 import React, { useEffect, useState, ChangeEventHandler } from 'react';
+import { localTimeToUTC, utcTimeToLocal } from '../Formatting';
 
 export interface InputProps {
   type?:
@@ -33,6 +34,8 @@ export interface InputProps {
   max?: number;
   error?: string;
   integerOnly?: boolean;
+  utcTimeValue?: boolean;
+  dateTimeOccursAt?: string | Date; // Use this if you have utcTimeValue set to true
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -49,6 +52,8 @@ export const Input: React.FC<InputProps> = ({
   max = Number.MAX_SAFE_INTEGER, // If a value gets above this, it will lose precision, looking strange to the user
   error,
   integerOnly,
+  utcTimeValue,
+  dateTimeOccursAt,
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -121,7 +126,13 @@ export const Input: React.FC<InputProps> = ({
         return;
       }
     }
-    onChange((type === 'number' || type === 'money' ? +val : val) as never);
+    onChange(
+      (type === 'number' || type === 'money'
+        ? +val
+        : type === 'time' && utcTimeValue
+        ? localTimeToUTC(val, dateTimeOccursAt || new Date())
+        : val) as never,
+    );
   };
 
   const getType = () => {
@@ -182,6 +193,13 @@ export const Input: React.FC<InputProps> = ({
           value={
             integerOnly && (type === 'number' || type === 'money')
               ? Math.floor(+value).toString()
+              : type === 'time' && utcTimeValue
+              ? value
+                ? utcTimeToLocal(
+                    value as string,
+                    dateTimeOccursAt || new Date(),
+                  )
+                : ''
               : value
           }
           aria-describedby={type === 'money' ? 'price-currency' : undefined}
