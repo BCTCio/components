@@ -24,6 +24,15 @@ const formatNumber = (num?: number | null): string => {};
 - If `num` is `null` or `undefined`, it returns `0`
 - Otherwise, it will separate each 3 digits with a comma, remove trailing zeros in the decimal, and round to the nearest thousandths
 
+## Format Currency
+
+```ts
+const formatCurrency = (num?: number | null): string => {};
+```
+
+- If `num` is `null` or `undefined`, it returns `$0.00`
+- Otherwise, it will separate each 3 digits with a comma, add a dollar sign, and use 2 decimal places.
+
 ## Capitalize
 
 ```ts
@@ -127,6 +136,24 @@ const numberDate = (date: Date | string): string => {};
 ```
 
 - Formats a date or date string into numbers (ex: `01/01/2020`)
+
+## Transform UTC Time to Local
+
+```ts
+const utcTimeToLocal = (utc: string, date: string | Date) => {};
+```
+
+- Transforms a UTC time to local time
+- Date is required to determine daylight savings time shift
+
+## Transform Local Time to UTC
+
+```ts
+const localTimeToUTC = (local: string, date: string | Date) => {};
+```
+
+- Transforms a local time to UTC time
+- Date is required to determine daylight savings time shift
 
 ## Color from Hue Range
 
