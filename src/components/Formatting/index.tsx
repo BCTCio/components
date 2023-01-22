@@ -10,9 +10,11 @@ export const formatPhoneNumber = (
   return phoneNumberString;
 };
 
-export const formatNumber = (num?: number | null): string => {
-  return num ? num.toLocaleString('en-US') : '0';
-};
+export const formatNumber = (num?: number | null): string =>
+  (num || 0).toLocaleString('en-US');
+
+export const formatCurrency = (num?: number | null): string =>
+  (num || 0).toLocaleString('en-us', { style: 'currency', currency: 'USD' });
 
 export const capitalize = (str: string): string =>
   str[0]?.toUpperCase() + str.slice(1).toLowerCase();
@@ -152,3 +154,13 @@ export const numberDate = (date: Date | string) => {
     day: '2-digit',
   });
 };
+
+export const utcTimeToLocal = (utc: string, date: string | Date): string =>
+  new Date(
+    `${new Date(date).toLocaleDateString()} ${utc} UTC`,
+  ).toLocaleTimeString('en-GB', { timeStyle: 'short' });
+
+export const localTimeToUTC = (local: string, date: string | Date): string =>
+  new Date(
+    `${new Date(date).toLocaleDateString()} ${local}`,
+  ).toLocaleTimeString('en-GB', { timeStyle: 'short', timeZone: 'UTC' });
