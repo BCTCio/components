@@ -29,7 +29,5 @@ const props: BreadcrumbsProps = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof Breadcrumbs> = (args) => (
-  <div className='px-2 py-2 border rounded-lg hover:border-gray-600'>
-    <Breadcrumbs {...props} {...args} />
-  </div>
+  <Breadcrumbs {...props} {...args} />
 );
