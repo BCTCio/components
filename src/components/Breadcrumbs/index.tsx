@@ -1,5 +1,4 @@
 import { ChevronRightIcon, HomeIcon } from '@heroicons/react/24/solid';
-import classNames from 'classnames';
 
 import React from 'react';
 
@@ -14,120 +13,81 @@ export interface BreadcrumbsProps {
     component: any;
     hrefProperty: string;
   };
-  backgroundColor?: 'light' | 'dark';
   links: ILink[];
+  darkMode?: boolean;
 }
 
-let background = 'light';
-const DarkMode =
-  'bg-gray-900  flex px-2 py-2 border rounded-lg  hover:border-gray-600';
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   links,
   customLink = {
     component: (props: any) => <a {...props} />,
     hrefProperty: 'href',
   },
-  backgroundColor = background,
+  darkMode,
 }) => {
-  if (backgroundColor === 'light') {
-    return (
-      <nav
-        className='flex px-2 py-2 border border-gray-400 rounded-lg  hover:border-gray-600'
-        aria-label='Breadcrumb'
-      >
-        <ol role='list' className='flex items-center space-x-4'>
-          <li>
-            <div>
+  return (
+    <nav
+      className={`flex ${
+        darkMode
+          ? 'bg-gray-900 px-2 py-2 border border-gray-300 hover:border-gray-600 rounded-lg'
+          : 'px-2 py-2 border border-gray-300 rounded-lg hover:border-gray-600'
+      }`}
+      aria-label='Breadcrumb'
+    >
+      <ol role='list' className='flex items-center space-x-4'>
+        <li>
+          <div>
+            <customLink.component
+              {...{ [customLink.hrefProperty]: links[0].href }}
+              className={`${
+                links.length > 1
+                  ? `${
+                      darkMode
+                        ? 'text-gray-300 hover:text-gray-100'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`
+                  : `${
+                      darkMode
+                        ? 'hover:text-gray-200 text-gray-100'
+                        : 'hover:text-gray-900 text-gray-700'
+                    }  `
+              }`}
+            >
+              <HomeIcon className='flex-shrink-0 w-5 h-5' aria-hidden='true' />
+              <span className='sr-only'>Home</span>
+            </customLink.component>
+          </div>
+        </li>
+        {links.slice(1).map((page, i) => (
+          <li key={i} title={page.title}>
+            <div className='flex items-center'>
+              <ChevronRightIcon
+                className='flex-shrink-0 w-5 h-5 text-gray-300'
+                aria-hidden='true'
+              />
               <customLink.component
-                {...{ [customLink.hrefProperty]: links[0].href }}
-                className={classNames({
-                  'text-gray-400 hover:text-black': links.length > 1,
-
-                  'text-white hover:text-gray-200': links.length === 1,
-                })}
+                {...{ [customLink.hrefProperty]: page.href }}
+                className={`max-w-xs truncate ml-4 text-sm font-medium ${
+                  page.isCurrent
+                    ? ` ${
+                        darkMode
+                          ? 'text-gray-300 hover:text-gray-100'
+                          : 'hover:text-gray-600 text-gray-400'
+                      }`
+                    : `${
+                        darkMode
+                          ? 'text-gray-200 hover:text-white'
+                          : 'hover:text-gray-700 text-gray-500'
+                      }`
+                }`}
+                aria-current={page.isCurrent ? 'page' : undefined}
               >
-                <HomeIcon
-                  className='flex-shrink-0 w-5 h-5'
-                  aria-hidden='true'
-                />
-                <span className='sr-only'>Home</span>
+                {page.title}
               </customLink.component>
             </div>
           </li>
-          {links.slice(1).map((page, i) => (
-            <li key={i} title={page.title}>
-              <div className='flex items-center'>
-                <ChevronRightIcon
-                  className='flex-shrink-0 w-5 h-5 text-gray-400'
-                  aria-hidden='true'
-                />
-                <customLink.component
-                  {...{ [customLink.hrefProperty]: page.href }}
-                  className={classNames(
-                    'max-w-xs truncate ml-4 text-sm font-medium',
-                    {
-                      'text-gray-400 hover:text-black': !page.isCurrent,
-                      'text-gray-400 hover:text-gray-300': page.isCurrent,
-                    }
-                  )}
-                  aria-current={page.isCurrent ? 'page' : undefined}
-                >
-                  {page.title}
-                </customLink.component>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </nav>
-    );
-  }
-  if (backgroundColor === 'dark') {
-    return (
-      <nav className={DarkMode} aria-label='Breadcrumb'>
-        <ol role='list' className='flex items-center space-x-4'>
-          <li>
-            <div>
-              <customLink.component
-                {...{ [customLink.hrefProperty]: links[0].href }}
-                className={classNames({
-                  'text-white hover:text-gray-200': links.length > 1,
-                  'text-white hover:cursor-not-allowed': links.length === 1,
-                })}
-              >
-                <HomeIcon
-                  className='flex-shrink-0 w-5 h-5'
-                  aria-hidden='true'
-                />
-                <span className='sr-only'>Home</span>
-              </customLink.component>
-            </div>
-          </li>
-          {links.slice(1).map((page, i) => (
-            <li key={i} title={page.title}>
-              <div className='flex items-center'>
-                <ChevronRightIcon
-                  className='flex-shrink-0 w-5 h-5 text-white'
-                  aria-hidden='true'
-                />
-                <customLink.component
-                  {...{ [customLink.hrefProperty]: page.href }}
-                  className={classNames(
-                    'max-w-xs truncate ml-4 text-sm font-medium',
-                    {
-                      'text-white hover:text-gray-200': !page.isCurrent,
-                      'text-white hover:cursor-not-allowed': page.isCurrent,
-                    }
-                  )}
-                  aria-current={page.isCurrent ? 'page' : undefined}
-                >
-                  {page.title}
-                </customLink.component>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </nav>
-    );
-  }
-  return <div>ERROR</div>;
+        ))}
+      </ol>
+    </nav>
+  );
 };
