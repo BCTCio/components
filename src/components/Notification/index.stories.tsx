@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { notify, error, warn } from '.';
+import { notify, error, warn, loadingPopup } from '.';
 import { Notification } from './component';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -27,6 +27,13 @@ export const Default: ComponentStory<typeof Notification> = () => {
         onClick={() => warn({ title: 'Title', description: 'Description' })}
       >
         Warn
+      </button>
+      <button
+        onClick={() =>
+          loadingPopup({ title: 'Title', description: 'Description' })
+        }
+      >
+        Loading
       </button>
       <Notification />
     </div>

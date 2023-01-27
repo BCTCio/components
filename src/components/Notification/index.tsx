@@ -5,7 +5,7 @@ export const globalNotifications = createState<{
   title: string;
   description?: string;
   duration?: number;
-  type: 'error' | 'success' | 'warning';
+  type: 'error' | 'success' | 'warning' | 'loading';
 }>({
   show: false,
   title: '',
@@ -53,6 +53,24 @@ export const notify = ({
     duration,
     show: true,
     type: 'success',
+  });
+};
+
+export const loadingPopup = ({
+  title,
+  description,
+  duration,
+}: {
+  title?: string;
+  description?: string;
+  duration?: number;
+}): void => {
+  globalNotifications.set({
+    title: title || 'Loading...',
+    description,
+    duration,
+    show: true,
+    type: 'loading',
   });
 };
 
