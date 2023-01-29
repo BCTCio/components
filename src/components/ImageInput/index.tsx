@@ -85,11 +85,12 @@ export const ImageInput: FC<ImageInputProps> = (props) => {
             if (newFile.size < file.size) file = newFile;
           }
           if (props.maxSize && file && file.size > props.maxSize) {
-            return error(
+            error(
               `This image is too large. The maximum size is ${formatFileSize(
                 props.maxSize,
               )}`,
             );
+            return;
           }
           if (fileURL) {
             URL.revokeObjectURL(fileURL);

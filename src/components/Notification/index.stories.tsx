@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { notify, error, warn, loadingPopup } from '.';
+import { notify, error, warn, showLoading } from '.';
 import { Notification } from './component';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -30,7 +30,7 @@ export const Default: ComponentStory<typeof Notification> = () => {
       </button>
       <button
         onClick={() =>
-          loadingPopup({ title: 'Title', description: 'Description' })
+          showLoading({ title: 'Title', description: 'Description' })
         }
       >
         Loading
@@ -55,7 +55,12 @@ notify({title?: string, description?: string, duration?: number});
 error(error: any, params?: { title?: string, fallback?: string, duration?: number });
 
 // Creates a warning notification.
-warn({title?: string, description?: string, duration?: number});`,
+warn({title?: string, description?: string, duration?: number});
+
+// Creates a loading notification.
+showLoading({title?: string, description?: string});
+
+// Each of these functions returns a function that can be called to hide the notification.`,
     },
   },
 };

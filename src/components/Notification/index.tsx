@@ -23,7 +23,7 @@ export const error = (
     fallback?: string;
     duration?: number;
   } = {},
-): void => {
+) => {
   console.trace(err);
   globalNotifications.set({
     title,
@@ -36,6 +36,7 @@ export const error = (
     type: 'error',
     duration,
   });
+  return () => globalNotifications.show.set(false);
 };
 
 export const notify = ({
@@ -46,7 +47,7 @@ export const notify = ({
   title?: string;
   description?: string;
   duration?: number;
-}): void => {
+}) => {
   globalNotifications.set({
     title: title || 'Success',
     description,
@@ -54,24 +55,24 @@ export const notify = ({
     show: true,
     type: 'success',
   });
+  return () => globalNotifications.show.set(false);
 };
 
-export const loadingPopup = ({
+export const showLoading = ({
   title,
   description,
-  duration,
 }: {
   title?: string;
   description?: string;
-  duration?: number;
-}): void => {
+}) => {
   globalNotifications.set({
     title: title || 'Loading...',
     description,
-    duration,
+    duration: 1e20,
     show: true,
     type: 'loading',
   });
+  return () => globalNotifications.show.set(false);
 };
 
 export const warn = ({
@@ -82,7 +83,7 @@ export const warn = ({
   title?: string;
   description?: string;
   duration?: number;
-}): void => {
+}) => {
   globalNotifications.set({
     title: title || 'Warning',
     description,
@@ -90,4 +91,7 @@ export const warn = ({
     show: true,
     type: 'warning',
   });
+  return () => globalNotifications.show.set(false);
 };
+
+export const closeNotification = () => globalNotifications.show.set(false);
