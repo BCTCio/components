@@ -28,16 +28,43 @@ export const Pagination: React.FC<PaginationProps> = ({
     if (abortController) abortController.abort();
     if (page !== newPage) setPage(newPage);
   };
-  const [text, setText] = useState<number | string>('...');
-  const handleChange = (e: any) => {
-    setText('');
+  const [text1, setText1] = useState<number | string>('...');
+  const [text2, setText2] = useState<number | string>('...');
+  const totalPages = Math.ceil(total / itemsPerPage);
+  const handleChange1 = (e: any) => {
+    setText1('');
     if (isNaN(e)) {
+      setText1(' ');
       return;
     } else {
-      setText(e);
+      setText1(e);
     }
   };
-  const totalPages = Math.ceil(total / itemsPerPage);
+  const handleChange2 = (e: any) => {
+    setText2('');
+    if (isNaN(e)) {
+      setText2(' ');
+      return;
+    } else {
+      setText2(e);
+    }
+  };
+
+  const handleKeypress1 = (e: any) => {
+    if (e.key === 'Enter' && text1 !== 0 && text1 < totalPages + 1) {
+      changePage(Number(text1));
+      setText1(' ');
+      setText2('...');
+    }
+  };
+  const handleKeypress2 = (e: any) => {
+    if (e.key === 'Enter' && +text2 !== 0 && text2 < totalPages + 1) {
+      changePage(Number(text2));
+      setText2(' ');
+      setText1('...');
+    }
+  };
+
   return (
     <div className='flex items-center justify-between bg-white px-4 py-3 sm:px-6'>
       <div className='flex flex-1 justify-between sm:hidden'>
@@ -86,11 +113,31 @@ export const Pagination: React.FC<PaginationProps> = ({
               <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
             </button>
             {page > 3 && (
-              <input
-                type='text'
-                className='w-12 relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'
-                placeholder='...'
-              />
+              <div>
+                <input
+                  value={text1 === 0 ? ' ' : text1}
+                  //when text is '', the handlechange turns '' to 0
+
+                  onClick={() => setText1(' ')}
+                  //when first clicked on, set text to a blank input
+
+                  onChange={(e) => handleChange1(Number(e.target.value))}
+                  style={{
+                    width: `${
+                      text1 == '...' ? '5.2' : text1.toString().length + 4
+                    }ch`,
+                  }}
+                  //auto sizing
+
+                  onBlur={() => {
+                    setText1('...');
+                  }}
+                  //when unfocused
+
+                  onKeyPress={handleKeypress1}
+                  className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
+                />
+              </div>
             )}
             {page > 2 && (
               <button
@@ -130,19 +177,25 @@ export const Pagination: React.FC<PaginationProps> = ({
             {page < totalPages - 2 && (
               <div>
                 <input
-                  value={text === 0 ? ' ' : text}
+                  value={text2 === 0 ? ' ' : text2}
                   //when text is '', the handlechange turns '' to 0
 
-                  onClick={() => setText(' ')}
+                  onClick={() => setText2(' ')}
                   //when first clicked on, set text to a blank input
 
-                  onChange={(e) => handleChange(Number(e.target.value))}
+                  onChange={(e) => handleChange2(Number(e.target.value))}
                   style={{
                     width: `${
-                      text == '...' ? '5.2' : text.toString().length + 4
+                      text2 == '...' ? '5.2' : text2.toString().length + 4
                     }ch`,
                   }}
                   //auto sizing
+
+                  onKeyPress={handleKeypress2}
+                  onBlur={() => {
+                    setText2('...');
+                  }}
+                  //when unfocused
                   className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
                 />
               </div>
