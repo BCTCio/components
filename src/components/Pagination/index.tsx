@@ -4,7 +4,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/solid';
-import React from 'react';
+import React, { useState } from 'react';
 
 export interface PaginationProps {
   page: number;
@@ -27,6 +27,15 @@ export const Pagination: React.FC<PaginationProps> = ({
   const changePage = (newPage: number) => {
     if (abortController) abortController.abort();
     if (page !== newPage) setPage(newPage);
+  };
+  const [text, setText] = useState<number | string>('...');
+  const handleChange = (e: any) => {
+    setText('');
+    if (isNaN(e)) {
+      return;
+    } else {
+      setText(e);
+    }
   };
   const totalPages = Math.ceil(total / itemsPerPage);
   return (
@@ -77,9 +86,11 @@ export const Pagination: React.FC<PaginationProps> = ({
               <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
             </button>
             {page > 3 && (
-              <span className='relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'>
-                ...
-              </span>
+              <input
+                type='text'
+                className='w-12 relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'
+                placeholder='...'
+              />
             )}
             {page > 2 && (
               <button
@@ -117,10 +128,26 @@ export const Pagination: React.FC<PaginationProps> = ({
               </button>
             )}
             {page < totalPages - 2 && (
-              <span className='relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'>
-                ...
-              </span>
+              <div>
+                <input
+                  value={text === 0 ? ' ' : text}
+                  //when text is '', the handlechange turns '' to 0
+
+                  onClick={() => setText(' ')}
+                  //when first clicked on, set text to a blank input
+
+                  onChange={(e) => handleChange(Number(e.target.value))}
+                  style={{
+                    width: `${
+                      text == '...' ? '5.2' : text.toString().length + 4
+                    }ch`,
+                  }}
+                  //auto sizing
+                  className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
+                />
+              </div>
             )}
+
             <button
               onClick={() => page < totalPages && changePage(page + 1)}
               className={unselected.replace('px-4', 'px-2')}
