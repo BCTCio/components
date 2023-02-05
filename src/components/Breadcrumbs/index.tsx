@@ -65,7 +65,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                     ? ` ${
                         darkMode
                           ? 'text-white hover:text-gray-200'
-                          : 'hover:brightness-125 text-sky-400 '
+                          : 'hover:brightness-125 font-semibold text-slate-500'
                       }`
                     : `${
                         darkMode
