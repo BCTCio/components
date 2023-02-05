@@ -30,38 +30,42 @@ export const Pagination: React.FC<PaginationProps> = ({
   };
   const [text1, setText1] = useState<number | string>('...');
   const [text2, setText2] = useState<number | string>('...');
+
   const totalPages = Math.ceil(total / itemsPerPage);
-  const handleChange1 = (e: any) => {
-    setText1('');
-    if (isNaN(e)) {
-      setText1(' ');
-      return;
+
+  const handleChange = (e: any, target: number) => {
+    if (target === 2) {
+      setText2('');
+      if (isNaN(e)) {
+        setText2(' ');
+        return;
+      } else {
+        setText2(e);
+      }
     } else {
-      setText1(e);
-    }
-  };
-  const handleChange2 = (e: any) => {
-    setText2('');
-    if (isNaN(e)) {
-      setText2(' ');
-      return;
-    } else {
-      setText2(e);
+      setText1('');
+      if (isNaN(e)) {
+        setText1(' ');
+        return;
+      } else {
+        setText1(e);
+      }
     }
   };
 
-  const handleKeypress1 = (e: any) => {
-    if (e.key === 'Enter' && text1 !== 0 && text1 < totalPages + 1) {
-      changePage(Number(text1));
-      setText1(' ');
-      setText2('...');
-    }
-  };
-  const handleKeypress2 = (e: any) => {
-    if (e.key === 'Enter' && +text2 !== 0 && text2 < totalPages + 1) {
-      changePage(Number(text2));
-      setText2(' ');
-      setText1('...');
+  const handleKeypress = (e: any) => {
+    if (e.key === 'Enter') {
+      if (+text2 !== 0 && text2 < totalPages + 1) {
+        changePage(Number(text2));
+        setText1('...');
+        setText2(' ');
+      }
+      if (+text1 !== 0 && text1 < totalPages + 1) {
+        changePage(Number(text1));
+        setText1(' ');
+        setText2('...');
+      }
+      return;
     }
   };
 
@@ -121,7 +125,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   onClick={() => setText1(' ')}
                   //when first clicked on, set text to a blank input
 
-                  onChange={(e) => handleChange1(Number(e.target.value))}
+                  onChange={(e) => handleChange(Number(e.target.value), 1)}
                   style={{
                     width: `${
                       text1 == '...' ? '5.2' : text1.toString().length + 4
@@ -134,7 +138,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   }}
                   //when unfocused
 
-                  onKeyPress={handleKeypress1}
+                  onKeyPress={handleKeypress}
                   className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
                 />
               </div>
@@ -183,7 +187,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   onClick={() => setText2(' ')}
                   //when first clicked on, set text to a blank input
 
-                  onChange={(e) => handleChange2(Number(e.target.value))}
+                  onChange={(e) => handleChange(Number(e.target.value), 2)}
                   style={{
                     width: `${
                       text2 == '...' ? '5.2' : text2.toString().length + 4
@@ -191,7 +195,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   }}
                   //auto sizing
 
-                  onKeyPress={handleKeypress2}
+                  onKeyPress={handleKeypress}
                   onBlur={() => {
                     setText2('...');
                   }}
