@@ -119,25 +119,26 @@ export const Pagination: React.FC<PaginationProps> = ({
             {page > 3 && (
               <div>
                 <input
-                  value={text1 === 0 ? ' ' : text1}
                   //when text is '', the handlechange turns '' to 0
-
-                  onClick={() => setText1(' ')}
+                  //
+                  value={text1 === 0 ? ' ' : text1}
+                  //
                   //when first clicked on, set text to a blank input
-
+                  onClick={() => setText1(' ')}
+                  //
                   onChange={(e) => handleChange(Number(e.target.value), 1)}
+                  //
+                  //auto sizing when text is inputted
                   style={{
                     width: `${
                       text1 == '...' ? '5.2' : text1.toString().length + 4
                     }ch`,
                   }}
-                  //auto sizing
-
+                  //
+                  //when unfocused
                   onBlur={() => {
                     setText1('...');
                   }}
-                  //when unfocused
-
                   onKeyPress={handleKeypress}
                   className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
                 />
