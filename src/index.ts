@@ -14,7 +14,13 @@ export * from './components/Modal';
 export * from './components/MultiDropdown';
 export * from './components/MultiSearchInput';
 export * from './components/Notification/component';
-export { error, notify, warn } from './components/Notification';
+export {
+  error,
+  notify,
+  warn,
+  showLoading,
+  closeNotification,
+} from './components/Notification';
 export * from './components/Pagination';
 export * from './components/PanelCard';
 export * from './components/SingleDropdown';
@@ -26,6 +32,7 @@ export * from './components/TextArea';
 export * from './components/ToggleSwitch';
 export * from './components/Tooltip';
 export * from './components/UserInfoPill';
+export * from './components/TileCard';
 
 export * from './constants/interfaces';
 export * from './constants/requiredSelects';

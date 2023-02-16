@@ -137,6 +137,24 @@ const numberDate = (date: Date | string): string => {};
 
 - Formats a date or date string into numbers (ex: `01/01/2020`)
 
+## Transform UTC Time to Local
+
+```ts
+const utcTimeToLocal = (utc: string, date: string | Date) => {};
+```
+
+- Transforms a UTC time to local time
+- Date is required to determine daylight savings time shift
+
+## Transform Local Time to UTC
+
+```ts
+const localTimeToUTC = (local: string, date: string | Date) => {};
+```
+
+- Transforms a local time to UTC time
+- Date is required to determine daylight savings time shift
+
 ## Color from Hue Range
 
 ```ts

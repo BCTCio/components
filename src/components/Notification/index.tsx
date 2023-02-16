@@ -5,7 +5,7 @@ export const globalNotifications = createState<{
   title: string;
   description?: string;
   duration?: number;
-  type: 'error' | 'success' | 'warning';
+  type: 'error' | 'success' | 'warning' | 'loading';
 }>({
   show: false,
   title: '',
@@ -23,7 +23,7 @@ export const error = (
     fallback?: string;
     duration?: number;
   } = {},
-): void => {
+) => {
   console.trace(err);
   globalNotifications.set({
     title,
@@ -36,6 +36,7 @@ export const error = (
     type: 'error',
     duration,
   });
+  return () => globalNotifications.show.set(false);
 };
 
 export const notify = ({
@@ -46,7 +47,7 @@ export const notify = ({
   title?: string;
   description?: string;
   duration?: number;
-}): void => {
+}) => {
   globalNotifications.set({
     title: title || 'Success',
     description,
@@ -54,6 +55,24 @@ export const notify = ({
     show: true,
     type: 'success',
   });
+  return () => globalNotifications.show.set(false);
+};
+
+export const showLoading = ({
+  title,
+  description,
+}: {
+  title?: string;
+  description?: string;
+}) => {
+  globalNotifications.set({
+    title: title || 'Loading...',
+    description,
+    duration: 1e20,
+    show: true,
+    type: 'loading',
+  });
+  return () => globalNotifications.show.set(false);
 };
 
 export const warn = ({
@@ -64,7 +83,7 @@ export const warn = ({
   title?: string;
   description?: string;
   duration?: number;
-}): void => {
+}) => {
   globalNotifications.set({
     title: title || 'Warning',
     description,
@@ -72,4 +91,7 @@ export const warn = ({
     show: true,
     type: 'warning',
   });
+  return () => globalNotifications.show.set(false);
 };
+
+export const closeNotification = () => globalNotifications.show.set(false);
