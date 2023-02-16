@@ -42,9 +42,11 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
             data-custom-input-label={label}
           >
             <div className='flex items-center'>
-              <span className='block truncate'>
-                {`${value.length || 'No'} options selected`}
-              </span>
+              <span className='block truncate'>{`${
+                value
+                  .map((v) => data.find(({ id }) => id === v)?.title)
+                  .join(', ') || 'No options selected'
+              }`}</span>
             </div>
             <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
               <ChevronUpDownIcon

@@ -8,6 +8,7 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { useHookstate } from '@hookstate/core';
 import { globalNotifications } from '.';
+import { Spinner } from '../Spinner';
 
 export const Notification: React.FC = () => {
   const state = useHookstate(globalNotifications);
@@ -41,6 +42,8 @@ export const Notification: React.FC = () => {
             aria-hidden='true'
           />
         );
+      case 'loading':
+        return <Spinner className='h-6 w-6' color='theme' />;
       default:
         return null;
     }

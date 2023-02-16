@@ -110,3 +110,20 @@ export const PasswordWithMaxLength: ComponentStory<typeof Input> = (
     />
   );
 };
+
+export const TimeWithTrueUtcValue: ComponentStory<typeof Input> = (
+  args: any,
+) => {
+  const [state, setState] = useState('');
+  return (
+    <Input
+      {...props}
+      type='time'
+      description={`True Value: ${state}`}
+      {...args}
+      value={state}
+      onChange={setState}
+      utcTimeValue
+    />
+  );
+};

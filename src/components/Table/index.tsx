@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { PaginationProps, Pagination } from '../Pagination';
 import NoDataSVG from '../../constants/assets/NoDataSVG';
+import { unCamelCase } from '../Formatting';
 
 const automaticItemsPerPage = 10;
 
@@ -55,7 +56,7 @@ export const Table: React.FC<TableProps> = ({
                       scope='col'
                       className='px-6 py-3 text-xs text-left font-medium text-gray-500 uppercase tracking-wider'
                     >
-                      {column}
+                      {unCamelCase(column)}
                     </th>
                   ))}
                 </tr>

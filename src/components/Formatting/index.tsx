@@ -154,3 +154,13 @@ export const numberDate = (date: Date | string) => {
     day: '2-digit',
   });
 };
+
+export const utcTimeToLocal = (utc: string, date: string | Date): string =>
+  new Date(
+    `${new Date(date).toLocaleDateString()} ${utc} UTC`,
+  ).toLocaleTimeString('en-GB', { timeStyle: 'short' });
+
+export const localTimeToUTC = (local: string, date: string | Date): string =>
+  new Date(
+    `${new Date(date).toLocaleDateString()} ${local}`,
+  ).toLocaleTimeString('en-GB', { timeStyle: 'short', timeZone: 'UTC' });
