@@ -131,7 +131,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   //auto sizing when text is inputted
                   style={{
                     width: `${
-                      text1 == '...' ? '5.2' : text1.toString().length + 4
+                      text1 === '...' ? '5.2' : text1.toString().length + 4
                     }ch`,
                   }}
                   //
