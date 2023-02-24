@@ -19,6 +19,7 @@ export interface MultiSearchInputProps {
   value: DropdownData[];
   description?: string;
   required?: boolean;
+  noOptionsPlaceholder?: string;
 }
 
 const filterDuplicates = (...data: DropdownData[][]) =>
@@ -46,6 +47,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
   handleFetchError = error,
   description,
   required,
+  noOptionsPlaceholder = 'No options selected',
 }) => {
   const [filter, setFilter] = useState('');
   const [debouncedFilter] = useDebouncedValue(filter, debounceTime);
@@ -102,7 +104,13 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
             <Combobox.Input
               className='w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-THEME-500 focus:outline-none focus:ring-1 focus:ring-THEME-500 sm:text-sm'
               onChange={(event) => setFilter(event.target.value)}
-              displayValue={(v) => `${v?.length || 'No'} options selected`}
+              displayValue={(v) =>
+                `${
+                  v?.length
+                    ? v?.length + ' ' + 'options selected'
+                    : noOptionsPlaceholder
+                }`
+              }
               placeholder={placeholder}
               onClick={({ target }: any) =>
                 !open && target.parentElement.children[1].children[0].click()
