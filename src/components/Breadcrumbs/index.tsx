@@ -26,14 +26,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   darkMode,
 }) => {
   return (
-    <nav
-      className={`flex ${
-        darkMode
-          ? 'bg-gray-900 px-2 py-2 border border-gray-300 hover:border-gray-600 rounded-lg'
-          : 'px-2 py-2 border border-gray-300 rounded-lg hover:border-gray-600'
-      }`}
-      aria-label='Breadcrumb'
-    >
+    <nav className='flex' aria-label='Breadcrumb'>
       <ol role='list' className='flex items-center space-x-4'>
         <li>
           <div>
@@ -44,12 +37,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   ? `${
                       darkMode
                         ? 'text-gray-300 hover:text-gray-100'
-                        : 'text-gray-600 hover:text-gray-800'
+                        : 'text-gray-400 hover:text-gray-600'
                     }`
                   : `${
                       darkMode
                         ? 'hover:text-gray-200 text-gray-100'
-                        : 'hover:text-gray-900 text-gray-700'
+                        : 'hover:text-gray-600 text-gray-400'
                     }  `
               }`}
             >
@@ -71,13 +64,13 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   page.isCurrent
                     ? ` ${
                         darkMode
-                          ? 'text-gray-300 hover:text-gray-100'
-                          : 'hover:text-gray-600 text-gray-400'
+                          ? 'text-white hover:text-gray-200'
+                          : 'hover:brightness-125 font-semibold text-slate-500'
                       }`
                     : `${
                         darkMode
                           ? 'text-gray-200 hover:text-white'
-                          : 'hover:text-gray-700 text-gray-500'
+                          : 'hover:text-gray-600 text-gray-400'
                       }`
                 }`}
                 aria-current={page.isCurrent ? 'page' : undefined}
