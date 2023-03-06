@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React from 'react';
 
 interface VerticalTabProps {
   elements: {

@@ -1,11 +1,4 @@
-import {
-  CogIcon,
-  KeyIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UserIcon,
-  UserMinusIcon,
-} from '@heroicons/react/24/solid';
+import { KeyIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
 
