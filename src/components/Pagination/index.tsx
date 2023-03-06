@@ -28,42 +28,44 @@ export const Pagination: React.FC<PaginationProps> = ({
     if (abortController) abortController.abort();
     if (page !== newPage) setPage(newPage);
   };
-  const [text1, setText1] = useState<number | string>('...');
-  const [text2, setText2] = useState<number | string>('...');
+  const [inputtedValueLess, setInputtedValueLess] =
+    useState<number | string>('...');
+  const [inputtedValueMore, setInputtedValueMore] =
+    useState<number | string>('...');
 
   const totalPages = Math.ceil(total / itemsPerPage);
 
   const handleChange = (e: any, target: number) => {
     if (target === 2) {
-      setText2('');
+      setInputtedValueMore('');
       if (isNaN(e)) {
-        setText2(' ');
+        setInputtedValueMore(' ');
         return;
       } else {
-        setText2(e);
+        setInputtedValueMore(e);
       }
     } else {
-      setText1('');
+      setInputtedValueLess('');
       if (isNaN(e)) {
-        setText1(' ');
+        setInputtedValueLess(' ');
         return;
       } else {
-        setText1(e);
+        setInputtedValueLess(e);
       }
     }
   };
 
   const handleKeypress = (e: any) => {
     if (e.key === 'Enter') {
-      if (+text2 !== 0 && text2 < totalPages + 1) {
-        changePage(Number(text2));
-        setText1('...');
-        setText2(' ');
+      if (+inputtedValueMore !== 0 && inputtedValueMore < totalPages + 1) {
+        changePage(Number(inputtedValueMore));
+        setInputtedValueLess('...');
+        setInputtedValueMore(' ');
       }
-      if (+text1 !== 0 && text1 < totalPages + 1) {
-        changePage(Number(text1));
-        setText1(' ');
-        setText2('...');
+      if (+inputtedValueLess !== 0 && inputtedValueLess < totalPages + 1) {
+        changePage(Number(inputtedValueLess));
+        setInputtedValueLess(' ');
+        setInputtedValueMore('...');
       }
       return;
     }
@@ -121,23 +123,25 @@ export const Pagination: React.FC<PaginationProps> = ({
                 <input
                   //when text is '', the handlechange turns '' to 0
                   //
-                  value={text1 === 0 ? ' ' : text1}
+                  value={inputtedValueLess === 0 ? ' ' : inputtedValueLess}
                   //
                   //when first clicked on, set text to a blank input
-                  onClick={() => setText1(' ')}
+                  onClick={() => setInputtedValueLess(' ')}
                   //
                   onChange={(e) => handleChange(Number(e.target.value), 1)}
                   //
                   //auto sizing when text is inputted
                   style={{
                     width: `${
-                      text1 === '...' ? '5.2' : text1.toString().length + 4
+                      inputtedValueLess === '...'
+                        ? '5.2'
+                        : inputtedValueLess.toString().length + 4
                     }ch`,
                   }}
                   //
                   //when unfocused
                   onBlur={() => {
-                    setText1('...');
+                    setInputtedValueLess('...');
                   }}
                   onKeyPress={handleKeypress}
                   className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
@@ -182,23 +186,25 @@ export const Pagination: React.FC<PaginationProps> = ({
             {page < totalPages - 2 && (
               <div>
                 <input
-                  value={text2 === 0 ? ' ' : text2}
+                  value={inputtedValueMore === 0 ? ' ' : inputtedValueMore}
                   //when text is '', the handlechange turns '' to 0
 
-                  onClick={() => setText2(' ')}
+                  onClick={() => setInputtedValueMore(' ')}
                   //when first clicked on, set text to a blank input
 
                   onChange={(e) => handleChange(Number(e.target.value), 2)}
                   style={{
                     width: `${
-                      text2 == '...' ? '5.2' : text2.toString().length + 4
+                      inputtedValueMore == '...'
+                        ? '5.2'
+                        : inputtedValueMore.toString().length + 4
                     }ch`,
                   }}
                   //auto sizing
 
                   onKeyPress={handleKeypress}
                   onBlur={() => {
-                    setText2('...');
+                    setInputtedValueMore('...');
                   }}
                   //when unfocused
                   className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
