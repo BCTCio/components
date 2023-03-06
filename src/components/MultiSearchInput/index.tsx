@@ -22,15 +22,6 @@ export interface MultiSearchInputProps {
   noOptionsPlaceholder?: string;
 }
 
-interface displayValue {
-  active: boolean;
-  description: string;
-  disabled: boolean;
-  id: string | number;
-  title: string;
-  length: number;
-}
-
 const filterDuplicates = (...data: DropdownData[][]) =>
   data
     .flatMap((x) => x)
@@ -113,7 +104,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
             <Combobox.Input
               className='w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-THEME-500 focus:outline-none focus:ring-1 focus:ring-THEME-500 sm:text-sm'
               onChange={(event) => setFilter(event.target.value)}
-              displayValue={(v: displayValue) =>
+              displayValue={(v: DropdownData) =>
                 `${
                   v?.length
                     ? v?.length + ' ' + 'options selected'
