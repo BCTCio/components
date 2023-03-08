@@ -4,7 +4,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/solid';
-import React from 'react';
+import React, { useState } from 'react';
 
 export interface PaginationProps {
   page: number;
@@ -28,7 +28,49 @@ export const Pagination: React.FC<PaginationProps> = ({
     if (abortController) abortController.abort();
     if (page !== newPage) setPage(newPage);
   };
+  const [inputtedValueLess, setInputtedValueLess] =
+    useState<number | string>('...');
+  const [inputtedValueMore, setInputtedValueMore] =
+    useState<number | string>('...');
+
   const totalPages = Math.ceil(total / itemsPerPage);
+
+  const handleChange = (e: any, target: number) => {
+    if (target === 2) {
+      setInputtedValueMore('');
+      if (isNaN(e)) {
+        setInputtedValueMore(' ');
+        return;
+      } else {
+        setInputtedValueMore(e);
+      }
+    } else {
+      setInputtedValueLess('');
+      if (isNaN(e)) {
+        setInputtedValueLess(' ');
+        return;
+      } else {
+        setInputtedValueLess(e);
+      }
+    }
+  };
+
+  const handleKeypress = (e: any) => {
+    if (e.key === 'Enter') {
+      if (+inputtedValueMore !== 0 && inputtedValueMore < totalPages + 1) {
+        changePage(Number(inputtedValueMore));
+        setInputtedValueLess('...');
+        setInputtedValueMore(' ');
+      }
+      if (+inputtedValueLess !== 0 && inputtedValueLess < totalPages + 1) {
+        changePage(Number(inputtedValueLess));
+        setInputtedValueLess(' ');
+        setInputtedValueMore('...');
+      }
+      return;
+    }
+  };
+
   return (
     <div className='flex items-center justify-between bg-white px-4 py-3 sm:px-6'>
       <div className='flex flex-1 justify-between sm:hidden'>
@@ -77,9 +119,34 @@ export const Pagination: React.FC<PaginationProps> = ({
               <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
             </button>
             {page > 3 && (
-              <span className='relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'>
-                ...
-              </span>
+              <div>
+                <input
+                  //when text is '', the handlechange turns '' to 0
+                  //
+                  value={inputtedValueLess === 0 ? ' ' : inputtedValueLess}
+                  //
+                  //when first clicked on, set text to a blank input
+                  onClick={() => setInputtedValueLess(' ')}
+                  //
+                  onChange={(e) => handleChange(Number(e.target.value), 1)}
+                  //
+                  //auto sizing when text is inputted
+                  style={{
+                    width: `${
+                      inputtedValueLess === '...'
+                        ? '5.2'
+                        : inputtedValueLess.toString().length + 4
+                    }ch`,
+                  }}
+                  //
+                  //when unfocused
+                  onBlur={() => {
+                    setInputtedValueLess('...');
+                  }}
+                  onKeyPress={handleKeypress}
+                  className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
+                />
+              </div>
             )}
             {page > 2 && (
               <button
@@ -117,10 +184,34 @@ export const Pagination: React.FC<PaginationProps> = ({
               </button>
             )}
             {page < totalPages - 2 && (
-              <span className='relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700'>
-                ...
-              </span>
+              <div>
+                <input
+                  value={inputtedValueMore === 0 ? ' ' : inputtedValueMore}
+                  //when text is '', the handlechange turns '' to 0
+
+                  onClick={() => setInputtedValueMore(' ')}
+                  //when first clicked on, set text to a blank input
+
+                  onChange={(e) => handleChange(Number(e.target.value), 2)}
+                  style={{
+                    width: `${
+                      inputtedValueMore == '...'
+                        ? '5.2'
+                        : inputtedValueMore.toString().length + 4
+                    }ch`,
+                  }}
+                  //auto sizing
+
+                  onKeyPress={handleKeypress}
+                  onBlur={() => {
+                    setInputtedValueMore('...');
+                  }}
+                  //when unfocused
+                  className='py-2 px-4 relative inline-flex items-center border border-gray-300 bg-white text-sm font-medium text-gray-700 '
+                />
+              </div>
             )}
+
             <button
               onClick={() => page < totalPages && changePage(page + 1)}
               className={unselected.replace('px-4', 'px-2')}
