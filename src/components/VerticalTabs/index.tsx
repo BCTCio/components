@@ -1,27 +1,29 @@
 import React from 'react';
 
 interface VerticalTabProps {
-  elements: {
-    id: string;
-    text: string;
-    icon?: any;
-  }[];
-  setValue: (v: any) => void;
-  value: any;
+  tabs: INavTab[];
+  setValue: (v: string) => void;
+  value: string | number;
 }
 
+interface INavTab {
+  id: string;
+  label: string;
+  icon?: React.FC;
+}
 export const VerticalTabs: React.FC<VerticalTabProps> = ({
-  elements,
+  tabs,
   value,
   setValue,
 }) => {
   return (
     <div className='flex flex-col space-y-1 flex-shrink-0'>
-      {elements.map((v: { text: string; icon?: any; id: string }) => (
+      {tabs.map((v: INavTab, i) => (
         <div
+          key={i}
           className={`px-1 py-2 cursor-pointer group flex flex-row ${
             value === v.id
-              ? 'border-l-4 border-blue-500 bg-blue-50'
+              ? 'border-l-4 border-THEME-500 bg-THEME-50'
               : ' hover:bg-gray-50'
           }`}
           onClick={() => {
@@ -34,18 +36,20 @@ export const VerticalTabs: React.FC<VerticalTabProps> = ({
             }`}
           >
             {v.icon && (
-              <v.icon
+              <div
                 className={`w-6 h-6 ${
-                  value === v.id ? 'text-blue-500' : 'text-gray-400'
+                  value === v.id ? 'text-THEME-500' : 'text-gray-400'
                 }`}
-              />
+              >
+                <v.icon />
+              </div>
             )}
             <span
               className={`font-medium text-sm truncate ${
-                value === v.id ? 'text-blue-700' : 'text-gray-900'
+                value === v.id ? 'text-THEME-700' : 'text-gray-900'
               }`}
             >
-              {v.text}
+              {v.label}
             </span>
           </div>
         </div>

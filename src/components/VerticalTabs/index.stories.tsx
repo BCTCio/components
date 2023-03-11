@@ -12,9 +12,9 @@ export const Default: ComponentStory<typeof VerticalTabs> = (args) => {
   const [selectedTab, setSelectedTab] = useState('');
   return (
     <VerticalTabs
-      elements={[
-        { id: 'id1', text: 'User settings' },
-        { id: 'id2', text: 'Password settings' },
+      tabs={[
+        { id: 'id1', label: 'User settings' },
+        { id: 'id2', label: 'Password settings' },
       ]}
       value={selectedTab}
       setValue={setSelectedTab}
@@ -25,9 +25,9 @@ export const WithIcons: ComponentStory<typeof VerticalTabs> = (args) => {
   const [selectedTab, setSelectedTab] = useState('');
   return (
     <VerticalTabs
-      elements={[
-        { id: 'id1', text: 'User settings', icon: UserCircleIcon },
-        { id: 'id2', text: 'Password settings', icon: KeyIcon },
+      tabs={[
+        { id: 'id1', label: 'User settings', icon: UserCircleIcon },
+        { id: 'id2', label: 'Password settings', icon: KeyIcon },
       ]}
       value={selectedTab}
       setValue={setSelectedTab}
