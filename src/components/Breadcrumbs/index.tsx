@@ -26,7 +26,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   darkMode,
 }) => {
   return (
-    <nav className='flex' aria-label='Breadcrumb'>
+<nav className={`flex px-5 py-3 rounded-lg ${
+  darkMode
+    ? 'bg-gray-700 border border-gray-900'
+    : 'border border-gray-200 bg-gray-50'
+  }`}>
       <ol role='list' className='flex items-center space-x-4'>
         <li>
           <div>
