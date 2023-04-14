@@ -1,16 +1,16 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta} from '@storybook/react';
-import { Badges } from '.';
+import { Badge } from '.';
 
 export default {
-  title: 'Badges',
-  component: Badges,
-} as ComponentMeta<typeof Badges>;
+  title: 'Badge',
+  component: Badge,
+} as ComponentMeta<typeof Badge>;
 
 
-export const Default: ComponentStory<typeof Badges> = (args: any) => {
+export const Default: ComponentStory<typeof Badge> = (args: any) => {
   return (
-    <Badges 
+    <Badge
     text='Badge'
     color='blue'
     rounded = {true}

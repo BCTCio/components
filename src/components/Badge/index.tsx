@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 
-export interface BadgesProps extends HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   size?: "sm" | "md" | "lg" | "xl";
   color: string;
   text: string;
@@ -13,7 +13,7 @@ const sizeToClass = {
   xl: 'px-4 py-2 text-lg',
 };
 
-export const Badges: React.FC<BadgesProps> = ({
+export const Badge: React.FC<BadgeProps> = ({
   color,
   text,
   size = 'md',
