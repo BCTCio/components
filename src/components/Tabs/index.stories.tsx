@@ -20,6 +20,7 @@ export const Default: ComponentStory<typeof Tabs> = (_args) => {
         'Tab B': <div>B</div>,
         'Tab C': <div>C</div>,
       }}
+      onTabChange={(tab) => alert(tab)}
     />
   );
 };
