@@ -4,6 +4,7 @@ export * from './components/Button';
 export * from './components/ButtonGroup';
 export * from './components/Checkbox';
 export * from './components/ConfirmationBox';
+export * from './components/Empty';
 export * from './components/FileInput';
 export * from './components/Formatting';
 export * from './components/GlobalConfirmationBox/component';
