@@ -1,9 +1,9 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta} from '@storybook/react';
-import { Badge } from '.';
+import { Badge } from './';
 
 export default {
-  title: 'Badge',
+  title: 'Elements/Badge',
   component: Badge,
 } as ComponentMeta<typeof Badge>;
 
