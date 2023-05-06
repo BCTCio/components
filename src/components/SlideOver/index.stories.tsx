@@ -15,4 +15,4 @@ export const Default: ComponentStory<typeof SlideOver> = (args: any) => {
     {...args}
     />
   )
-}
+};

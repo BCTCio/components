@@ -26,6 +26,7 @@ export * from './components/Pagination';
 export * from './components/PanelCard';
 export * from './components/SingleDropdown';
 export * from './components/SingleSearchInput';
+export * from './components/SlideOver';
 export * from './components/Spinner';
 export * from './components/Table';
 export * from './components/Tabs';
