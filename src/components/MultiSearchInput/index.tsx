@@ -27,7 +27,7 @@ const filterDuplicates = (...data: DropdownData[][]) =>
     .reduce(
       (prev, curr) =>
         prev.find(({ id }) => id === curr.id) ? prev : prev.concat(curr),
-      [] as DropdownData[],
+      [] as DropdownData[]
     );
 
 /**
@@ -57,7 +57,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
     title: item.title.toLowerCase(),
   }));
   const filteredData = data.filter((_x, i) =>
-    lowercaseData[i].title.includes(filter.toLowerCase()),
+    lowercaseData[i].title.includes(filter.toLowerCase())
   );
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
           currentRequest.current = new AbortController();
           await onInputChange(
             debouncedFilter.toLowerCase(),
-            currentRequest.current.signal,
+            currentRequest.current.signal
           );
           setLoading(false);
         } catch (e) {
@@ -86,23 +86,33 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
   }, [debouncedFilter]);
 
   return (
-    // @ts-ignore
     <Combobox as='div' value={value} onChange={onChange} multiple by='id'>
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
-          <Combobox.Label className='text-sm font-medium text-gray-800'>
+          <Combobox.Label className='block text-sm font-medium text-gray-800'>
             {label} {required && <span className='text-red-500'>*</span>}
             {description && (
-              <p className='text-gray-500 text-xs font-normal mb-1'>
+              <p className='mb-1 text-xs font-normal text-gray-500'>
                 {description}
               </p>
             )}
           </Combobox.Label>
           <div className='relative mt-1'>
             <Combobox.Input
-              className='w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-THEME-500 focus:outline-none focus:ring-1 focus:ring-THEME-500 sm:text-sm'
-              onChange={(event) => setFilter(event.target.value)}
-              displayValue={(v) => `${v?.length || 'No'} options selected`}
+              className='w-full py-2 pl-3 pr-10 bg-white border border-gray-300 rounded-md shadow-sm focus:border-THEME-500 focus:outline-none focus:ring-1 focus:ring-THEME-500 sm:text-sm'
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setFilter(event.target.value)
+              }
+              displayValue={(
+                v: (
+                  | {
+                      id: string;
+                      title: string;
+                      disabled?: boolean | undefined;
+                    }
+                  | undefined
+                )[]
+              ) => `${v?.length || 'No'} options selected`}
               placeholder={placeholder}
               onClick={({ target }: any) =>
                 !open && target.parentElement.children[1].children[0].click()
@@ -111,31 +121,31 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
               data-custom-input-has-data={value.length ? true : undefined}
               data-custom-input-label={label}
             />
-            <div className='absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none'>
+            <div className='absolute inset-y-0 right-0 flex items-center px-2 rounded-r-md focus:outline-none'>
               <Combobox.Button>
                 <ChevronUpDownIcon
-                  className='h-5 w-5 text-gray-400'
+                  className='w-5 h-5 text-gray-400'
                   aria-hidden='true'
                 />
               </Combobox.Button>
               {loading && (
-                <div className='absolute inset-y-0 right-6 flex items-center rounded-r-md px-2 focus:outline-none pointer-events-none'>
+                <div className='absolute inset-y-0 flex items-center px-2 pointer-events-none right-6 rounded-r-md focus:outline-none'>
                   <Spinner className='h-5' />
                 </div>
               )}
             </div>
 
             {data.length > 0 && (
-              <Combobox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+              <Combobox.Options className='absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                 {filterDuplicates(
                   onInputChange ? data : filteredData,
-                  value,
+                  value
                 ).map((option) => (
                   <Combobox.Option
                     key={option.id}
                     value={option}
                     disabled={option.disabled}
-                    className={({ active }) =>
+                    className={({ active }: { active: boolean }) =>
                       classNames(
                         'relative select-none py-2 pr-9 text-gray-900',
                         {
@@ -144,18 +154,18 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
                             option.disabled,
                           'cursor-pointer': !option.disabled,
                           'bg-THEME-100': active,
-                        },
+                        }
                       )
                     }
                   >
-                    {({ selected }) => (
+                    {({ selected }: { selected: boolean }) => (
                       <>
                         <div className='flex items-center'>
                           {showStatus && (
                             <span
                               className={classNames(
                                 'inline-block h-2 w-2 flex-shrink-0 rounded-full',
-                                option.active ? 'bg-green-400' : 'bg-gray-200',
+                                option.active ? 'bg-green-400' : 'bg-gray-200'
                               )}
                               aria-hidden='true'
                             />
@@ -163,12 +173,12 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
                           <span
                             className={classNames(
                               'ml-3 truncate',
-                              selected && 'font-semibold',
+                              selected && 'font-semibold'
                             )}
                           >
                             {option.title}
                             {option.description && (
-                              <p className='text-gray-500 text-xs font-normal'>
+                              <p className='text-xs font-normal text-gray-500'>
                                 {option.description}
                               </p>
                             )}
@@ -177,7 +187,7 @@ export const MultiSearchInput: React.FC<MultiSearchInputProps> = ({
 
                         {selected && (
                           <span className='absolute inset-y-0 right-0 flex items-center pr-4 text-THEME-600'>
-                            <CheckIcon className='h-5 w-5' aria-hidden='true' />
+                            <CheckIcon className='w-5 h-5' aria-hidden='true' />
                           </span>
                         )}
                       </>
