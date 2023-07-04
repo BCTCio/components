@@ -7,10 +7,6 @@ export default {
   component: Calendar,
 } as ComponentMeta<typeof Calendar>;
 
-const Template: ComponentStory<typeof Calendar> = (args) => {
-  return <Calendar {...args} />;
-};
-
 export const Default: ComponentStory<typeof Calendar> = (args: any) => {
   return (
     <Calendar
