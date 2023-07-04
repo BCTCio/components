@@ -35,7 +35,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     // Adding weekday list
     const weekdayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
       (weekday) => (
-        <div className="text-center font-light" key={weekday}>
+        <div className='text-center font-light' key={weekday}>
           {weekday}
         </div>
       )
@@ -57,16 +57,16 @@ export const Calendar: React.FC<CalendarProps> = ({
           }`}
         >
           <h1
-            className="text-sm text-gray-800"
+            className='text-sm text-gray-800'
             style={{ color: isCarryoverDay ? '#eee' : undefined }}
           >
             {day.format('DD')}
           </h1>
-          <div className="mt-2">
+          <div className='mt-2'>
             {eventsForDay.length > 0 && (
-              <ul className="pl-0">
+              <ul className='pl-0'>
                 {eventsForDay.map((event) => (
-                  <li key={event.date} className="text-sm">
+                  <li key={event.date} className='text-sm'>
                     <span
                       style={{
                         display: 'inline-block',
@@ -93,15 +93,15 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   return (
     <div>
-      <div className="bg-gray-100 text-gray-800 py-2 px-5 text-right rounded-lg">
-        <div className="text-xl font-semibold">
+      <div className='bg-gray-100 text-gray-800 py-2 px-5 text-right rounded-lg'>
+        <div className='text-xl font-semibold'>
           {dayjs()
             .year(year)
             .month(month - 1)
             .format('MMMM YYYY')}
         </div>
       </div>
-      <div className="grid grid-cols-7 gap-2 p-4">{renderCalendar()}</div>
+      <div className='grid grid-cols-7 gap-2 p-4'>{renderCalendar()}</div>
     </div>
   );
 };
