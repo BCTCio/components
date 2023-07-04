@@ -12,6 +12,7 @@ export interface CalendarProps {
   month: number;
   year: number;
 }
+
 const typeColor: { [key: string]: string } = {
   reminder: 'green',
   warning: 'orange',
@@ -19,16 +20,20 @@ const typeColor: { [key: string]: string } = {
 };
 
 export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
-  //Calendar instances
   const renderCalendar = () => {
     const calendarDays = [];
     const startDate = dayjs(`${year}-${month}-01`)
       .startOf('month')
       .startOf('week');
     const endDate = dayjs(`${year}-${month}-01`).endOf('month').endOf('week');
-
     let day = startDate;
 
+    //Adding weekday list
+    const weekdayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
+      (weekday) => <div className="text-center font-light">{weekday}</div>
+    );
+
+    // Render calendar days
     while (day.isBefore(endDate, 'day')) {
       const eventsForDay = Array.isArray(events)
         ? events.filter((event) => dayjs(event.date).isSame(day, 'day'))
@@ -36,7 +41,6 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
       const isCurrentDay = day.isSame(dayjs(), 'day');
       const isCarryoverDay = day.month() !== month - 1;
 
-      //Building the calendar
       calendarDays.push(
         <div
           key={day.format('YYYY-MM-DD')}
@@ -75,7 +79,8 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
       );
       day = day.add(1, 'day');
     }
-    return calendarDays;
+
+    return [weekdayList, ...calendarDays];
   };
 
   return (
