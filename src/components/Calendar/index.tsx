@@ -19,6 +19,7 @@ const typeColor: { [key: string]: string } = {
 };
 
 export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
+  //Calendar instances
   const renderCalendar = () => {
     const calendarDays = [];
     const startDate = dayjs(`${year}-${month}-01`)
@@ -29,12 +30,13 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
     let day = startDate;
 
     while (day.isBefore(endDate, 'day')) {
-      const eventsForDay = events.filter((event) =>
-        dayjs(event.date).isSame(day, 'day')
-      );
+      const eventsForDay = Array.isArray(events)
+        ? events.filter((event) => dayjs(event.date).isSame(day, 'day'))
+        : [];
       const isCurrentDay = day.isSame(dayjs(), 'day');
       const isCarryoverDay = day.month() !== month - 1;
 
+      //Building the calendar
       calendarDays.push(
         <div
           key={day.format('YYYY-MM-DD')}
@@ -78,7 +80,7 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
 
   return (
     <div>
-      <div className="bg-gray-100 text-gray-800 py-2 px-5 text-right">
+      <div className="bg-gray-100 text-gray-800 py-2 px-5 text-right rounded-lg">
         <div className="text-xl font-semibold">
           {dayjs()
             .year(year)

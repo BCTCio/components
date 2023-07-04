@@ -7,7 +7,7 @@ export default {
   component: Calendar,
 } as ComponentMeta<typeof Calendar>;
 
-const Template: ComponentStory<typeof Calendar> = (args: any) => {
+const Template: ComponentStory<typeof Calendar> = (args) => {
   return <Calendar {...args} />;
 };
 
@@ -15,17 +15,12 @@ export const Default: ComponentStory<typeof Calendar> = (args: any) => {
   return (
     <Calendar
       events={[
-        {
-          date: '2023-07-03',
-          title: 'Special Day',
-          type: 'reminder',
-        },
-        {
-          date: '2023-07-03',
-          title: 'Birthday',
-          type: 'warning',
-        },
+        { date: '2023-07-02', title: 'reminder', type: 'reminder' },
+        { date: '2023-07-03', title: 'warning', type: 'warning' },
+        { date: '2023-07-04', title: 'urgent', type: 'urgent' },
       ]}
+      month={7}
+      year={2023}
       {...args}
     />
   );
