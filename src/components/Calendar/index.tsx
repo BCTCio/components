@@ -11,15 +11,19 @@ export interface CalendarProps {
   events: CalendarEvent[];
   month: number;
   year: number;
+  typeColors: { [key: string]: string };
 }
 
-const typeColor: { [key: string]: string } = {
-  reminder: 'green',
-  warning: 'orange',
-  urgent: 'red',
-};
-
-export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
+export const Calendar: React.FC<CalendarProps> = ({
+  month,
+  year,
+  events,
+  typeColors = {
+    reminder: 'green',
+    warning: 'orange',
+    urgent: 'red',
+  },
+}) => {
   const renderCalendar = () => {
     const calendarDays = [];
     const startDate = dayjs(`${year}-${month}-01`)
@@ -28,9 +32,13 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
     const endDate = dayjs(`${year}-${month}-01`).endOf('month').endOf('week');
     let day = startDate;
 
-    //Adding weekday list
+    // Adding weekday list
     const weekdayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
-      (weekday) => <div className="text-center font-light">{weekday}</div>
+      (weekday) => (
+        <div className="text-center font-light" key={weekday}>
+          {weekday}
+        </div>
+      )
     );
 
     // Render calendar days
@@ -49,7 +57,7 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
           }`}
         >
           <h1
-            className={'text-sm text-gray-800'}
+            className="text-sm text-gray-800"
             style={{ color: isCarryoverDay ? '#eee' : undefined }}
           >
             {day.format('DD')}
@@ -66,7 +74,7 @@ export const Calendar: React.FC<CalendarProps> = ({ month, year, events }) => {
                         height: '8px',
                         borderRadius: '50%',
                         marginRight: '6px',
-                        backgroundColor: typeColor[event.type],
+                        backgroundColor: typeColors[event.type],
                       }}
                     ></span>
                     {event.title}
