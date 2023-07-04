@@ -51,10 +51,13 @@
     "@heroicons/react": "^2.0.12",
     "@hookstate/core": "3.0.13",
     "@mantine/hooks": "^5.5.5",
+    "antd": "^5.6.4",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1",
     "compressorjs": "^1.1.1",
+    "dayjs": "^1.11.9",
     "gifsicle-wasm-browser": "^1.5.16",
+    "rc-picker": "^3.9.0",
     "tslib": "^2.4.0"
   }
 }
