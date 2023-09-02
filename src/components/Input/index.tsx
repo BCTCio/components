@@ -36,6 +36,8 @@ export interface InputProps {
   integerOnly?: boolean;
   utcTimeValue?: boolean;
   dateTimeOccursAt?: string | Date; // Use this if you have utcTimeValue set to true
+  readonly?: boolean;
+  disabled?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -54,6 +56,8 @@ export const Input: React.FC<InputProps> = ({
   integerOnly,
   utcTimeValue,
   dateTimeOccursAt,
+  readonly,
+  disabled,
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -154,11 +158,11 @@ export const Input: React.FC<InputProps> = ({
           {label}
           <span className='text-red-500'>{required && ' *'}</span>
           {description && (
-            <p className='text-gray-500 text-xs font-normal'>{description}</p>
+            <p className='text-xs font-normal text-gray-500'>{description}</p>
           )}
         </label>
       )}
-      <div className='mt-1 relative shadow-sm'>
+      <div className='relative mt-1 shadow-sm'>
         {type === 'money' && (
           <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
             <span className='text-gray-500 sm:text-sm'>$</span>
@@ -166,6 +170,8 @@ export const Input: React.FC<InputProps> = ({
         )}
         <input
           name={label}
+          readOnly={readonly}
+          disabled={disabled}
           id={id}
           type={getType()}
           required={required}
@@ -178,6 +184,7 @@ export const Input: React.FC<InputProps> = ({
               'pr-12': (type === 'money') === !error,
               'pr-20': type === 'money' && error,
             },
+            readonly || disabled ? 'bg-gray-100 opacity-70' : 'bg-white',
             error
               ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
               : 'focus:ring-THEME-500 focus:border-THEME-500',
@@ -220,17 +227,17 @@ export const Input: React.FC<InputProps> = ({
             {type === 'password' &&
               (passwordVisibility ? (
                 <EyeSlashIcon
-                  className='h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer'
+                  className='w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-400'
                   onClick={() => setPasswordVisibility(false)}
                 />
               ) : (
                 <EyeIcon
-                  className='h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer'
+                  className='w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-400'
                   onClick={() => setPasswordVisibility(true)}
                 />
               ))}
             {type === 'search' && (
-              <MagnifyingGlassIcon className='h-5 w-5 text-gray-500 hover:text-gray-400 cursor-pointer' />
+              <MagnifyingGlassIcon className='w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-400' />
             )}
             {type === 'money' && (
               <span
@@ -244,7 +251,7 @@ export const Input: React.FC<InputProps> = ({
             )}
             {error && (
               <ExclamationCircleIcon
-                className='ml-1 h-5 w-5 text-red-500'
+                className='w-5 h-5 ml-1 text-red-500'
                 aria-hidden='true'
               />
             )}
@@ -257,23 +264,23 @@ export const Input: React.FC<InputProps> = ({
           )}
         >
           <svg
-            className='fill-gray-200 h-2 mr-2'
+            className='h-2 mr-2 fill-gray-200'
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             viewBox='0 0 24 18'
           >
             <polygon points='12,0 0,18 24,18' />
           </svg>
-          <div className='flex gap-1 items-start bg-gray-200 p-2 rounded-lg'>
+          <div className='flex items-start gap-1 p-2 bg-gray-200 rounded-lg'>
             <InformationCircleIcon
-              className='w-4 text-gray-400 flex-none'
+              className='flex-none w-4 text-gray-400'
               aria-hidden='true'
             />
             <span className='text-xs text-gray-600 select-none'>{tooltip}</span>
           </div>
         </div>
       </div>
-      {error && <p className='mt-2 text-red-600 text-sm'>{error}</p>}
+      {error && <p className='mt-2 text-sm text-red-600'>{error}</p>}
     </div>
   );
 };
