@@ -180,7 +180,8 @@ export const Input: React.FC<InputProps> = ({
               'pr-16': (type === 'password' || type === 'search') && error,
               'pr-10': (type === 'password' || type === 'search') === !error,
 
-              'pl-7': type === 'money',
+              'pl-8': type === 'money',
+              'pr-14': type === 'money',
               'pr-12': (type === 'money') === !error,
               'pr-20': type === 'money' && error,
             },
