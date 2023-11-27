@@ -132,7 +132,8 @@ export const Input: React.FC<InputProps> = ({
     }
     onChange(
       (type === 'number' || type === 'money'
-        ? +val
+        ? // filter out non-numeric characters and convert to number
+          +val.replace(/[^0-9.-]/g, '')
         : type === 'time' && utcTimeValue
         ? localTimeToUTC(val, dateTimeOccursAt || new Date())
         : val) as never,
@@ -145,7 +146,9 @@ export const Input: React.FC<InputProps> = ({
         if (passwordVisibility) return 'text';
         else return type;
       case 'money':
-        return 'number';
+        return 'text';
+      case 'number':
+        return 'text';
       default:
         return type;
     }
@@ -179,7 +182,6 @@ export const Input: React.FC<InputProps> = ({
             {
               'pr-16': (type === 'password' || type === 'search') && error,
               'pr-10': (type === 'password' || type === 'search') === !error,
-
               'pl-8': type === 'money',
               'pr-14': type === 'money',
               'pr-12': (type === 'money') === !error,
