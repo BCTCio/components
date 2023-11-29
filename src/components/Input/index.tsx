@@ -24,6 +24,8 @@ export interface InputProps {
     | 'search';
   onChange: ((v: string) => void) | ((v: number) => void);
   onEnter?: () => void | Promise<void>;
+  onBlur?: () => void | Promise<void>;
+  onFocus?: () => void | Promise<void>;
   value: string | number;
   label?: string;
   description?: string;
@@ -58,6 +60,8 @@ export const Input: React.FC<InputProps> = ({
   dateTimeOccursAt,
   readonly,
   disabled,
+  onBlur,
+  onFocus,
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -205,6 +209,8 @@ export const Input: React.FC<InputProps> = ({
           id={id}
           type={getType()}
           required={required}
+          onBlur={onBlur}
+          onFocus={onFocus}
           className={classNames(
             {
               'pr-16': (type === 'password' || type === 'search') && error,
