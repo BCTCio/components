@@ -78,8 +78,13 @@ export const Input: React.FC<InputProps> = ({
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     let val = e.target.value;
     if (type === 'number') {
+      // if every character is removed from the input, set the value to 0
+      if (val === '') {
+        val = '0';
+      }
+      console.log(keyPressed, value);
       // if this is the first input, remove the original 0 value and replace it with the new one
-      if (keyPressed !== undefined && value === 0) {
+      if (keyPressed !== undefined && value == 0) {
         val = keyPressed;
       }
       if (!integerOnly) {
