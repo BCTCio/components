@@ -74,7 +74,6 @@ export const Input: React.FC<InputProps> = ({
     }
     return;
   }, [tooltipShow]);
-  console.log(value, +value);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     let val = e.target.value;
@@ -88,7 +87,9 @@ export const Input: React.FC<InputProps> = ({
         keyPressed !== undefined &&
         value == 0 &&
         keyPressed !== 'Backspace' &&
-        keyPressed !== 'Delete'
+        keyPressed !== 'Delete' &&
+        keyPressed !== '-' &&
+        keyPressed !== '.'
       ) {
         val = keyPressed;
       }
