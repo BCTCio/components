@@ -74,6 +74,7 @@ export const Input: React.FC<InputProps> = ({
     }
     return;
   }, [tooltipShow]);
+  console.log(value, +value);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     let val = e.target.value;
@@ -82,14 +83,25 @@ export const Input: React.FC<InputProps> = ({
       if (val === '') {
         val = '0';
       }
-      console.log(keyPressed, value);
       // if this is the first input, remove the original 0 value and replace it with the new one
-      if (keyPressed !== undefined && value == 0) {
+      if (
+        keyPressed !== undefined &&
+        value == 0 &&
+        keyPressed !== 'Backspace' &&
+        keyPressed !== 'Delete'
+      ) {
         val = keyPressed;
       }
+
       if (!integerOnly) {
         // Allow numbers and a single decimal point
         const validNumberRegex = /^-?\d*\.?\d*$/;
+        if (!validNumberRegex.test(val)) {
+          return; // Early return if the value is not a valid number
+        }
+      } else {
+        // Allow only integers
+        const validNumberRegex = /^-?\d*$/;
         if (!validNumberRegex.test(val)) {
           return; // Early return if the value is not a valid number
         }
@@ -136,6 +148,14 @@ export const Input: React.FC<InputProps> = ({
         setTooltipShow(true);
         return;
       }
+    }
+
+    if (val[0] === '.') {
+      val = '0.' + val.slice(1);
+    }
+
+    if (val[0] === '-' && val[1] === '.') {
+      val = '-0.' + val.slice(2);
     }
     onChange(
       (type === 'number' || type === 'money'
