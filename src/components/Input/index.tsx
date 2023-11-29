@@ -103,8 +103,6 @@ export const Input: React.FC<InputProps> = ({
         return;
       }
     } else if (type === 'money') {
-      if (keyPressed === '-') val = (-value).toString();
-      val = (+val).toString();
       if (isFinite(min) && +val < min) {
         setTooltip(`Your number must be ${min} or above`);
         setTooltipShow(true);
