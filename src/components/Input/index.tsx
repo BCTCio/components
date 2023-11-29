@@ -99,14 +99,19 @@ export const Input: React.FC<InputProps> = ({
         setTooltipShow(true);
         return;
       }
-
-      // Prevents input from going into scientific notation
-      if (+val < 1e-6 && +val > -1e-6 && val !== '0' && val !== '') {
-        setTooltip('Your number is far too precise');
-        setTooltipShow(true);
-        return;
-      }
     } else if (type === 'money') {
+      // Allow numbers and a single decimal point
+      const validNumberRegex = /^-?\d*\.?\d*$/;
+      if (!validNumberRegex.test(val)) {
+        return; // Early return if the value is not a valid number
+      }
+
+      // allow only 2 decimal places
+      const decimalPlaces = val.split('.')[1];
+      if (decimalPlaces && decimalPlaces.length > 2) {
+        return; // Early return if the value has more than 2 decimal places
+      }
+
       if (keyPressed !== undefined && value === 0) {
         val = keyPressed;
       }
@@ -117,18 +122,6 @@ export const Input: React.FC<InputProps> = ({
       }
       if (isFinite(max) && +val > max) {
         setTooltip(`Your number must be ${max} or under`);
-        setTooltipShow(true);
-        return;
-      }
-      if (val.includes('e')) {
-        setTooltip(`Your number cannot be in scientific notation`);
-        setTooltipShow(true);
-        return;
-      }
-
-      // Prevents input from going into scientific notation
-      if (+val - Math.floor(+val * 100) / 100 !== 0) {
-        setTooltip('Your number cannot have more than 3 decimal places');
         setTooltipShow(true);
         return;
       }
