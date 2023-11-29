@@ -76,11 +76,15 @@ export const Input: React.FC<InputProps> = ({
   }, [tooltipShow]);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    e.preventDefault();
     let val = e.target.value;
     if (type === 'number') {
-      if (keyPressed === '-') val = (-value).toString();
-      val = (+val).toString();
+      if (!integerOnly) {
+        // Allow numbers and a single decimal point
+        const validNumberRegex = /^-?\d*\.?\d*$/;
+        if (!validNumberRegex.test(val)) {
+          return; // Early return if the value is not a valid number
+        }
+      }
       if (isFinite(min) && +val < min) {
         setTooltip(`Your number must be ${min} or above`);
         setTooltipShow(true);
@@ -132,8 +136,7 @@ export const Input: React.FC<InputProps> = ({
     }
     onChange(
       (type === 'number' || type === 'money'
-        ? // filter out non-numeric characters and convert to number
-          +val.replace(/[^0-9.-]/g, '')
+        ? val
         : type === 'time' && utcTimeValue
         ? localTimeToUTC(val, dateTimeOccursAt || new Date())
         : val) as never,
@@ -194,8 +197,10 @@ export const Input: React.FC<InputProps> = ({
             'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md',
           )}
           placeholder={placeholder}
-          onKeyPress={(e) => {
-            if (integerOnly && e.key === '.') e.preventDefault();
+          onKeyDown={(e) => {
+            if (integerOnly && e.key === '.') {
+              e.preventDefault();
+            }
             keyPressed = e.key;
             if (onEnter && e.key === 'Enter') onEnter();
           }}
