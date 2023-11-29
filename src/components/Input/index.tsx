@@ -78,6 +78,10 @@ export const Input: React.FC<InputProps> = ({
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     let val = e.target.value;
     if (type === 'number') {
+      // if this is the first input, remove the original 0 value and replace it with the new one
+      if (keyPressed !== undefined && value === 0) {
+        val = keyPressed;
+      }
       if (!integerOnly) {
         // Allow numbers and a single decimal point
         const validNumberRegex = /^-?\d*\.?\d*$/;
@@ -103,6 +107,9 @@ export const Input: React.FC<InputProps> = ({
         return;
       }
     } else if (type === 'money') {
+      if (keyPressed !== undefined && value === 0) {
+        val = keyPressed;
+      }
       if (isFinite(min) && +val < min) {
         setTooltip(`Your number must be ${min} or above`);
         setTooltipShow(true);

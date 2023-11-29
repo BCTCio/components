@@ -19,6 +19,14 @@ export const Default: ComponentStory<typeof Input> = (args: any) => {
   const [state, setState] = useState('');
   return <Input type='text' {...args} value={state} onChange={setState} />;
 };
+export const Number: ComponentStory<typeof Input> = (args: any) => {
+  const [state, setState] = useState(0);
+  return <Input type='number' {...args} value={state} onChange={setState} />;
+};
+export const Money: ComponentStory<typeof Input> = (args: any) => {
+  const [state, setState] = useState(0);
+  return <Input type='money' {...args} value={state} onChange={setState} />;
+};
 
 export const WithDetails: ComponentStory<typeof Input> = (args: any) => {
   const [state, setState] = useState('');
