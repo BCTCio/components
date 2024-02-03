@@ -30,7 +30,7 @@ const filterDuplicates = (
     .reduce(
       (prev, curr) =>
         prev.find(({ id }) => id === curr.id) ? prev : prev.concat(curr),
-      [] as DropdownData[]
+      [] as DropdownData[],
     );
 
 /**
@@ -60,7 +60,7 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
     title: item.title.toLowerCase(),
   }));
   const filteredData = data.filter((_x, i) =>
-    lowercaseData[i].title.includes(filter.toLowerCase())
+    lowercaseData[i].title.includes(filter.toLowerCase()),
   );
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
           currentRequest.current = new AbortController();
           await onInputChange(
             debouncedFilter.toLowerCase(),
-            currentRequest.current.signal
+            currentRequest.current.signal,
           );
           setLoading(false);
         } catch (e) {
@@ -115,6 +115,11 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
               data-custom-input-required={required ? true : undefined}
               data-custom-input-has-data={value ? true : undefined}
               data-custom-input-label={label}
+              // disable form's autocomplete
+              autoComplete='off'
+              autoCorrect='off'
+              autoCapitalize='off'
+              spellCheck='false'
             />
             <div className='absolute inset-y-0 right-0 flex items-center px-2 rounded-r-md focus:outline-none'>
               <Combobox.Button>
@@ -134,7 +139,7 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
               <Combobox.Options className='absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                 {filterDuplicates(
                   onInputChange ? data : filteredData,
-                  value
+                  value,
                 ).map((option) => (
                   <Combobox.Option
                     key={option.id}
@@ -149,7 +154,7 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
                             option.disabled,
                           'cursor-pointer': !option.disabled,
                           'bg-THEME-100': active,
-                        }
+                        },
                       )
                     }
                   >
@@ -160,7 +165,7 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
                             <span
                               className={classNames(
                                 'inline-block h-2 w-2 flex-shrink-0 rounded-full',
-                                option.active ? 'bg-green-400' : 'bg-gray-200'
+                                option.active ? 'bg-green-400' : 'bg-gray-200',
                               )}
                               aria-hidden='true'
                             />
@@ -168,7 +173,7 @@ export const SingleSearchInput: React.FC<SingleSearchInputProps> = ({
                           <span
                             className={classNames(
                               'ml-3 truncate',
-                              selected && 'font-semibold'
+                              selected && 'font-semibold',
                             )}
                           >
                             {option.title}
