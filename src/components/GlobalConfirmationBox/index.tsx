@@ -1,7 +1,7 @@
-import { createState } from '@hookstate/core';
+import { hookstate } from '@hookstate/core';
 import { ConfirmationBoxData } from '../ConfirmationBox';
 
-export const globalConfirmation = createState<
+export const globalConfirmation = hookstate<
   ConfirmationBoxData & { show: boolean }
 >({
   title: '',
