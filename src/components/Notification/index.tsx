@@ -1,6 +1,6 @@
-import { hookstate } from '@hookstate/core';
+import { createState } from '@hookstate/core';
 
-export const globalNotifications = hookstate<{
+export const globalNotifications = createState<{
   show: boolean;
   title: string;
   description?: string;
