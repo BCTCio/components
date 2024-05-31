@@ -5,14 +5,13 @@ import {
   InformationCircleIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
-import { useHookstate } from '@hookstate/core';
-import { globalConfirmation } from '.';
+import { GlobalConfirmationState, useGlobalConfirmation, useGlobalConfirmationDispatch } from './context';
 
 export const GlobalConfirmationBox: React.FC = () => {
-  const {
-    value: { show, title, description, type = 'warning', onConfirm, onCancel },
-    show: { set: setShow },
-  } = useHookstate(globalConfirmation);
+  const { show, type, title, description, onConfirm, onCancel } =
+    useGlobalConfirmation() as GlobalConfirmationState;
+  const dispatch = useGlobalConfirmationDispatch();
+
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const renderIcon = () => {
     switch (type) {
@@ -56,7 +55,7 @@ export const GlobalConfirmationBox: React.FC = () => {
         initialFocus={cancelButtonRef}
         open={show}
         onClose={() => {
-          setShow(false);
+          dispatch({ type: 'HIDE' });
           onCancel?.call(null);
         }}
       >
@@ -117,7 +116,7 @@ export const GlobalConfirmationBox: React.FC = () => {
                   } w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm`}
                   onClick={() => {
                     onConfirm();
-                    setShow(false);
+                    dispatch({ type: 'HIDE' });
                   }}
                 >
                   Confirm
@@ -125,7 +124,7 @@ export const GlobalConfirmationBox: React.FC = () => {
                 <button
                   className='inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm'
                   onClick={() => {
-                    setShow(false);
+                    dispatch({ type: 'HIDE' });
                     onCancel?.call(null);
                   }}
                   ref={cancelButtonRef}

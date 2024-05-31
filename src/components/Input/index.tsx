@@ -275,7 +275,7 @@ export const Input: React.FC<InputProps> = ({
                 />
               ))}
             {type === 'search' && (
-              <MagnifyingGlassIcon className='w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-400' />
+              <MagnifyingGlassIcon className='w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-400' onClick={onEnter}/>
             )}
             {type === 'money' && (
               <span

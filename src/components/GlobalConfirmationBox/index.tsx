@@ -1,14 +1,7 @@
-import { createState } from '@hookstate/core';
 import { ConfirmationBoxData } from '../ConfirmationBox';
+import { useGlobalConfirmationDispatch } from './context';
 
-export const globalConfirmation = createState<
-  ConfirmationBoxData & { show: boolean }
->({
-  title: '',
-  description: '',
-  show: false,
-  onConfirm() {},
-});
+const dispatch = useGlobalConfirmationDispatch();
 
 export const confirmation = (data: ConfirmationBoxData) =>
-  globalConfirmation.set({ type: 'warning', ...data, show: true });
+  dispatch({ type: 'SHOW', payload: data });

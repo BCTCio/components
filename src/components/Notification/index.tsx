@@ -1,16 +1,6 @@
-import { createState } from '@hookstate/core';
+import { useNotificationDispatch } from "./context";
 
-export const globalNotifications = createState<{
-  show: boolean;
-  title: string;
-  description?: string;
-  duration?: number;
-  type: 'error' | 'success' | 'warning' | 'loading';
-}>({
-  show: false,
-  title: '',
-  type: 'success',
-});
+const notificationDispatch = useNotificationDispatch();
 
 export const error = (
   err: any,
@@ -25,18 +15,18 @@ export const error = (
   } = {},
 ) => {
   console.trace(err);
-  globalNotifications.set({
-    title,
-    description:
-      typeof err === 'string'
-        ? err
-        : err?.response?.data || err?.message?.toString() || fallback,
-    // String, Axios, Error, Fallback
-    show: true,
-    type: 'error',
-    duration,
+  
+  notificationDispatch({
+    type: 'SHOW',
+    payload: {
+      title,
+      message: err?.message || fallback || 'An error occurred',
+      duration,
+      type: 'error',
+    },
   });
-  return () => globalNotifications.show.set(false);
+
+  return () => notificationDispatch({ type: 'HIDE' });
 };
 
 export const notify = ({
@@ -48,14 +38,17 @@ export const notify = ({
   description?: string;
   duration?: number;
 }) => {
-  globalNotifications.set({
-    title: title || 'Success',
-    description,
-    duration,
-    show: true,
-    type: 'success',
+  notificationDispatch({
+    type: 'SHOW',
+    payload: {
+      title: title || '',
+      message: description || '',
+      duration,
+      type: 'success',
+    },
   });
-  return () => globalNotifications.show.set(false);
+
+  return () => notificationDispatch({ type: 'HIDE' });
 };
 
 export const showLoading = ({
@@ -65,14 +58,17 @@ export const showLoading = ({
   title?: string;
   description?: string;
 }) => {
-  globalNotifications.set({
-    title: title || 'Loading...',
-    description,
-    duration: 1e20,
-    show: true,
-    type: 'loading',
+  notificationDispatch({
+    type: 'SHOW',
+    payload: {
+      title: title || '',
+      message: description || '',
+      type: 'loading',
+      duration: 1e20,
+    },
   });
-  return () => globalNotifications.show.set(false);
+
+  return () => notificationDispatch({ type: 'HIDE' });
 };
 
 export const warn = ({
@@ -84,14 +80,17 @@ export const warn = ({
   description?: string;
   duration?: number;
 }) => {
-  globalNotifications.set({
-    title: title || 'Warning',
-    description,
-    duration,
-    show: true,
-    type: 'warning',
+  notificationDispatch({
+    type: 'SHOW',
+    payload: {
+      title: title || '',
+      message: description || '',
+      duration,
+      type: 'warning',
+    },
   });
-  return () => globalNotifications.show.set(false);
+
+  return () => notificationDispatch({ type: 'HIDE' });
 };
 
-export const closeNotification = () => globalNotifications.show.set(false);
+export const closeNotification = () => notificationDispatch({ type: 'HIDE' });
