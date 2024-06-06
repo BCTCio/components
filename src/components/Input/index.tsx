@@ -257,7 +257,7 @@ export const Input: React.FC<InputProps> = ({
             className={classNames(
               {
                 'pointer-events-none':
-                  type === 'money' || type === 'search' || error,
+                  type === 'money' || error,
               },
               'right-0 absolute inset-y-0 pr-3 flex items-center',
             )}
