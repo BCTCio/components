@@ -3,7 +3,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { error, notify, warn, showLoading } from '.';
-import Notification from './component';
+import { Notification } from './component';
 import { NotificationProvider, useNotificationDispatch } from './context';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

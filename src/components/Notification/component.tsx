@@ -13,7 +13,7 @@ import {
 } from './context';
 import { Spinner } from '../Spinner';
 
-export default function Notification() {
+export const Notification: React.FC = () => {
   const { show, type, title, message, duration } =
     useNotification() as NotificationState;
   const dispatch = useNotificationDispatch();
