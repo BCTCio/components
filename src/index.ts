@@ -39,5 +39,5 @@ export * from './components/TileCard';
 export * from './components/VerticalTabs';
 export * from './constants/interfaces';
 export * from './constants/requiredSelects';
-export { NotificationProvider } from './components/Notification/context';
-export { GlobalConfirmationProvider } from './components/GlobalConfirmationBox/context';
+export { NotificationProvider, useNotificationDispatch } from './components/Notification/context';
+export { GlobalConfirmationProvider, useGlobalConfirmationDispatch } from './components/GlobalConfirmationBox/context';
