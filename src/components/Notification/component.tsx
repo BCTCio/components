@@ -9,7 +9,7 @@ import { XMarkIcon } from '@heroicons/react/20/solid';
 import {
   NotificationState,
   useNotification,
-  useNotificationDispatch,
+  useNotificationDispatch
 } from './context';
 import { Spinner } from '../Spinner';
 
@@ -17,7 +17,7 @@ export default function Notification() {
   const { show, type, title, message, duration } =
     useNotification() as NotificationState;
   const dispatch = useNotificationDispatch();
-
+  
   useEffect(() => {
     if (show) {
       const timeout = setTimeout(() => {

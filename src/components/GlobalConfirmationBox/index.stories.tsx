@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { confirmation } from '.';
 import { GlobalConfirmationBox } from './component';
+import { GlobalConfirmationProvider, useGlobalConfirmationDispatch } from './context';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -11,28 +12,37 @@ export default {
   component: GlobalConfirmationBox,
 } as ComponentMeta<typeof GlobalConfirmationBox>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-export const Default: ComponentStory<typeof GlobalConfirmationBox> = (
-  args: any,
-) => {
+const GlobalConfirmationButtons = () => {
+  const dispatch = useGlobalConfirmationDispatch();
+
   return (
-    <>
-      <GlobalConfirmationBox />
+    <div className="grid grid-cols-1">
       <button
         onClick={() =>
           confirmation({
             title: 'Title',
             description: 'Description',
-            ...args,
             onConfirm() {
               alert('Confirmed');
             },
-          })
+          }, dispatch)
         }
       >
         Open
       </button>
-    </>
+    </div>
+  );
+}
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+export const Default: ComponentStory<typeof GlobalConfirmationBox> = (
+  args: any,
+) => {
+  return (
+    <GlobalConfirmationProvider>
+      <GlobalConfirmationButtons />
+      <GlobalConfirmationBox />
+    </GlobalConfirmationProvider>
   );
 };
 

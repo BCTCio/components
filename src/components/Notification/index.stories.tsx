@@ -2,9 +2,9 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { notify, error, warn, showLoading } from '.';
+import { error, notify, warn, showLoading } from '.';
 import Notification from './component';
-import { NotificationProvider } from './context';
+import { NotificationProvider, useNotificationDispatch } from './context';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -12,35 +12,44 @@ export default {
   component: Notification,
 } as ComponentMeta<typeof Notification>;
 
+
+const NotificationButtons = () => {
+  const dispatch = useNotificationDispatch();
+
+  return (
+    <div className='grid grid-cols-1'>
+      <button
+        onClick={() => notify({ title: 'Title', description: 'Description', dispatch})}
+      >
+        Notify
+      </button>
+      <button onClick={() => error('Error Message', { title: 'Title', dispatch })}>
+        Error
+      </button>
+      <button
+        onClick={() => warn({ title: 'Title', description: 'Description', dispatch })}
+      >
+        Warn
+      </button>
+      <button
+        onClick={() =>
+          showLoading({ title: 'Title', description: 'Description', dispatch})
+        }
+      >
+        Loading
+      </button>
+    </div>
+    
+  );
+}
+
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Default: ComponentStory<typeof Notification> = () => {
-  
   return (
     <NotificationProvider>
-      <Notification />
+      <NotificationButtons />   
 
-      <div className='grid grid-cols-1'>
-        <button
-          onClick={() => notify({ title: 'Title', description: 'Description' })}
-        >
-          Notify
-        </button>
-        <button onClick={() => error('Error Message', { title: 'Title' })}>
-          Error
-        </button>
-        <button
-          onClick={() => warn({ title: 'Title', description: 'Description' })}
-        >
-          Warn
-        </button>
-        <button
-          onClick={() =>
-            showLoading({ title: 'Title', description: 'Description' })
-          }
-        >
-          Loading
-        </button>
-      </div>
+      <Notification />
     </NotificationProvider>
   );
 };

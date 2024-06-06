@@ -1,7 +1,5 @@
+import { Dispatch } from 'react';
 import { ConfirmationBoxData } from '../ConfirmationBox';
-import { useGlobalConfirmationDispatch } from './context';
 
-const dispatch = useGlobalConfirmationDispatch();
-
-export const confirmation = (data: ConfirmationBoxData) =>
+export const confirmation = (data: ConfirmationBoxData, dispatch: Dispatch<any>) =>
   dispatch({ type: 'SHOW', payload: data });

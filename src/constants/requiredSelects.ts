@@ -1,10 +1,12 @@
 import { error } from '../components/Notification';
+import { useNotificationDispatch } from '../components/Notification/context';
 
 /**
  * Checks all select/search inputs that are required and if they are, returns and shows an error
  * @param e The form submit event
  */
 export const checkRequiredSelects = (e: any, throwIfUnsuccessful = false) => {
+  const dispatch = useNotificationDispatch();
   const requiredButEmptyLabels = Array.from(e.target.elements as HTMLElement[])
     .filter(
       (element) =>
@@ -34,7 +36,7 @@ export const checkRequiredSelects = (e: any, throwIfUnsuccessful = false) => {
       message = `You still have to fill in ${requiredButEmptyLabels.length} required fields!`;
     }
     if (throwIfUnsuccessful) throw new Error(message);
-    error(message, { title: 'Error' });
+    error(message, { title: 'Error', dispatch });
     return true;
   }
   return false;
