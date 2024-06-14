@@ -12,6 +12,7 @@ export interface SingleDropdownProps {
   value: DropdownData['id'];
   description?: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
 export const SingleDropdown: React.FC<SingleDropdownProps> = ({
@@ -22,11 +23,12 @@ export const SingleDropdown: React.FC<SingleDropdownProps> = ({
   value,
   description,
   required,
+  disabled = false,
 }) => {
   const selected = data.find((v) => v.id === value);
   return (
     <div className='w-full rounded-md shadow-sm'>
-      <Listbox value={value} onChange={onChange}>
+      <Listbox value={value} onChange={onChange} disabled={disabled}>
         <div className='relative w-full'>
           <Listbox.Label className='block text-sm font-medium text-gray-800'>
             {label} {required && <span className='text-red-500'>*</span>}
@@ -37,7 +39,7 @@ export const SingleDropdown: React.FC<SingleDropdownProps> = ({
             )}
           </Listbox.Label>
           <Listbox.Button
-            className='relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-THEME-500 focus:border-THEME-500 sm:text-sm'
+            className='relative mt-1 w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-THEME-500 focus:border-THEME-500 sm:text-sm'
             data-custom-input-required={required ? true : undefined}
             data-custom-input-has-data={value ? true : undefined}
             data-custom-input-label={label}
@@ -52,7 +54,7 @@ export const SingleDropdown: React.FC<SingleDropdownProps> = ({
                   )}
                 />
               )}
-              <span className='block truncate'>
+              <span className={`block truncate ${disabled ? 'text-gray-400' : ''}`}>
                 {selected?.title || 'None Selected'}
               </span>
             </div>
