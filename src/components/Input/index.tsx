@@ -41,6 +41,7 @@ export interface InputProps {
   readonly?: boolean;
   disabled?: boolean;
   ref?: React.Ref<HTMLInputElement>;
+  className?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -64,6 +65,7 @@ export const Input: React.FC<InputProps> = ({
   onBlur,
   onFocus,
   ref,
+  className,
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -228,6 +230,7 @@ export const Input: React.FC<InputProps> = ({
               ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
               : 'focus:ring-THEME-500 focus:border-THEME-500',
             'shadow-sm block w-full sm:text-sm border-gray-300 rounded-md',
+            className
           )}
           placeholder={placeholder}
           onKeyDown={(e) => {
