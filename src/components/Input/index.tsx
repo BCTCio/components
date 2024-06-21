@@ -40,6 +40,7 @@ export interface InputProps {
   dateTimeOccursAt?: string | Date; // Use this if you have utcTimeValue set to true
   readonly?: boolean;
   disabled?: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -62,6 +63,7 @@ export const Input: React.FC<InputProps> = ({
   disabled,
   onBlur,
   onFocus,
+  ref,
 }) => {
   const [tooltip, setTooltip] = useState('');
   const [tooltipShow, setTooltipShow] = useState(false);
@@ -211,6 +213,7 @@ export const Input: React.FC<InputProps> = ({
           required={required}
           onBlur={onBlur}
           onFocus={onFocus}
+          ref={ref}
           className={classNames(
             {
               'pr-16': (type === 'password' || type === 'search') && error,
